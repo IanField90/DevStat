@@ -19,6 +19,9 @@ import org.androidannotations.annotations.EActivity;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends ActionBarActivity implements ActionBar.OnNavigationListener {
+    private static final int SCREEN_METRICS = 0;
+    private static final int SOFTWARE = 1;
+    private static final int HARDWARE = 2;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -29,7 +32,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
 
         // Set up the action bar to show a dropdown list.
         final ActionBar actionBar = getSupportActionBar();
@@ -44,9 +46,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
                         android.R.layout.simple_list_item_1,
                         android.R.id.text1,
                         new String[] {
-                                getString(R.string.title_section1),
-                                getString(R.string.title_section2),
-                                getString(R.string.title_section3),
+                                getString(R.string.title_screen_metrics),
+                                getString(R.string.title_software),
+                                getString(R.string.title_hardware)
                         }),
                 this);
     }
@@ -92,45 +94,22 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
     public boolean onNavigationItemSelected(int position, long id) {
         // When the given dropdown item is selected, show its contents in the
         // container view.
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+        if (position == SCREEN_METRICS) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new ScreenStatsFragment_())
+                    .commit();
+        }
+        else if (position == SOFTWARE) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new SoftwareStatsFragment_())
+                    .commit();
+        }
+        else if (position == HARDWARE) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new HardwareStatsFragment_())
+                    .commit();
+        }
         return true;
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
     }
 
 }
