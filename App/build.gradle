@@ -3,10 +3,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.6.+'
+        classpath 'com.android.tools.build:gradle:0.8.+'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.1'
     }
 }
 apply plugin: 'android'
+apply plugin: 'android-apt'
 
 repositories {
     mavenCentral()
@@ -19,6 +21,7 @@ android {
     defaultConfig {
         minSdkVersion 7
         targetSdkVersion 19
+        packageName 'uk.co.ianfield.devstat'
     }
     buildTypes {
         release {
@@ -31,6 +34,37 @@ android {
             proguardFile 'proguard-rules.txt'
         }
     }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java', 'GENERATED_FOLDER']
+            resources.srcDirs = ['src/main/resources']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+        }
+    }
+
+//    Further android annotation cleverness
+    applicationVariants.all { variant ->
+        def aptOutputDir = project.file("build/source/apt")
+        def aptOutput = new File(aptOutputDir, variant.dirName)
+
+        android.sourceSets[new File(variant.dirName).getName()].java.srcDirs += aptOutput.getPath()
+
+        variant.javaCompile.options.compilerArgs += [
+                '-processorpath', configurations.apt.getAsPath(),
+                '-s', aptOutput
+        ]
+
+        variant.javaCompile.source = variant.javaCompile.source.filter { p ->
+            return !p.getPath().startsWith(aptOutputDir.getPath())
+        }
+
+        variant.javaCompile.doFirst {
+            aptOutput.mkdirs()
+        }
+    }
 }
 
 dependencies {
@@ -40,5 +74,16 @@ dependencies {
 
     // Android Annotations
     apt "org.androidannotations:androidannotations:3.0.1"
-    compile "org.androidannotations:androidannotations:3.0.1"
+    compile "org.androidannotations:androidannotations-api:3.0.1"
+}
+
+apt {
+    arguments {
+        androidManifestFile variant.processResources.manifestFile
+        resourcePackageName android.defaultConfig.packageName
+    }
+}
+
+configurations {
+    apt
 }
