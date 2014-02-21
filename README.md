@@ -21,10 +21,10 @@ Android application to quickly query device data
     
 ###Hardware
 
-  Memory class
-  Large memory class
-  Maximum memory
-  Free space
-  Vibrator presence
-  Telephony
-  Autofocus availability
+    Memory class
+    Large memory class
+    Maximum memory
+    Free space
+    Vibrator presence
+    Telephony
+    Autofocus availability
