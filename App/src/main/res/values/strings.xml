@@ -9,12 +9,12 @@
 
     <string name="action_about">About</string>
 
+    <!-- Screen -->
     <string name="display_density">Display density</string>
     <string name="screen_width">Width</string>
     <string name="screen_height">Height</string>
     <string name="drawable_density">Drawable density</string>
     <string name="screen_size">Screen size</string>
-
 
     <string name="screen_size_small">Small</string>
     <string name="screen_size_normal">Normal</string>
@@ -22,6 +22,15 @@
     <string name="screen_size_xlarge">Extra large</string>
     <string name="screen_size_undefined">Undefined</string>
 
-    <string name="memory_class">Memory Class</string>
+
+    <!-- Software -->
+    <string name="android_version">Android version</string>
+    <string name="sdk_int">SDK Int</string>
+    <string name="opengl_version">OpenGL ES version</string>
+    <string name="unknown">Unknown</string>
+
+    <!-- Hardware -->
+    <string name="memory_class">Memory class</string>
+
 
 </resources>
