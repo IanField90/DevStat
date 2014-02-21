@@ -43,5 +43,9 @@
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
 
+    <string name="auto_focus">Auto focus</string>
+    <string name="available">Available</string>
+    <string name="unavailable">Unavailable</string>
+
 
 </resources>

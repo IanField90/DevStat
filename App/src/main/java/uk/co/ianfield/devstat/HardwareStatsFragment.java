@@ -3,6 +3,7 @@ package uk.co.ianfield.devstat;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
@@ -93,6 +94,16 @@ public class HardwareStatsFragment extends Fragment {
         }
         else {
             stat.setInfo(getString(R.string.disabled));
+        }
+        stats.add(stat);
+
+        stat = new StatItem();
+        stat.setTitle(getString(R.string.auto_focus));
+        if (getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS)){
+            stat.setInfo(getString(R.string.available));
+        }
+        else {
+            stat.setInfo(getString(R.string.unavailable));
         }
         stats.add(stat);
 
