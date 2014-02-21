@@ -1,5 +1,6 @@
 package uk.co.ianfield.devstat;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Build;
@@ -7,6 +8,7 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
+import android.telephony.TelephonyManager;
 import android.widget.ListView;
 
 import org.androidannotations.annotations.AfterViews;
@@ -84,6 +86,22 @@ public class HardwareStatsFragment extends Fragment {
         }
         stats.add(stat);
 
+        stat = new StatItem();
+        stat.setTitle(getString(R.string.telephony));
+        if (isTelephonyEnabled(getActivity())) {
+            stat.setInfo(getString(R.string.enabled));
+        }
+        else {
+            stat.setInfo(getString(R.string.disabled));
+        }
+        stats.add(stat);
+
         statsList.setAdapter(new StatItemArrayAdapter(getActivity(), R.layout.stat_item, stats));
+    }
+
+
+    public static boolean isTelephonyEnabled(Activity activity) {
+        TelephonyManager tm = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
+        return (tm != null && tm.getSimState() == TelephonyManager.SIM_STATE_READY);
     }
 }

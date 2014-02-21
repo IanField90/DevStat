@@ -39,7 +39,9 @@
     <string name="exists">Exists</string>
     <string name="none">None</string>
 
-    
+    <string name="telephony">Telephony</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
 
 
 </resources>
