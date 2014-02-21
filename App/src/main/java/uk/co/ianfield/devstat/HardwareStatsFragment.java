@@ -3,6 +3,8 @@ package uk.co.ianfield.devstat;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
+import android.os.StatFs;
 import android.support.v4.app.Fragment;
 import android.widget.ListView;
 
@@ -49,6 +51,21 @@ public class HardwareStatsFragment extends Fragment {
         Runtime rt = Runtime.getRuntime();
         long maxMemory = rt.maxMemory();
         stat.setInfo(String.format("%d bytes", maxMemory));
+        stats.add(stat);
+
+
+        stat = new StatItem();
+        stat.setTitle(getString(R.string.free_space));
+        long available;
+        if (Build.VERSION.SDK_INT >= 9) {
+            available = Environment.getExternalStorageDirectory().getFreeSpace();
+        }
+        else {
+            StatFs filesystemstats = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
+            filesystemstats.restat(Environment.getExternalStorageDirectory().getAbsolutePath());
+            available = ((long) filesystemstats.getAvailableBlocks() * (long) filesystemstats.getBlockSize());
+        }
+        stat.setInfo(String.format("%d bytes", available));
         stats.add(stat);
 
         statsList.setAdapter(new StatItemArrayAdapter(getActivity(), R.layout.stat_item, stats));
