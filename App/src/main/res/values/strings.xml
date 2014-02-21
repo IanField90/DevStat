@@ -10,8 +10,8 @@
     <string name="action_settings">Settings</string>
 
     <string name="display_density">Display density</string>
-    <string name="screen_width">Screen Width</string>
-    <string name="screen_height">Screen Height</string>
+    <string name="screen_width">Width</string>
+    <string name="screen_height">Height</string>
     <string name="drawable_density">Drawable density</string>
     <string name="screen_size">Screen size</string>
 
@@ -19,7 +19,7 @@
     <string name="screen_size_small">Small</string>
     <string name="screen_size_normal">Normal</string>
     <string name="screen_size_large">Large</string>
-    <string name="screen_size_xlarge">Extra Large</string>
+    <string name="screen_size_xlarge">Extra large</string>
     <string name="screen_size_undefined">Undefined</string>
 
     <string name="memory_class">Memory Class</string>

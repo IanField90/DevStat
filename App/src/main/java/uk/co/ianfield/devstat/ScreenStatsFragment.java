@@ -49,16 +49,22 @@ public class ScreenStatsFragment extends Fragment {
         stat = new StatItem();
         stat.setTitle(getString(R.string.drawable_density));
         if (metrics.density == 0.75) {
-            stat.setInfo("ldpi");
+            stat.setInfo("ldpi (0.75)");
         }
         else if (metrics.density == 1.0) {
-            stat.setInfo("mdpi");
+            stat.setInfo("mdpi (1.0)");
         }
         else if (metrics.density == 1.5) {
-            stat.setInfo("hdpi");
+            stat.setInfo("hdpi (1.5)");
         }
         else if (metrics.density == 2.0) {
-            stat.setInfo("xhdpi");
+            stat.setInfo("xhdpi (2.0)");
+        }
+        else if (metrics.density == 3.0) {
+            stat.setInfo("xxhdpi (3.0)");
+        }
+        else if (metrics.density == 4.0) {
+            stat.setInfo("xxxhdpi (4.0)");
         }
         stats.add(stat);
 

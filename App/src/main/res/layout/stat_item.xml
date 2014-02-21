@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceSmall"
         android:id="@+id/txtInfo"
+        android:paddingLeft="5dp"
         />
 
 </LinearLayout>
