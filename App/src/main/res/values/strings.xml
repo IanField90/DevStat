@@ -31,6 +31,8 @@
 
     <!-- Hardware -->
     <string name="memory_class">Memory class</string>
+    <string name="large_memory_class">Large memory class</string>
+    <string name="max_memory">Max memory</string>
 
 
 </resources>
