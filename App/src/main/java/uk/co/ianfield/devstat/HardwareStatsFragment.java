@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.widget.ListView;
 
@@ -66,6 +67,21 @@ public class HardwareStatsFragment extends Fragment {
             available = ((long) filesystemstats.getAvailableBlocks() * (long) filesystemstats.getBlockSize());
         }
         stat.setInfo(String.format("%d bytes", available));
+        stats.add(stat);
+
+        stat = new StatItem();
+        stat.setTitle(getString(R.string.vibrator));
+        if(Build.VERSION.SDK_INT >= 11) {
+            if(((Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
+                stat.setInfo(getString(R.string.exists));
+            }
+            else {
+                stat.setInfo(getString(R.string.none));
+            }
+        }
+        else {
+            stat.setInfo(getString(R.string.unknown));
+        }
         stats.add(stat);
 
         statsList.setAdapter(new StatItemArrayAdapter(getActivity(), R.layout.stat_item, stats));

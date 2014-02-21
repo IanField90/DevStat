@@ -35,5 +35,11 @@
     <string name="max_memory">Max memory</string>
     <string name="free_space">Free space</string>
 
+    <string name="vibrator">Vibrator</string>
+    <string name="exists">Exists</string>
+    <string name="none">None</string>
+
+    
+
 
 </resources>
