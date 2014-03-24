@@ -54,6 +54,9 @@ public class ScreenStatsFragment extends Fragment {
         else if (metrics.density == 1.0) {
             stat.setInfo("mdpi (1x)");
         }
+        else if (metrics.density == 1.33) {
+            stat.setInfo("tvdpi (1.33x");
+        }
         else if (metrics.density == 1.5) {
             stat.setInfo("hdpi (1.5x)");
         }
