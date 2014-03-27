@@ -37,6 +37,16 @@ public class HardwareStatsFragment extends Fragment {
         StatItem stat;
 
         stat = new StatItem();
+        stat.setTitle(getString(R.string.manufacturer));
+        stat.setInfo(Build.MANUFACTURER);
+        stats.add(stat);
+
+        stat = new StatItem();
+        stat.setTitle(getString(R.string.device_model));
+        stat.setInfo(Build.MODEL);
+        stats.add(stat);
+
+        stat = new StatItem();
         stat.setTitle(getString(R.string.memory_class));
         int memoryClass = am.getMemoryClass();
         stat.setInfo(String.format("%d mb", memoryClass));

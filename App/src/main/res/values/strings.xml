@@ -47,5 +47,7 @@
     <string name="available">Available</string>
     <string name="unavailable">Unavailable</string>
 
+    <string name="manufacturer">Manufacturer</string>
+    <string name="device_model">Device model</string>
 
 </resources>

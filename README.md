@@ -21,6 +21,8 @@ Android application to quickly query device data
     
 ###Hardware
 
+    Manufacturer
+    Model
     Memory class
     Large memory class
     Maximum memory
