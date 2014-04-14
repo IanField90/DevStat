@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -70,6 +71,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.OnNavig
     void actionAboutClick() {
         Intent intent = new Intent(this, AboutActivity_.class);
         startActivity(intent);
+    }
+
+    @OptionsItem(R.id.action_developer)
+    void actionDeveloperClick() {
+        startActivity(new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS));
     }
 
     @Override

@@ -8,6 +8,7 @@
     <string name="title_hardware">Hardware</string>
 
     <string name="action_about">About</string>
+    <string name="action_developer">Open developer options</string>
 
     <!-- Screen -->
     <string name="display_density">Display density</string>
