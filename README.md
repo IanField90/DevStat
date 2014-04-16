@@ -1,7 +1,7 @@
 DevStat
 =======
 
-Android application to quickly query device data
+Android application to quickly query device data. This can also be used to help debug the cause of an app not showing in the Google Play store due to your AndroidManifest.xml settings e.g. Camera auto-focus.
 
 ##Information
 
