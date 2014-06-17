@@ -1,4 +1,4 @@
-package uk.co.ianfield.devstat.widget;
+package uk.co.ianfield.devstatcore.widget;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import uk.co.ianfield.devstat.R;
-import uk.co.ianfield.devstat.model.StatItem;
+import uk.co.ianfield.devstatcore.R;
+import uk.co.ianfield.devstatcore.model.StatItem;
 
 /**
  * Created by ianfield on 20/02/2014.
