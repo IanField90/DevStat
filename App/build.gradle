@@ -72,6 +72,8 @@ dependencies {
     compile 'com.android.support:support-v4:19.1.+'
     compile 'com.android.support:appcompat-v7:19.1.+'
 
+    compile project(":DevStatLib")
+
     // Android Annotations
     apt "org.androidannotations:androidannotations:3.0.1"
     compile "org.androidannotations:androidannotations-api:3.0.1"

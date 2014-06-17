@@ -17,8 +17,8 @@ android {
     buildToolsVersion "19.1.0"
 
     defaultConfig {
-        applicationId "uk.co.ianfield.devstat"
-        minSdkVersion 8
+        applicationId "uk.co.ianfield.devstatcore"
+        minSdkVersion 7
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
