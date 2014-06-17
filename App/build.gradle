@@ -3,8 +3,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.1'
+        classpath 'com.android.tools.build:gradle:0.11.+'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.3'
     }
 }
 apply plugin: 'android'
@@ -16,12 +16,12 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "19.1.0"
 
     defaultConfig {
         minSdkVersion 7
         targetSdkVersion 19
-        packageName 'uk.co.ianfield.devstat'
+        applicationId 'uk.co.ianfield.devstat'
     }
     buildTypes {
         release {
@@ -47,7 +47,7 @@ android {
 
 //    Further android annotation cleverness
     applicationVariants.all { variant ->
-        def aptOutputDir = project.file("build/source/apt")
+        def aptOutputDir = project.file("build/generated/source/apt")
         def aptOutput = new File(aptOutputDir, variant.dirName)
 
         android.sourceSets[new File(variant.dirName).getName()].java.srcDirs += aptOutput.getPath()
@@ -69,8 +69,8 @@ android {
 
 dependencies {
     compile 'com.android.support:gridlayout-v7:19.0.1'
-    compile 'com.android.support:support-v4:19.0.1'
-    compile 'com.android.support:appcompat-v7:19.0.1'
+    compile 'com.android.support:support-v4:19.1.+'
+    compile 'com.android.support:appcompat-v7:19.1.+'
 
     // Android Annotations
     apt "org.androidannotations:androidannotations:3.0.1"
