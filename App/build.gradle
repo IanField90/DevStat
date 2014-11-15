@@ -33,7 +33,6 @@ def getCredentials = {
 }
 
 dependencies {
-    compile 'com.android.support:gridlayout-v7:19.0.1'
     compile 'com.android.support:support-v4:21.0.0'
     compile 'com.android.support:appcompat-v7:21.0.0'
     compile 'com.android.support:cardview-v7:21.0.0'
@@ -42,8 +41,8 @@ dependencies {
     compile project(":DevStatCore")
 
     // Android Annotations
-    apt "org.androidannotations:androidannotations:3.0.1"
-    compile "org.androidannotations:androidannotations-api:3.0.1"
+    apt "org.androidannotations:androidannotations:3.2"
+    compile "org.androidannotations:androidannotations-api:3.2"
 }
 
 apt {
