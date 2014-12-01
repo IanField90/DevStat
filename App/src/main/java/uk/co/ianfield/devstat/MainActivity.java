@@ -3,13 +3,8 @@ package uk.co.ianfield.devstat;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,8 +16,8 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 
-import uk.co.ianfield.devstatcore.StatHelper;
-import uk.co.ianfield.devstatcore.model.StatItem;
+import uk.co.ianfield.devstat.StatHelper;
+import uk.co.ianfield.devstat.model.StatItem;
 
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.main)
@@ -78,9 +73,9 @@ public class MainActivity extends ActionBarActivity {
 
     private void loadDataIntoContainers(ArrayList<StatItem> list, LinearLayout container) {
         for(StatItem stat : list) {
-            LinearLayout row = (LinearLayout) LayoutInflater.from(this).inflate(uk.co.ianfield.devstatcore.R.layout.stat_item, null);
-            TextView txtInfo = (TextView) row.findViewById(uk.co.ianfield.devstatcore.R.id.txtInfo);
-            TextView txtTitle = (TextView) row.findViewById(uk.co.ianfield.devstatcore.R.id.txtTitle);
+            LinearLayout row = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.stat_item, null);
+            TextView txtInfo = (TextView) row.findViewById(R.id.txtInfo);
+            TextView txtTitle = (TextView) row.findViewById(R.id.txtTitle);
 
             if (txtInfo != null) {
                 txtInfo.setText(stat.getInfo());

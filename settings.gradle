@@ -1,1 +1,1 @@
-include ':App', 'DevStatCore'
+include ':app'
