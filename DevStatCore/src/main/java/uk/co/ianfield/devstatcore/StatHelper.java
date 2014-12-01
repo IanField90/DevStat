@@ -12,6 +12,8 @@ import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 
+import java.text.DecimalFormat;
+
 import uk.co.ianfield.devstatcore.model.StatItem;
 
 /**
@@ -98,14 +100,14 @@ public class StatHelper {
                 stat = new StatItem();
                 stat.setTitle(context.getString(R.string.memory_class));
                 int memoryClass = am.getMemoryClass();
-                stat.setInfo(String.format("%d mb", memoryClass));
+                stat.setInfo(String.format("%d MB", memoryClass));
                 break;
             case LARGE_MEMORY_CLASS:
                 if(Build.VERSION.SDK_INT >= 11) {
                     stat = new StatItem();
                     stat.setTitle(context.getString(R.string.large_memory_class));
                     int largeMemoryClass = am.getLargeMemoryClass();
-                    stat.setInfo(String.format("%d mb", largeMemoryClass));
+                    stat.setInfo(String.format("%d MB", largeMemoryClass));
                 }
                 break;
             case MAX_MEMORY:
@@ -113,7 +115,7 @@ public class StatHelper {
                 stat.setTitle(context.getString(R.string.max_memory));
                 Runtime rt = Runtime.getRuntime();
                 long maxMemory = rt.maxMemory();
-                stat.setInfo(String.format("%d bytes", maxMemory));
+                stat.setInfo(readableFileSize(maxMemory));
                 break;
             case FREE_SPACE:
                 stat = new StatItem();
@@ -127,7 +129,7 @@ public class StatHelper {
                     filesystemstats.restat(Environment.getExternalStorageDirectory().getAbsolutePath());
                     available = ((long) filesystemstats.getAvailableBlocks() * (long) filesystemstats.getBlockSize());
                 }
-                stat.setInfo(String.format("%d bytes", available));
+                stat.setInfo(readableFileSize(available));
                 break;
             case VIBRATOR:
                 stat = new StatItem();
@@ -240,6 +242,12 @@ public class StatHelper {
         return stat;
     }
 
+    private static String readableFileSize(long size) {
+        if(size <= 0) return "0";
+        final String[] units = new String[] { "B", "kB", "MB", "GB", "TB" };
+        int digitGroups = (int) (Math.log10(size)/Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
 
     private boolean isTelephonyEnabled() {
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
