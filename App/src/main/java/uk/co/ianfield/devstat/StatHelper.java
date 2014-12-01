@@ -1,4 +1,4 @@
-package uk.co.ianfield.devstatcore;
+package uk.co.ianfield.devstat;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -14,7 +14,7 @@ import android.util.DisplayMetrics;
 
 import java.text.DecimalFormat;
 
-import uk.co.ianfield.devstatcore.model.StatItem;
+import uk.co.ianfield.devstat.model.StatItem;
 
 /**
  * Created by IanField90 on 17/06/2014.
