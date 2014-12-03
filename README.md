@@ -1,4 +1,4 @@
-[![Icon]](https://raw.githubusercontent.com/IanField90/DevStat/master/App/src/main/res/drawable-xxhdpi/ic_launcher.png)
+![Icon](https://raw.githubusercontent.com/IanField90/DevStat/master/App/src/main/res/drawable-xxhdpi/ic_launcher.png)
 
 DevStat
 =======
