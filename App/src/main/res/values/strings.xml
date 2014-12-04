@@ -10,6 +10,8 @@
     <string name="action_about">About</string>
     <string name="action_developer">Open developer options</string>
     <string name="action_email">Email</string>
+    <string name="send_email">Send email…</string>
+    <string name="email_subject">DevStat Information</string>
 
     <!-- Screen -->
     <string name="display_density">Display density</string>

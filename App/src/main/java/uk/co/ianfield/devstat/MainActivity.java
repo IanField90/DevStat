@@ -105,30 +105,30 @@ public class MainActivity extends ActionBarActivity {
     void emailClick() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", "", null));
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DevStat information");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
 
         StringBuffer stringBuffer = new StringBuffer();
 
-        stringBuffer.append("Screen\n");
+        stringBuffer.append(String.format("%s\n", getString(R.string.title_screen_metrics)));
         for (StatItem item : screenStats) {
             stringBuffer.append(item.toString());
             stringBuffer.append("\n");
         }
 
-        stringBuffer.append("\nSoftware\n");
+        stringBuffer.append(String.format("\n%s\n", getString(R.string.title_software)));
         for (StatItem item : softwareStats) {
             stringBuffer.append(item.toString());
             stringBuffer.append("\n");
         }
 
-        stringBuffer.append("\nHardware\n");
+        stringBuffer.append(String.format("\n%s\n", getString(R.string.title_hardware)));
         for (StatItem item : hardwareStats) {
             stringBuffer.append(item.toString());
             stringBuffer.append("\n");
         }
 
         emailIntent.putExtra(Intent.EXTRA_TEXT, stringBuffer.toString());
-        startActivity(Intent.createChooser(emailIntent, "Send email..."));
+        startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email)));
     }
 
 }
