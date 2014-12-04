@@ -9,6 +9,7 @@
 
     <string name="action_about">About</string>
     <string name="action_developer">Open developer options</string>
+    <string name="action_email">Email</string>
 
     <!-- Screen -->
     <string name="display_density">Display density</string>

@@ -1,6 +1,7 @@
 package uk.co.ianfield.devstat;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.provider.Settings;
@@ -85,13 +86,6 @@ public class MainActivity extends ActionBarActivity {
                 txtTitle.setText(stat.getTitle());
             }
             container.addView(row);
-//            if (list.indexOf(stat) < list.size() - 1) {
-//                View view = new View(this);
-//                view.setBackgroundColor(getResources().getColor(R.color.accent));
-//                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (2 * getResources().getDisplayMetrics().density + 0.5f));
-//                view.setLayoutParams(lp);
-//                container.addView(view);
-//            }
 
         }
     }
@@ -105,6 +99,36 @@ public class MainActivity extends ActionBarActivity {
     @OptionsItem(R.id.action_developer)
     void actionDeveloperClick() {
         startActivity(new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS));
+    }
+
+    @OptionsItem(R.id.action_email)
+    void emailClick() {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                "mailto", "", null));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DevStat information");
+
+        StringBuffer stringBuffer = new StringBuffer();
+
+        stringBuffer.append("Screen\n");
+        for (StatItem item : screenStats) {
+            stringBuffer.append(item.toString());
+            stringBuffer.append("\n");
+        }
+
+        stringBuffer.append("\nSoftware\n");
+        for (StatItem item : softwareStats) {
+            stringBuffer.append(item.toString());
+            stringBuffer.append("\n");
+        }
+
+        stringBuffer.append("\nHardware\n");
+        for (StatItem item : hardwareStats) {
+            stringBuffer.append(item.toString());
+            stringBuffer.append("\n");
+        }
+
+        emailIntent.putExtra(Intent.EXTRA_TEXT, stringBuffer.toString());
+        startActivity(Intent.createChooser(emailIntent, "Send email..."));
     }
 
 }
