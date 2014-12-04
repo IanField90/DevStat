@@ -6,7 +6,7 @@
     <item android:id="@+id/action_email"
         android:title="@string/action_email"
         app:showAsAction="ifRoom"
-        android:icon="@android:drawable/ic_menu_send"
+        android:icon="@drawable/ic_email_white_24dp"
         />
     
     <item android:id="@+id/action_about"
