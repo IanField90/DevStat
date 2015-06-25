@@ -135,7 +135,7 @@ public class StatHelper {
                 stat.setTitle(context.getString(R.string.vibrator));
                 if (Build.VERSION.SDK_INT >= 11) {
                     if (((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
-                        stat.setInfo(context.getString(R.string.exists));
+                        stat.setInfo(context.getString(R.string.present));
                     } else {
                         stat.setInfo(context.getString(R.string.none));
                     }
