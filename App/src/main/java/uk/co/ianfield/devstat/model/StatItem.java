@@ -7,19 +7,19 @@ public class StatItem {
     String title;
     String info;
 
-    public String getTitle () {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle (String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getInfo () {
+    public String getInfo() {
         return info;
     }
 
-    public void setInfo (String info) {
+    public void setInfo(String info) {
         this.info = info;
     }
 

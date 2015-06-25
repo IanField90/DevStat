@@ -32,14 +32,14 @@ def getCredentials = {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:22.0.0'
-    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:support-v4:22.2.0'
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:cardview-v7:22.0.0'
     compile 'com.android.support:recyclerview-v7:22.0.0'
 
     // Android Annotations
-    apt "org.androidannotations:androidannotations:3.2"
-    compile "org.androidannotations:androidannotations-api:3.2"
+    apt "org.androidannotations:androidannotations:3.3.1"
+    compile "org.androidannotations:androidannotations-api:3.3.1"
 }
 
 apt {
@@ -68,14 +68,14 @@ repositories {
 
 android {
     compileSdkVersion 22
-    buildToolsVersion '22.0.0'
+    buildToolsVersion '22.0.1'
 
     defaultConfig {
         minSdkVersion 7
         targetSdkVersion 22
         applicationId 'uk.co.ianfield.devstat'
-        versionCode 5
-        versionName '1.4'
+        versionCode 6
+        versionName '1.4.1'
     }
     signingConfigs {
         release {
