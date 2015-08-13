@@ -3,7 +3,6 @@ package uk.co.ianfield.devstat;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -11,18 +10,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
-import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 
-import uk.co.ianfield.devstat.StatHelper;
 import uk.co.ianfield.devstat.model.StatItem;
 
 @EActivity(R.layout.activity_main)
-@OptionsMenu(R.menu.main)
+//@OptionsMenu(R.menu.main)
 public class MainActivity extends AppCompatActivity {
 
     @ViewById(R.id.llScreenMetricsContainer)
@@ -114,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OptionsItem(R.id.action_email)
+    @Click(R.id.btnSendEmail)
     void emailClick() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", "", null));
