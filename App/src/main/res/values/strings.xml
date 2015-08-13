@@ -40,7 +40,7 @@
     <string name="free_space">Free space</string>
 
     <string name="vibrator">Vibrator</string>
-    <string name="exists">Exists</string>
+    <string name="present">Present</string>
     <string name="none">None</string>
 
     <string name="telephony">Telephony</string>
@@ -48,6 +48,11 @@
     <string name="disabled">Disabled</string>
 
     <string name="auto_focus">Auto focus</string>
+
+    <string name="camera">Camera</string>
+    <string name="accelerometer">Accelerometer</string>
+    <string name="compass">Compass</string>
+
     <string name="available">Available</string>
     <string name="unavailable">Unavailable</string>
 

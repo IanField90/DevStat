@@ -11,6 +11,7 @@ import android.os.StatFs;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import java.text.DecimalFormat;
 
@@ -26,7 +27,7 @@ public class StatHelper {
         this.context = context;
     }
 
-    public static enum Hardware {
+    public enum Hardware {
         MANUFACTURER,
         MODEL,
         MEMORY_CLASS,
@@ -35,10 +36,13 @@ public class StatHelper {
         FREE_SPACE,
         VIBRATOR,
         TELEPHONY,
+        CAMERA,
         AUTO_FOCUS,
+        ACCELEROMETER,
+        COMPASS
     }
 
-    public static enum Screen {
+    public enum Screen {
         WIDTH,
         HEIGHT,
         DISPLAY_DENSITY,
@@ -46,7 +50,7 @@ public class StatHelper {
         SCREEN_SIZE,
     }
 
-    public static enum Software {
+    public enum Software {
         ANDROID_VERSION,
         SDK_INT,
         OPEN_GL_ES,
@@ -73,8 +77,7 @@ public class StatHelper {
                 ConfigurationInfo configurationInfo = activityManager.getDeviceConfigurationInfo();
                 if (configurationInfo != null) {
                     stat.setInfo(configurationInfo.getGlEsVersion());
-                }
-                else {
+                } else {
                     stat.setInfo(context.getString(R.string.unknown));
                 }
                 break;
@@ -103,7 +106,7 @@ public class StatHelper {
                 stat.setInfo(String.format("%d MB", memoryClass));
                 break;
             case LARGE_MEMORY_CLASS:
-                if(Build.VERSION.SDK_INT >= 11) {
+                if (Build.VERSION.SDK_INT >= 11) {
                     stat = new StatItem();
                     stat.setTitle(context.getString(R.string.large_memory_class));
                     int largeMemoryClass = am.getLargeMemoryClass();
@@ -123,8 +126,7 @@ public class StatHelper {
                 long available;
                 if (Build.VERSION.SDK_INT >= 9) {
                     available = Environment.getExternalStorageDirectory().getFreeSpace();
-                }
-                else {
+                } else {
                     StatFs filesystemstats = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
                     filesystemstats.restat(Environment.getExternalStorageDirectory().getAbsolutePath());
                     available = ((long) filesystemstats.getAvailableBlocks() * (long) filesystemstats.getBlockSize());
@@ -134,15 +136,13 @@ public class StatHelper {
             case VIBRATOR:
                 stat = new StatItem();
                 stat.setTitle(context.getString(R.string.vibrator));
-                if(Build.VERSION.SDK_INT >= 11) {
-                    if(((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
-                        stat.setInfo(context.getString(R.string.exists));
-                    }
-                    else {
+                if (Build.VERSION.SDK_INT >= 11) {
+                    if (((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
+                        stat.setInfo(context.getString(R.string.present));
+                    } else {
                         stat.setInfo(context.getString(R.string.none));
                     }
-                }
-                else {
+                } else {
                     stat.setInfo(context.getString(R.string.unknown));
                 }
                 break;
@@ -151,21 +151,50 @@ public class StatHelper {
                 stat.setTitle(context.getString(R.string.telephony));
                 if (isTelephonyEnabled()) {
                     stat.setInfo(context.getString(R.string.enabled));
-                }
-                else {
+                } else {
                     stat.setInfo(context.getString(R.string.disabled));
                 }
                 break;
             case AUTO_FOCUS:
                 stat = new StatItem();
                 stat.setTitle(context.getString(R.string.auto_focus));
-                if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS)){
+                if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS)) {
                     stat.setInfo(context.getString(R.string.available));
-                }
-                else {
+                } else {
                     stat.setInfo(context.getString(R.string.unavailable));
                 }
                 break;
+
+            case CAMERA:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.camera));
+                if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+                    stat.setInfo(context.getString(R.string.available));
+                } else {
+                    stat.setInfo(context.getString(R.string.unavailable));
+                }
+                break;
+
+            case ACCELEROMETER:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.accelerometer));
+                if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)) {
+                    stat.setInfo(context.getString(R.string.available));
+                } else {
+                    stat.setInfo(context.getString(R.string.unavailable));
+                }
+                break;
+
+            case COMPASS:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.compass));
+                if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS)) {
+                    stat.setInfo(context.getString(R.string.available));
+                } else {
+                    stat.setInfo(context.getString(R.string.unavailable));
+                }
+                break;
+
         }
         return stat;
     }
@@ -193,25 +222,23 @@ public class StatHelper {
             case DRAWABLE_DENSITY:
                 stat = new StatItem();
                 stat.setTitle(context.getString(R.string.drawable_density));
-                if (metrics.density == 0.75) {
+                if (metrics.densityDpi == DisplayMetrics.DENSITY_LOW) {
                     stat.setInfo("ldpi (.75x)");
-                }
-                else if (metrics.density == 1.0) {
+                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_MEDIUM) {
                     stat.setInfo("mdpi (1x)");
-                }
-                else if (metrics.density == 1.33) {
+                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_TV) {
                     stat.setInfo("tvdpi (1.33x");
-                }
-                else if (metrics.density == 1.5) {
+                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_HIGH) {
                     stat.setInfo("hdpi (1.5x)");
-                }
-                else if (metrics.density == 2.0) {
+                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH) {
                     stat.setInfo("xhdpi (2x)");
-                }
-                else if (metrics.density == 3.0) {
+                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_400) {
+                    stat.setInfo("xxhdpi (System scaled down to suit)");
+                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_XXHIGH) {
                     stat.setInfo("xxhdpi (3x)");
-                }
-                else if (metrics.density == 4.0) {
+                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_560) {
+                    stat.setInfo("xxxhdpi (System scaled down to suit)");
+                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_XXXHIGH) {
                     stat.setInfo("xxxhdpi (4x)");
                 }
                 break;
@@ -221,7 +248,7 @@ public class StatHelper {
                 int screenSize = context.getResources().getConfiguration().screenLayout &
                         Configuration.SCREENLAYOUT_SIZE_MASK;
 
-                switch(screenSize) {
+                switch (screenSize) {
                     case Configuration.SCREENLAYOUT_SIZE_LARGE:
                         stat.setInfo(context.getString(R.string.screen_size_large));
                         break;
@@ -243,10 +270,10 @@ public class StatHelper {
     }
 
     private static String readableFileSize(long size) {
-        if(size <= 0) return "0";
-        final String[] units = new String[] { "B", "kB", "MB", "GB", "TB" };
-        int digitGroups = (int) (Math.log10(size)/Math.log10(1024));
-        return new DecimalFormat("#,##0.#").format(size/Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+        if (size <= 0) return "0";
+        final String[] units = new String[]{"B", "kB", "MB", "GB", "TB"};
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
 
     private boolean isTelephonyEnabled() {

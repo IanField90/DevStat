@@ -57,14 +57,17 @@ public class MainActivity extends ActionBarActivity {
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MANUFACTURER));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MODEL));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MEMORY_CLASS));
-        if(Build.VERSION.SDK_INT >= 11) { // This is also checked for within
+        if (Build.VERSION.SDK_INT >= 11) { // This is also checked for within
             hardwareStats.add(helper.getStatItem(StatHelper.Hardware.LARGE_MEMORY_CLASS));
         }
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MAX_MEMORY));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.FREE_SPACE));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.VIBRATOR));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.TELEPHONY));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.CAMERA));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.AUTO_FOCUS));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.COMPASS));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.ACCELEROMETER));
 
         loadDataIntoContainers(screenStats, screenMetricsContainer);
         loadDataIntoContainers(hardwareStats, hardwareContainer);
@@ -73,7 +76,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     private void loadDataIntoContainers(ArrayList<StatItem> list, LinearLayout container) {
-        for(StatItem stat : list) {
+        for (StatItem stat : list) {
             LinearLayout row = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.stat_item, null);
             TextView txtInfo = (TextView) row.findViewById(R.id.txtInfo);
             TextView txtTitle = (TextView) row.findViewById(R.id.txtTitle);
