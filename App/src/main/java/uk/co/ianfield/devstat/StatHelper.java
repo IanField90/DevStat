@@ -3,6 +3,7 @@ package uk.co.ianfield.devstat;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
+import android.content.pm.FeatureInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import uk.co.ianfield.devstat.model.StatItem;
 
@@ -195,80 +197,6 @@ public class StatHelper {
                 }
                 break;
 
-//            FEATURE_AUDIO_LOW_LATENCY
-//            FEATURE_AUDIO_OUTPUT
-//            FEATURE_BLUETOOTH
-//            FEATURE_BLUETOOTH_LE
-//            FEATURE_CAMERA_ANY
-//            FEATURE_CAMERA_EXTERNAL
-//            FEATURE_CAMERA_FLASH
-//            FEATURE_CAMERA_FRONT
-//            FEATURE_CAMERA_LEVEL_FULL
-//            FEATURE_CAMERA_CAPABILITY_MANUAL_SENSOR
-//            FEATURE_CAMERA_CAPABILITY_MANUAL_POST_PROCESSING
-//            FEATURE_CAMERA_CAPABILITY_RAW
-//            FEATURE_CONSUMER_IR
-//            FEATURE_LOCATION
-//            FEATURE_LOCATION_GPS
-//            FEATURE_LOCATION_NETWORK
-//            FEATURE_MICROPHONE
-//            FEATURE_NFC
-//            FEATURE_NFC_HCE
-//            FEATURE_NFC_HOST_CARD_EMULATION
-//            FEATURE_OPENGLES_EXTENSION_PACK
-//            FEATURE_SENSOR_ACCELEROMETER
-//            FEATURE_SENSOR_BAROMETER
-//            FEATURE_SENSOR_COMPASS
-//            FEATURE_SENSOR_GYROSCOPE
-//            FEATURE_SENSOR_LIGHT
-//            FEATURE_SENSOR_PROXIMITY
-//            FEATURE_SENSOR_STEP_COUNTER
-//            FEATURE_SENSOR_STEP_DETECTOR
-//            FEATURE_SENSOR_HEART_RATE
-//            FEATURE_SENSOR_HEART_RATE_ECG
-//            FEATURE_SENSOR_RELATIVE_HUMIDITY
-//            FEATURE_SENSOR_AMBIENT_TEMPERATURE
-//            FEATURE_TELEPHONY
-//            FEATURE_TELEPHONY_CDMA
-//            FEATURE_TELEPHONY_GSM
-//            FEATURE_USB_HOST
-//            FEATURE_USB_ACCESSORY
-//            FEATURE_SIP
-//            FEATURE_SIP_VOIP
-//            FEATURE_CONNECTION_SERVICE
-//            FEATURE_TOUCHSCREEN
-//            FEATURE_TOUCHSCREEN_MULTITOUCH
-//            FEATURE_TOUCHSCREEN_MULTITOUCH_DISTINCT
-//            FEATURE_TOUCHSCREEN_MULTITOUCH_JAZZHAND
-//            FEATURE_FAKETOUCH
-//            FEATURE_FAKETOUCH_MULTITOUCH_DISTINCT
-//            FEATURE_FAKETOUCH_MULTITOUCH_JAZZHAND
-//            FEATURE_SCREEN_PORTRAIT
-//            FEATURE_SCREEN_LANDSCAPE
-//            FEATURE_LIVE_WALLPAPER
-//            FEATURE_APP_WIDGETS
-//            FEATURE_VOICE_RECOGNIZERS
-//            FEATURE_HOME_SCREEN
-//            FEATURE_INPUT_METHODS
-//            FEATURE_DEVICE_ADMIN
-//            FEATURE_LEANBACK
-//            FEATURE_LEANBACK_ONLY
-//            FEATURE_LIVE_TV
-//            FEATURE_WIFI
-//            FEATURE_WIFI_DIRECT
-//            FEATURE_TELEVISION
-//            FEATURE_WATCH
-//            FEATURE_PRINTING
-//            FEATURE_BACKUP
-//            FEATURE_MANAGED_USERS
-//            FEATURE_MANAGED_PROFILES
-//            FEATURE_VERIFIED_BOOT
-//            FEATURE_SECURELY_REMOVES_USERS
-//            FEATURE_WEBVIEW
-//            FEATURE_ETHERNET
-//            FEATURE_HDMI_CEC
-//            FEATURE_GAMEPAD
-
         }
         return stat;
     }
@@ -341,6 +269,20 @@ public class StatHelper {
                 break;
         }
         return stat;
+    }
+
+    public ArrayList<StatItem> getFeatureList() {
+        ArrayList<StatItem> featureList = new ArrayList<>();
+        for (FeatureInfo featureInfo : context.getPackageManager().getSystemAvailableFeatures()) {
+            StatItem stat = new StatItem();
+            if (featureInfo.name != null) {
+                stat.setInfo(featureInfo.name);
+            } else {
+                stat.setInfo("GLEs Version: " + featureInfo.getGlEsVersion());
+            }
+            featureList.add(stat);
+        }
+        return featureList;
     }
 
     private static String readableFileSize(long size) {

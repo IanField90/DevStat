@@ -58,5 +58,6 @@
 
     <string name="manufacturer">Manufacturer</string>
     <string name="device_model">Device model</string>
+    <string name="title_features">Features</string>
 
 </resources>

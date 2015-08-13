@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ import uk.co.ianfield.devstat.model.StatItem;
 
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.main)
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     @ViewById(R.id.llScreenMetricsContainer)
     LinearLayout screenMetricsContainer;
@@ -33,9 +34,13 @@ public class MainActivity extends ActionBarActivity {
     @ViewById(R.id.llHardwareContainer)
     LinearLayout hardwareContainer;
 
-    ArrayList<StatItem> hardwareStats = new ArrayList<StatItem>();
-    ArrayList<StatItem> screenStats = new ArrayList<StatItem>();
-    ArrayList<StatItem> softwareStats = new ArrayList<StatItem>();
+    @ViewById(R.id.llFeaturesContainer)
+    LinearLayout featuresContainer;
+
+    ArrayList<StatItem> hardwareStats = new ArrayList<>();
+    ArrayList<StatItem> screenStats = new ArrayList<>();
+    ArrayList<StatItem> softwareStats = new ArrayList<>();
+    ArrayList<StatItem> featureStats = new ArrayList<>();
 
     @AfterViews
     void initContent() {
@@ -69,9 +74,13 @@ public class MainActivity extends ActionBarActivity {
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.COMPASS));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.ACCELEROMETER));
 
+        // Features (some will dupe for now)
+        featureStats = helper.getFeatureList();
+
         loadDataIntoContainers(screenStats, screenMetricsContainer);
         loadDataIntoContainers(hardwareStats, hardwareContainer);
         loadDataIntoContainers(softwareStats, softwareContainer);
+        loadDataIntoContainers(featureStats, featuresContainer);
     }
 
 
@@ -126,6 +135,12 @@ public class MainActivity extends ActionBarActivity {
 
         stringBuffer.append(String.format("\n%s\n", getString(R.string.title_hardware)));
         for (StatItem item : hardwareStats) {
+            stringBuffer.append(item.toString());
+            stringBuffer.append("\n");
+        }
+
+        stringBuffer.append(String.format("\n%s\n", getString(R.string.title_features)));
+        for (StatItem item : featureStats) {
             stringBuffer.append(item.toString());
             stringBuffer.append("\n");
         }

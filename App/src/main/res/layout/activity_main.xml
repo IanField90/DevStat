@@ -74,6 +74,28 @@
             android:paddingLeft="5dp"
             android:id="@+id/llHardwareContainer"
             />
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            style="@style/Base.TextAppearance.AppCompat.Large.Inverse"
+            android:textStyle="bold"
+            android:text="@string/title_features"
+            />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@color/accent" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="5dp"
+            android:id="@+id/llFeaturesContainer"
+            />
     </LinearLayout>
     
 </ScrollView>
