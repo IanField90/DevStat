@@ -36,7 +36,10 @@ public class StatHelper {
         FREE_SPACE,
         VIBRATOR,
         TELEPHONY,
+        CAMERA,
         AUTO_FOCUS,
+        ACCELEROMETER,
+        COMPASS
     }
 
     public enum Screen {
@@ -161,6 +164,37 @@ public class StatHelper {
                     stat.setInfo(context.getString(R.string.unavailable));
                 }
                 break;
+
+            case CAMERA:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.camera));
+                if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+                    stat.setInfo(context.getString(R.string.available));
+                } else {
+                    stat.setInfo(context.getString(R.string.unavailable));
+                }
+                break;
+
+            case ACCELEROMETER:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.accelerometer));
+                if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)) {
+                    stat.setInfo(context.getString(R.string.available));
+                } else {
+                    stat.setInfo(context.getString(R.string.unavailable));
+                }
+                break;
+
+            case COMPASS:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.compass));
+                if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS)) {
+                    stat.setInfo(context.getString(R.string.available));
+                } else {
+                    stat.setInfo(context.getString(R.string.unavailable));
+                }
+                break;
+
         }
         return stat;
     }

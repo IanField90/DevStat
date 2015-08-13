@@ -64,7 +64,10 @@ public class MainActivity extends ActionBarActivity {
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.FREE_SPACE));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.VIBRATOR));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.TELEPHONY));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.CAMERA));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.AUTO_FOCUS));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.COMPASS));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.ACCELEROMETER));
 
         loadDataIntoContainers(screenStats, screenMetricsContainer);
         loadDataIntoContainers(hardwareStats, hardwareContainer);
