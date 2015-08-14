@@ -34,7 +34,6 @@ public class StatHelper {
         LARGE_MEMORY_CLASS,
         MAX_MEMORY,
         FREE_SPACE,
-        VIBRATOR,
         TELEPHONY,
         DEVICE,
         BRAND,
@@ -165,19 +164,6 @@ public class StatHelper {
                     available = ((long) filesystemstats.getAvailableBlocks() * (long) filesystemstats.getBlockSize());
                 }
                 stat.setInfo(readableFileSize(available));
-                break;
-            case VIBRATOR:
-                stat = new StatItem();
-                stat.setTitle(context.getString(R.string.vibrator));
-                if (Build.VERSION.SDK_INT >= 11) {
-                    if (((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
-                        stat.setInfo(context.getString(R.string.present));
-                    } else {
-                        stat.setInfo(context.getString(R.string.none));
-                    }
-                } else {
-                    stat.setInfo(context.getString(R.string.unknown));
-                }
                 break;
             case TELEPHONY:
                 stat = new StatItem();

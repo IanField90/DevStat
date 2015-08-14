@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         }
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MAX_MEMORY));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.FREE_SPACE));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.VIBRATOR));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.TELEPHONY));
 
         // Features (some will dupe for now)

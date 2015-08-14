@@ -2,12 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uk.co.ianfield.devstat">
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-    <!-- Features -->
-    <uses-feature android:name="android.hardware.camera" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"

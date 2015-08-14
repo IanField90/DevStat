@@ -64,7 +64,6 @@ public class InformationPageFragment extends Fragment {
                 }
                 items.add(helper.getStatItem(StatHelper.Hardware.MAX_MEMORY));
                 items.add(helper.getStatItem(StatHelper.Hardware.FREE_SPACE));
-                items.add(helper.getStatItem(StatHelper.Hardware.VIBRATOR));
                 items.add(helper.getStatItem(StatHelper.Hardware.TELEPHONY));
                 break;
             case 3:
