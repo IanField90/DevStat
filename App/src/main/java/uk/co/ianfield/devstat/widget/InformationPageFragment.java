@@ -61,10 +61,6 @@ public class InformationPageFragment extends Fragment {
                 items.add(helper.getStatItem(StatHelper.Hardware.FREE_SPACE));
                 items.add(helper.getStatItem(StatHelper.Hardware.VIBRATOR));
                 items.add(helper.getStatItem(StatHelper.Hardware.TELEPHONY));
-                items.add(helper.getStatItem(StatHelper.Hardware.CAMERA));
-                items.add(helper.getStatItem(StatHelper.Hardware.AUTO_FOCUS));
-                items.add(helper.getStatItem(StatHelper.Hardware.COMPASS));
-                items.add(helper.getStatItem(StatHelper.Hardware.ACCELEROMETER));
                 break;
             case 3:
                 items = helper.getFeatureList();
@@ -92,31 +88,4 @@ public class InformationPageFragment extends Fragment {
 
         }
     }
-
-//    public static final String ARG_PAGE = "ARG_PAGE";
-//
-//    private int mPage;
-//
-//    public static InformationPageFragment newInstance(int page) {
-//        Bundle args = new Bundle();
-//        args.putInt(ARG_PAGE, page);
-//        InformationPageFragment fragment = new InformationPageFragment();
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        mPage = getArguments().getInt(ARG_PAGE);
-//    }
-
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_page, container, false);
-//        TextView textView = (TextView) view;
-//        textView.setText("Fragment #" + mPage);
-//        return view;
-//    }
 }
