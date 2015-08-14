@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     @ViewById(R.id.llFeaturesContainer)
     LinearLayout featuresContainer;
+
+    @ViewById(R.id.tabs)
+    TabLayout tabLayout;
 
     ArrayList<StatItem> hardwareStats = new ArrayList<>();
     ArrayList<StatItem> screenStats = new ArrayList<>();
@@ -80,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
         loadDataIntoContainers(hardwareStats, hardwareContainer);
         loadDataIntoContainers(softwareStats, softwareContainer);
         loadDataIntoContainers(featureStats, featuresContainer);
+
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_screen_metrics));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_software));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_hardware));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_features));
     }
 
 
