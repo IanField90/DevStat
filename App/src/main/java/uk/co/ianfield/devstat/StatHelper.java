@@ -4,7 +4,6 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
 import android.content.pm.FeatureInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Environment;
@@ -12,7 +11,6 @@ import android.os.StatFs;
 import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -38,6 +36,11 @@ public class StatHelper {
         FREE_SPACE,
         VIBRATOR,
         TELEPHONY,
+        DEVICE,
+        BRAND,
+        BOARD,
+        HOST,
+        PRODUCT
     }
 
     public enum Screen {
@@ -87,16 +90,48 @@ public class StatHelper {
         StatItem stat = null;
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         switch (hardware) {
-            case MANUFACTURER:
-                stat = new StatItem();
-                stat.setTitle(context.getString(R.string.manufacturer));
-                stat.setInfo(Build.MANUFACTURER);
-                break;
             case MODEL:
                 stat = new StatItem();
                 stat.setTitle(context.getString(R.string.device_model));
                 stat.setInfo(Build.MODEL);
                 break;
+
+            case DEVICE:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.device));
+                stat.setInfo(Build.DEVICE);
+                break;
+
+            case BRAND:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.brand));
+                stat.setInfo(Build.BRAND);
+                break;
+
+            case BOARD:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.board));
+                stat.setInfo(Build.BOARD);
+                break;
+
+            case HOST:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.host));
+                stat.setInfo(Build.HOST);
+                break;
+
+            case MANUFACTURER:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.manufacturer));
+                stat.setInfo(Build.MANUFACTURER);
+                break;
+
+            case PRODUCT:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.product));
+                stat.setInfo(Build.PRODUCT);
+                break;
+
             case MEMORY_CLASS:
                 stat = new StatItem();
                 stat.setTitle(context.getString(R.string.memory_class));
@@ -233,9 +268,13 @@ public class StatHelper {
         for (FeatureInfo featureInfo : context.getPackageManager().getSystemAvailableFeatures()) {
             StatItem stat = new StatItem();
             if (featureInfo.name != null) {
+                String[] featureParts = featureInfo.name.toLowerCase().split("[.]");
+                String featureName = featureParts[featureParts.length -1].replaceAll("_", " ");
+                stat.setTitle(featureName.substring(0, 1).toUpperCase() + featureName.substring(1));
                 stat.setInfo(featureInfo.name);
             } else {
-                stat.setInfo("GLEs Version: " + featureInfo.getGlEsVersion());
+                stat.setTitle(context.getString(R.string.opengl_version));
+                stat.setInfo(featureInfo.getGlEsVersion());
             }
             featureList.add(stat);
         }

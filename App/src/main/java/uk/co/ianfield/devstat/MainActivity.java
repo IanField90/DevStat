@@ -7,9 +7,6 @@ import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -33,14 +30,19 @@ public class MainActivity extends AppCompatActivity {
     @ViewById(R.id.viewpager)
     ViewPager viewPager;
 
-    ArrayList<StatItem> hardwareStats = new ArrayList<>();
-    ArrayList<StatItem> screenStats = new ArrayList<>();
-    ArrayList<StatItem> softwareStats = new ArrayList<>();
-    ArrayList<StatItem> featureStats = new ArrayList<>();
+    ArrayList<StatItem> hardwareStats;
+    ArrayList<StatItem> screenStats;
+    ArrayList<StatItem> softwareStats;
+    ArrayList<StatItem> featureStats;
 
     @AfterViews
     void initContent() {
         StatHelper helper = new StatHelper(this);
+        hardwareStats = new ArrayList<>();
+        screenStats = new ArrayList<>();
+        softwareStats = new ArrayList<>();
+        featureStats = new ArrayList<>();
+
         // Screen
         screenStats.add(helper.getStatItem(StatHelper.Screen.WIDTH));
         screenStats.add(helper.getStatItem(StatHelper.Screen.HEIGHT));
@@ -57,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
         // Hardware
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MANUFACTURER));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MODEL));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.DEVICE));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.BRAND));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.BOARD));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.HOST));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.PRODUCT));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MEMORY_CLASS));
         if (Build.VERSION.SDK_INT >= 11) { // This is also checked for within
             hardwareStats.add(helper.getStatItem(StatHelper.Hardware.LARGE_MEMORY_CLASS));

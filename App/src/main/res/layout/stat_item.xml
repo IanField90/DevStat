@@ -9,12 +9,12 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceMedium"
         android:id="@+id/txtTitle"
-        android:layout_marginBottom="5dp"
         />
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceSmall"
+        android:layout_marginTop="5dp"
         android:id="@+id/txtInfo"
         android:paddingLeft="5dp"
         />

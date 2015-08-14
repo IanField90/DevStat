@@ -1,10 +1,8 @@
 package uk.co.ianfield.devstat.widget;
 
 import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,11 +28,12 @@ public class InformationPageFragment extends Fragment {
     @ViewById(R.id.llContainer)
     LinearLayout container;
 
-    ArrayList<StatItem> items = new ArrayList<>();
+    ArrayList<StatItem> items;
 
     @AfterViews
     void init() {
         StatHelper helper = new StatHelper(getActivity());
+        items = new ArrayList<>();
         switch (page) {
             case 0:
                 items.add(helper.getStatItem(StatHelper.Screen.WIDTH));
@@ -53,6 +52,12 @@ public class InformationPageFragment extends Fragment {
             case 2:
                 items.add(helper.getStatItem(StatHelper.Hardware.MANUFACTURER));
                 items.add(helper.getStatItem(StatHelper.Hardware.MODEL));
+                items.add(helper.getStatItem(StatHelper.Hardware.DEVICE));
+                items.add(helper.getStatItem(StatHelper.Hardware.BRAND));
+                items.add(helper.getStatItem(StatHelper.Hardware.BOARD));
+                items.add(helper.getStatItem(StatHelper.Hardware.HOST));
+                items.add(helper.getStatItem(StatHelper.Hardware.PRODUCT));
+
                 items.add(helper.getStatItem(StatHelper.Hardware.MEMORY_CLASS));
                 if (Build.VERSION.SDK_INT >= 11) { // This is also checked for within
                     items.add(helper.getStatItem(StatHelper.Hardware.LARGE_MEMORY_CLASS));
@@ -72,6 +77,7 @@ public class InformationPageFragment extends Fragment {
 
 
     private void loadDataIntoContainer(ArrayList<StatItem> list, LinearLayout container) {
+        container.removeAllViews();
         for (StatItem stat : list) {
             LinearLayout row = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.stat_item, null);
             TextView txtInfo = (TextView) row.findViewById(R.id.txtInfo);

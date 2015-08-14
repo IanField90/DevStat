@@ -59,5 +59,10 @@
     <string name="manufacturer">Manufacturer</string>
     <string name="device_model">Device model</string>
     <string name="title_features">Features</string>
+    <string name="product">Product</string>
+    <string name="host">Host</string>
+    <string name="board">Board</string>
+    <string name="brand">Brand</string>
+    <string name="device">Device</string>
 
 </resources>
