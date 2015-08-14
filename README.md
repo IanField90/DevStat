@@ -41,3 +41,7 @@ Android application to quickly query device data. This can also be used to help 
     Vibrator presence
     Telephony
     Autofocus availability
+
+###Features
+
+    All features available to the device
