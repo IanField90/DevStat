@@ -75,8 +75,8 @@ android {
         minSdkVersion 7
         targetSdkVersion 22
         applicationId 'uk.co.ianfield.devstat'
-        versionCode 6
-        versionName '1.4.1'
+        versionCode 7
+        versionName '2.0.0'
     }
     signingConfigs {
         release {
