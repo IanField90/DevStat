@@ -13,6 +13,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import uk.co.ianfield.devstat.model.StatItem;
 
 @EActivity(R.layout.activity_main)
-//@OptionsMenu(R.menu.main)
+@OptionsMenu(R.menu.main)
 public class MainActivity extends AppCompatActivity {
 
     @ViewById(R.id.llScreenMetricsContainer)
@@ -111,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS));
     }
 
-    @OptionsItem(R.id.action_email)
     @Click(R.id.btnSendEmail)
     void emailClick() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
