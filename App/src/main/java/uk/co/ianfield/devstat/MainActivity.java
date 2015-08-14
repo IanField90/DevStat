@@ -27,18 +27,6 @@ import uk.co.ianfield.devstat.widget.InformationPagerAdapter;
 @OptionsMenu(R.menu.main)
 public class MainActivity extends AppCompatActivity {
 
-//    @ViewById(R.id.llScreenMetricsContainer)
-//    LinearLayout screenMetricsContainer;
-//
-//    @ViewById(R.id.llSoftwareContainer)
-//    LinearLayout softwareContainer;
-//
-//    @ViewById(R.id.llHardwareContainer)
-//    LinearLayout hardwareContainer;
-//
-//    @ViewById(R.id.llFeaturesContainer)
-//    LinearLayout featuresContainer;
-
     @ViewById(R.id.tabs)
     TabLayout tabLayout;
 
@@ -85,39 +73,9 @@ public class MainActivity extends AppCompatActivity {
         // Features (some will dupe for now)
         featureStats = helper.getFeatureList();
 
-//        loadDataIntoContainers(screenStats, screenMetricsContainer);
-//        loadDataIntoContainers(hardwareStats, hardwareContainer);
-//        loadDataIntoContainers(softwareStats, softwareContainer);
-//        loadDataIntoContainers(featureStats, featuresContainer);
-
-
         viewPager.setAdapter(new InformationPagerAdapter(getSupportFragmentManager(), this));
 
-//        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_screen_metrics));
-//        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_software));
-//        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_hardware));
-//        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_features));
-
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-
-    private void loadDataIntoContainers(ArrayList<StatItem> list, LinearLayout container) {
-        for (StatItem stat : list) {
-            LinearLayout row = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.stat_item, null);
-            TextView txtInfo = (TextView) row.findViewById(R.id.txtInfo);
-            TextView txtTitle = (TextView) row.findViewById(R.id.txtTitle);
-
-            if (txtInfo != null) {
-                txtInfo.setText(stat.getInfo());
-            }
-
-            if (txtTitle != null) {
-                txtTitle.setText(stat.getTitle());
-            }
-            container.addView(row);
-
-        }
     }
 
     @OptionsItem(R.id.action_about)
