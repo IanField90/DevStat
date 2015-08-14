@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
@@ -20,25 +21,29 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 
 import uk.co.ianfield.devstat.model.StatItem;
+import uk.co.ianfield.devstat.widget.InformationPagerAdapter;
 
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.main)
 public class MainActivity extends AppCompatActivity {
 
-    @ViewById(R.id.llScreenMetricsContainer)
-    LinearLayout screenMetricsContainer;
-
-    @ViewById(R.id.llSoftwareContainer)
-    LinearLayout softwareContainer;
-
-    @ViewById(R.id.llHardwareContainer)
-    LinearLayout hardwareContainer;
-
-    @ViewById(R.id.llFeaturesContainer)
-    LinearLayout featuresContainer;
+//    @ViewById(R.id.llScreenMetricsContainer)
+//    LinearLayout screenMetricsContainer;
+//
+//    @ViewById(R.id.llSoftwareContainer)
+//    LinearLayout softwareContainer;
+//
+//    @ViewById(R.id.llHardwareContainer)
+//    LinearLayout hardwareContainer;
+//
+//    @ViewById(R.id.llFeaturesContainer)
+//    LinearLayout featuresContainer;
 
     @ViewById(R.id.tabs)
     TabLayout tabLayout;
+
+    @ViewById(R.id.viewpager)
+    ViewPager viewPager;
 
     ArrayList<StatItem> hardwareStats = new ArrayList<>();
     ArrayList<StatItem> screenStats = new ArrayList<>();
@@ -80,15 +85,20 @@ public class MainActivity extends AppCompatActivity {
         // Features (some will dupe for now)
         featureStats = helper.getFeatureList();
 
-        loadDataIntoContainers(screenStats, screenMetricsContainer);
-        loadDataIntoContainers(hardwareStats, hardwareContainer);
-        loadDataIntoContainers(softwareStats, softwareContainer);
-        loadDataIntoContainers(featureStats, featuresContainer);
+//        loadDataIntoContainers(screenStats, screenMetricsContainer);
+//        loadDataIntoContainers(hardwareStats, hardwareContainer);
+//        loadDataIntoContainers(softwareStats, softwareContainer);
+//        loadDataIntoContainers(featureStats, featuresContainer);
 
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_screen_metrics));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_software));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_hardware));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_features));
+
+        viewPager.setAdapter(new InformationPagerAdapter(getSupportFragmentManager(), this));
+
+//        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_screen_metrics));
+//        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_software));
+//        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_hardware));
+//        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_features));
+
+        tabLayout.setupWithViewPager(viewPager);
     }
 
 

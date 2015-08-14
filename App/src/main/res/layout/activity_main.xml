@@ -8,109 +8,117 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tabs"
+        app:tabMode="scrollable"
         />
 
-    <ScrollView
-        android:id="@+id/container"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
         android:layout_below="@+id/tabs"
-        tools:context="uk.co.ianfield.devstat.MainActivity"
-        tools:ignore="MergeRootFrame">
+        android:background="@android:color/white" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+    <!--<ScrollView-->
+        <!--android:id="@+id/container"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@android:color/white"-->
+        <!--android:layout_below="@+id/tabs"-->
+        <!--tools:context="uk.co.ianfield.devstat.MainActivity"-->
+        <!--tools:ignore="MergeRootFrame">-->
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                style="@style/Base.TextAppearance.AppCompat.Large.Inverse"
-                android:textStyle="bold"
-                android:text="@string/title_screen_metrics"
-                />
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:background="@color/accent" />
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:id="@+id/llScreenMetricsContainer"
-                />
+        <!--<LinearLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!-->-->
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
-                style="@style/Base.TextAppearance.AppCompat.Large.Inverse"
-                android:textStyle="bold"
-                android:text="@string/title_software"
-                />
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:background="@color/accent" />
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:id="@+id/llSoftwareContainer"
-                />
+            <!--<TextView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="10dp"-->
+                <!--style="@style/Base.TextAppearance.AppCompat.Large.Inverse"-->
+                <!--android:textStyle="bold"-->
+                <!--android:text="@string/title_screen_metrics"-->
+                <!--/>-->
+            <!--<View-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="2dp"-->
+                <!--android:background="@color/accent" />-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:id="@+id/llScreenMetricsContainer"-->
+                <!--/>-->
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
-                style="@style/Base.TextAppearance.AppCompat.Large.Inverse"
-                android:textStyle="bold"
-                android:text="@string/title_hardware"
-                />
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:background="@color/accent" />
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:id="@+id/llHardwareContainer"
-                />
+            <!--<TextView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="10dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--style="@style/Base.TextAppearance.AppCompat.Large.Inverse"-->
+                <!--android:textStyle="bold"-->
+                <!--android:text="@string/title_software"-->
+                <!--/>-->
+            <!--<View-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="2dp"-->
+                <!--android:background="@color/accent" />-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:id="@+id/llSoftwareContainer"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="10dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--style="@style/Base.TextAppearance.AppCompat.Large.Inverse"-->
+                <!--android:textStyle="bold"-->
+                <!--android:text="@string/title_hardware"-->
+                <!--/>-->
+            <!--<View-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="2dp"-->
+                <!--android:background="@color/accent" />-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:id="@+id/llHardwareContainer"-->
+                <!--/>-->
 
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
-                style="@style/Base.TextAppearance.AppCompat.Large.Inverse"
-                android:textStyle="bold"
-                android:text="@string/title_features"
-                />
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:background="@color/accent" />
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5dp"
-                android:id="@+id/llFeaturesContainer"
-                />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="10dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--style="@style/Base.TextAppearance.AppCompat.Large.Inverse"-->
+                <!--android:textStyle="bold"-->
+                <!--android:text="@string/title_features"-->
+                <!--/>-->
+            <!--<View-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="2dp"-->
+                <!--android:background="@color/accent" />-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:id="@+id/llFeaturesContainer"-->
+                <!--/>-->
+        <!--</LinearLayout>-->
 
-    </ScrollView>
+    <!--</ScrollView>-->
 
 
     <android.support.design.widget.FloatingActionButton
