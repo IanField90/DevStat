@@ -119,7 +119,9 @@ public class MainActivity extends AppCompatActivity {
 
         stringBuffer.append(String.format("\n%s\n", getString(R.string.title_features)));
         for (StatItem item : featureStats) {
-            stringBuffer.append(item.toString());
+            stringBuffer.append(item.getTitle());
+            stringBuffer.append(":\n");
+            stringBuffer.append(item.getInfo());
             stringBuffer.append("\n");
         }
 
