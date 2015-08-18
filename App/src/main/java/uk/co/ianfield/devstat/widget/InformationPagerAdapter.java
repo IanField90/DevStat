@@ -5,7 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+
 import uk.co.ianfield.devstat.R;
+import uk.co.ianfield.devstat.model.StatItem;
 
 /**
  * Created by Ian Field on 14/08/15.
@@ -14,15 +17,20 @@ public class InformationPagerAdapter extends FragmentPagerAdapter {
     private int tabTitles[] = { R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware, R.string.title_features };
     private Context context;
 
+    private ArrayList<StatItem>[] statSets;
 
-    public InformationPagerAdapter(FragmentManager fm, Context context) {
+    public InformationPagerAdapter(FragmentManager fm, Context context, ArrayList<StatItem>[] statSets) {
         super(fm);
         this.context = context;
+        this.statSets = statSets;
     }
+
 
     @Override
     public Fragment getItem(int i) {
-        return InformationPageFragment_.builder().page(i).build();
+        InformationPageFragment fragment = InformationPageFragment_.builder().page(i).build();
+        fragment.setItems(statSets[i]);
+        return fragment;
     }
 
     @Override

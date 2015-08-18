@@ -75,7 +75,10 @@ public class MainActivity extends AppCompatActivity {
         // Features (some will dupe for now)
         featureStats = helper.getFeatureList();
 
-        viewPager.setAdapter(new InformationPagerAdapter(getSupportFragmentManager(), this));
+
+        ArrayList[] statSets = new ArrayList[] {screenStats, softwareStats, hardwareStats, featureStats};
+
+        viewPager.setAdapter(new InformationPagerAdapter(getSupportFragmentManager(), this, statSets));
 
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -97,35 +100,35 @@ public class MainActivity extends AppCompatActivity {
                 "mailto", "", null));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));
 
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuffer.append(String.format("%s\n", getString(R.string.title_screen_metrics)));
+        stringBuilder.append(String.format("%s\n", getString(R.string.title_screen_metrics)));
         for (StatItem item : screenStats) {
-            stringBuffer.append(item.toString());
-            stringBuffer.append("\n");
+            stringBuilder.append(item.toString());
+            stringBuilder.append("\n");
         }
 
-        stringBuffer.append(String.format("\n%s\n", getString(R.string.title_software)));
+        stringBuilder.append(String.format("\n%s\n", getString(R.string.title_software)));
         for (StatItem item : softwareStats) {
-            stringBuffer.append(item.toString());
-            stringBuffer.append("\n");
+            stringBuilder.append(item.toString());
+            stringBuilder.append("\n");
         }
 
-        stringBuffer.append(String.format("\n%s\n", getString(R.string.title_hardware)));
+        stringBuilder.append(String.format("\n%s\n", getString(R.string.title_hardware)));
         for (StatItem item : hardwareStats) {
-            stringBuffer.append(item.toString());
-            stringBuffer.append("\n");
+            stringBuilder.append(item.toString());
+            stringBuilder.append("\n");
         }
 
-        stringBuffer.append(String.format("\n%s\n", getString(R.string.title_features)));
+        stringBuilder.append(String.format("\n%s\n", getString(R.string.title_features)));
         for (StatItem item : featureStats) {
-            stringBuffer.append(item.getTitle());
-            stringBuffer.append(":\n");
-            stringBuffer.append(item.getInfo());
-            stringBuffer.append("\n");
+            stringBuilder.append(item.getTitle());
+            stringBuilder.append(":\n");
+            stringBuilder.append(item.getInfo());
+            stringBuilder.append("\n");
         }
 
-        emailIntent.putExtra(Intent.EXTRA_TEXT, stringBuffer.toString());
+        emailIntent.putExtra(Intent.EXTRA_TEXT, stringBuilder.toString());
         startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email)));
     }
 
