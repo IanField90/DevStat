@@ -7,29 +7,27 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-import uk.co.ianfield.devstat.R;
 import uk.co.ianfield.devstat.model.StatItem;
 
 /**
  * Created by Ian Field on 14/08/15.
  */
 public class InformationPagerAdapter extends FragmentPagerAdapter {
-    private int tabTitles[] = { R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware, R.string.title_features };
     private Context context;
+    private int[] tabTitles;
+    private ArrayList<ArrayList<StatItem>> statSets;
 
-    private ArrayList<StatItem>[] statSets;
-
-    public InformationPagerAdapter(FragmentManager fm, Context context, ArrayList<StatItem>[] statSets) {
+    public InformationPagerAdapter(FragmentManager fm, Context context, int[] tabTitles, ArrayList<ArrayList<StatItem>> statSets) {
         super(fm);
+        this.tabTitles = tabTitles;
         this.context = context;
         this.statSets = statSets;
     }
 
-
     @Override
     public Fragment getItem(int i) {
-        InformationPageFragment fragment = InformationPageFragment_.builder().page(i).build();
-        fragment.setItems(statSets[i]);
+        InformationPageFragment fragment = InformationPageFragment_.builder().build();
+        fragment.setItems(statSets.get(i));
         return fragment;
     }
 

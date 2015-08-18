@@ -3,6 +3,7 @@ package uk.co.ianfield.devstat;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -16,6 +17,7 @@ import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import uk.co.ianfield.devstat.model.StatItem;
 import uk.co.ianfield.devstat.widget.InformationPagerAdapter;
@@ -34,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<StatItem> screenStats;
     ArrayList<StatItem> softwareStats;
     ArrayList<StatItem> featureStats;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @AfterViews
     void initContent() {
@@ -55,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         softwareStats.add(helper.getStatItem(StatHelper.Software.SDK_INT));
         softwareStats.add(helper.getStatItem(StatHelper.Software.OPEN_GL_ES));
 
-
         // Hardware
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MANUFACTURER));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MODEL));
@@ -75,10 +81,13 @@ public class MainActivity extends AppCompatActivity {
         // Features (some will dupe for now)
         featureStats = helper.getFeatureList();
 
+        // This could probably be done better
+        ArrayList<ArrayList<StatItem>> statGroups = new ArrayList<>();
+        statGroups.addAll(Arrays.asList(screenStats, softwareStats, hardwareStats, featureStats));
 
-        ArrayList[] statSets = new ArrayList[] {screenStats, softwareStats, hardwareStats, featureStats};
-
-        viewPager.setAdapter(new InformationPagerAdapter(getSupportFragmentManager(), this, statSets));
+        viewPager.setAdapter(new InformationPagerAdapter(getSupportFragmentManager(), this,
+            new int[] { R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware, R.string.title_features },
+            statGroups));
 
         tabLayout.setupWithViewPager(viewPager);
     }

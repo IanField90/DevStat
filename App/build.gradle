@@ -32,11 +32,11 @@ def getCredentials = {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:22.2.1'
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.android.support:cardview-v7:22.2.1'
-    compile 'com.android.support:recyclerview-v7:22.2.1'
-    compile 'com.android.support:design:22.2.1'
+    compile 'com.android.support:support-v4:23.0.0'
+    compile 'com.android.support:appcompat-v7:23.0.0'
+    compile 'com.android.support:cardview-v7:23.0.0'
+    compile 'com.android.support:recyclerview-v7:23.0.0'
+    compile 'com.android.support:design:23.0.0'
 
     // Android Annotations
     apt "org.androidannotations:androidannotations:3.3.2"
@@ -59,7 +59,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7'
     }
 }
 
@@ -75,8 +75,8 @@ android {
         minSdkVersion 7
         targetSdkVersion 23
         applicationId 'uk.co.ianfield.devstat'
-        versionCode 8
-        versionName '2.0.1'
+        versionCode 9
+        versionName '2.0.2'
     }
     signingConfigs {
         release {

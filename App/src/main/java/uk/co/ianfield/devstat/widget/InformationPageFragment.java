@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -20,9 +19,6 @@ import uk.co.ianfield.devstat.model.StatItem;
  */
 @EFragment(R.layout.fragment_information_page)
 public class InformationPageFragment extends Fragment {
-    @FragmentArg
-    int page;
-
     @ViewById(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
