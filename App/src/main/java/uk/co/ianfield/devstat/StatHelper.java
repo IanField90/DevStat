@@ -4,12 +4,15 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
 import android.content.pm.FeatureInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -53,6 +56,7 @@ public class StatHelper {
         ANDROID_VERSION,
         SDK_INT,
         OPEN_GL_ES,
+        GOOGLE_PLAY_SERVICES_VERSION
     }
 
 
@@ -80,6 +84,18 @@ public class StatHelper {
                     stat.setInfo(context.getString(R.string.unknown));
                 }
                 break;
+            case GOOGLE_PLAY_SERVICES_VERSION:
+                stat = new StatItem();
+                stat.setTitle(context.getString(R.string.google_play_services_version));
+                try {
+                    PackageInfo info = context.getPackageManager().getPackageInfo("com.google.android.gms", 0);
+                    stat.setInfo(String.format("%s [%s]", info.versionName, info.versionCode));
+                } catch (PackageManager.NameNotFoundException e) {
+                    Log.e(StatHelper.class.getSimpleName(), "Unable to find google play services", e);
+                    stat.setInfo(context.getString(R.string.unavailable));
+                }
+                break;
+
         }
         return stat;
     }

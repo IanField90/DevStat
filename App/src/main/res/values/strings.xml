@@ -31,6 +31,7 @@
     <string name="android_version">Android version</string>
     <string name="sdk_int">SDK Int</string>
     <string name="opengl_version">OpenGL ES version</string>
+    <string name="google_play_services_version">Google Play Services version</string>
     <string name="unknown">Unknown</string>
 
     <!-- Hardware -->

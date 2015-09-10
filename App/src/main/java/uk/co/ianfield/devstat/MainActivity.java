@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         softwareStats.add(helper.getStatItem(StatHelper.Software.ANDROID_VERSION));
         softwareStats.add(helper.getStatItem(StatHelper.Software.SDK_INT));
         softwareStats.add(helper.getStatItem(StatHelper.Software.OPEN_GL_ES));
+        softwareStats.add(helper.getStatItem(StatHelper.Software.GOOGLE_PLAY_SERVICES_VERSION));
 
         // Hardware
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MANUFACTURER));
