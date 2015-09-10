@@ -41,7 +41,8 @@ public class StatHelper {
         BRAND,
         BOARD,
         HOST,
-        PRODUCT
+        PRODUCT,
+        SD_CARD
     }
 
     public enum Screen {
@@ -61,20 +62,17 @@ public class StatHelper {
 
 
     public StatItem getStatItem(Software software) {
-        StatItem stat = null;
+        StatItem stat = new StatItem();
         switch (software) {
             case ANDROID_VERSION:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.android_version));
                 stat.setInfo(Build.VERSION.RELEASE);
                 break;
             case SDK_INT:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.sdk_int));
                 stat.setInfo(String.format("%d", Build.VERSION.SDK_INT));
                 break;
             case OPEN_GL_ES:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.opengl_version));
                 ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
                 ConfigurationInfo configurationInfo = activityManager.getDeviceConfigurationInfo();
@@ -85,7 +83,6 @@ public class StatHelper {
                 }
                 break;
             case GOOGLE_PLAY_SERVICES_VERSION:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.google_play_services_version));
                 try {
                     PackageInfo info = context.getPackageManager().getPackageInfo("com.google.android.gms", 0);
@@ -101,63 +98,56 @@ public class StatHelper {
     }
 
     public StatItem getStatItem(Hardware hardware) {
-        StatItem stat = null;
+        StatItem stat = new StatItem();
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         switch (hardware) {
             case MODEL:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.device_model));
                 stat.setInfo(Build.MODEL);
                 break;
 
             case DEVICE:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.device));
                 stat.setInfo(Build.DEVICE);
                 break;
 
             case BRAND:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.brand));
                 stat.setInfo(Build.BRAND);
                 break;
 
             case BOARD:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.board));
                 stat.setInfo(Build.BOARD);
                 break;
 
             case HOST:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.host));
                 stat.setInfo(Build.HOST);
                 break;
 
             case MANUFACTURER:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.manufacturer));
                 stat.setInfo(Build.MANUFACTURER);
                 break;
 
             case PRODUCT:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.product));
                 stat.setInfo(Build.PRODUCT);
                 break;
 
             case MEMORY_CLASS:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.memory_class));
                 int memoryClass = am.getMemoryClass();
                 stat.setInfo(String.format("%d MB", memoryClass));
                 break;
             case LARGE_MEMORY_CLASS:
                 if (Build.VERSION.SDK_INT >= 11) {
-                    stat = new StatItem();
                     stat.setTitle(context.getString(R.string.large_memory_class));
                     int largeMemoryClass = am.getLargeMemoryClass();
                     stat.setInfo(String.format("%d MB", largeMemoryClass));
+                } else {
+                    stat = null;
                 }
                 break;
             case MAX_MEMORY:
@@ -168,7 +158,6 @@ public class StatHelper {
                 stat.setInfo(readableFileSize(maxMemory));
                 break;
             case FREE_SPACE:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.free_space));
                 long available;
                 if (Build.VERSION.SDK_INT >= 9) {
@@ -181,12 +170,22 @@ public class StatHelper {
                 stat.setInfo(readableFileSize(available));
                 break;
             case TELEPHONY:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.telephony));
                 if (isTelephonyEnabled()) {
                     stat.setInfo(context.getString(R.string.enabled));
                 } else {
                     stat.setInfo(context.getString(R.string.disabled));
+                }
+                break;
+
+            case SD_CARD:
+                stat.setTitle(context.getString(R.string.sd_card));
+                Boolean sdPresence = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+                    stat.setInfo(context.getString(R.string.sd_presence, String.valueOf(sdPresence)));
+                } else {
+                    Boolean emulated = android.os.Environment.isExternalStorageEmulated();
+                    stat.setInfo(context.getString(R.string.sd_presence_emulated, String.valueOf(sdPresence), String.valueOf(emulated)));
                 }
                 break;
 
@@ -197,25 +196,21 @@ public class StatHelper {
     public StatItem getStatItem(Screen screen) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
 
-        StatItem stat = null;
+        StatItem stat = new StatItem();
         switch (screen) {
             case WIDTH:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.screen_width));
                 stat.setInfo(String.format("%d px", metrics.widthPixels));
                 break;
             case HEIGHT:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.screen_height));
                 stat.setInfo(String.format("%d px", metrics.heightPixels));
                 break;
             case DISPLAY_DENSITY:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.display_density));
                 stat.setInfo(String.format("%d dpi", metrics.densityDpi));
                 break;
             case DRAWABLE_DENSITY:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.drawable_density));
                 if (metrics.densityDpi == DisplayMetrics.DENSITY_LOW) {
                     stat.setInfo("ldpi (.75x)");
@@ -238,7 +233,6 @@ public class StatHelper {
                 }
                 break;
             case SCREEN_SIZE:
-                stat = new StatItem();
                 stat.setTitle(context.getString(R.string.screen_size));
                 int screenSize = context.getResources().getConfiguration().screenLayout &
                         Configuration.SCREENLAYOUT_SIZE_MASK;

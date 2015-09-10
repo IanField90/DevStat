@@ -53,6 +53,7 @@
     <string name="camera">Camera</string>
     <string name="accelerometer">Accelerometer</string>
     <string name="compass">Compass</string>
+    <string name="sd_card">SD Card</string>
 
     <string name="available">Available</string>
     <string name="unavailable">Unavailable</string>
@@ -67,5 +68,8 @@
     <string name="device">Device</string>
 
     <string name="copied_to_clipboard">Copied to clipboard</string>
+
+    <string name="sd_presence_emulated">Presence: %1$s, Emulated: %2$s</string>
+    <string name="sd_presence">Presence: %1$s</string>
 
 </resources>
