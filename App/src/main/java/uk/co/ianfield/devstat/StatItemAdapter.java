@@ -1,9 +1,11 @@
 package uk.co.ianfield.devstat;
 
+import android.location.GpsStatus;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ import uk.co.ianfield.devstat.model.StatItem;
 public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewHolder> {
     private ArrayList<StatItem> mDataset;
 
+    private final OnItemLongClickListener listener;
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTitle;
         public TextView mInfo;
@@ -26,8 +30,9 @@ public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewH
         }
     }
 
-    public StatItemAdapter(ArrayList<StatItem> statItems) {
+    public StatItemAdapter(ArrayList<StatItem> statItems, OnItemLongClickListener listener) {
         mDataset = statItems;
+        this.listener = listener;
     }
 
     @Override
@@ -38,9 +43,21 @@ public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewH
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.mTitle.setText(mDataset.get(position).getTitle());
         holder.mInfo.setText(mDataset.get(position).getInfo());
+
+        if (listener != null) {
+            View.OnLongClickListener viewListener = new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    listener.onItemClick(position);
+                    return true;
+                }
+            };
+            holder.mTitle.setOnLongClickListener(viewListener);
+            holder.mInfo.setOnLongClickListener(viewListener);
+        }
     }
 
     @Override
@@ -48,4 +65,7 @@ public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewH
         return mDataset.size();
     }
 
+    public interface OnItemLongClickListener {
+        void onItemClick(int position);
+    }
 }
