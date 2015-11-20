@@ -24,6 +24,6 @@ public class StatItem {
     }
 
     public String toString() {
-        return String.format("%s: %s", title, info);
+        return String.format("%s: %s", getTitle(), getInfo());
     }
 }

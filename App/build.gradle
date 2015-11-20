@@ -32,20 +32,35 @@ def getCredentials = {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:23.0.1'
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.android.support:cardview-v7:23.0.1'
-    compile 'com.android.support:recyclerview-v7:23.0.1'
-    compile 'com.android.support:design:23.0.1'
+    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:cardview-v7:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
 
     // Android Annotations
     apt "org.androidannotations:androidannotations:3.3.2"
     compile "org.androidannotations:androidannotations-api:3.3.2"
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile 'org.hamcrest:hamcrest-library:1.1'
+    testCompile 'com.google.truth:truth:0.27'
+
+    androidTestCompile 'junit:junit:4.12'
+
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.1'
+    androidTestCompile 'com.android.support:support-annotations:23.1.1'
+    androidTestCompile 'com.android.support.test:runner:0.4.1'
+    androidTestCompile 'com.android.support.test:rules:0.4.1'
+    // Set this dependency if you want to use Hamcrest matching
+    androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
 }
 
 apt {
     arguments {
-        androidManifestFile variant.outputs[0].processManifest.manifestOutputFile
+        androidManifestFile variant.outputs[0]?.processManifest?.manifestOutputFile
         resourcePackageName android.defaultConfig.applicationId
     }
 }
@@ -69,14 +84,15 @@ repositories {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.1'
+    buildToolsVersion '23.0.2'
 
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 8
         targetSdkVersion 23
         applicationId 'uk.co.ianfield.devstat'
         versionCode 10
         versionName '2.1.0'
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
         release {
