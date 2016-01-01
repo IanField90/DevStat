@@ -1,5 +1,6 @@
 package uk.co.ianfield.devstat;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS));
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Click(R.id.btnSendEmail)
     void emailClick() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(

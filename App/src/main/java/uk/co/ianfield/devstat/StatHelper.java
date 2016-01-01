@@ -212,25 +212,7 @@ public class StatHelper {
                 break;
             case DRAWABLE_DENSITY:
                 stat.setTitle(context.getString(R.string.drawable_density));
-                if (metrics.densityDpi == DisplayMetrics.DENSITY_LOW) {
-                    stat.setInfo("ldpi (.75x)");
-                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_MEDIUM) {
-                    stat.setInfo("mdpi (1x)");
-                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_TV) {
-                    stat.setInfo("tvdpi (1.33x");
-                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_HIGH) {
-                    stat.setInfo("hdpi (1.5x)");
-                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH) {
-                    stat.setInfo("xhdpi (2x)");
-                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_400) {
-                    stat.setInfo("xxhdpi (System scaled down to suit)");
-                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_XXHIGH) {
-                    stat.setInfo("xxhdpi (3x)");
-                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_560) {
-                    stat.setInfo("xxxhdpi (System scaled down to suit)");
-                } else if (metrics.densityDpi == DisplayMetrics.DENSITY_XXXHIGH) {
-                    stat.setInfo("xxxhdpi (4x)");
-                }
+                stat.setInfo(getDensityInfo(metrics));
                 break;
             case SCREEN_SIZE:
                 stat.setTitle(context.getString(R.string.screen_size));
@@ -256,6 +238,35 @@ public class StatHelper {
                 break;
         }
         return stat;
+    }
+
+    private String getDensityInfo(DisplayMetrics metrics) {
+        switch (metrics.densityDpi) {
+            case DisplayMetrics.DENSITY_LOW:
+                return "ldpi (.75x)";
+            case DisplayMetrics.DENSITY_MEDIUM: // === DENSITY_DEFAULT
+                return "mdpi (1x)";
+            case DisplayMetrics.DENSITY_TV:
+                return "tvdpi (1.33x)";
+            case DisplayMetrics.DENSITY_HIGH:
+                return "hdpi (1.5x)";
+            case DisplayMetrics.DENSITY_XHIGH:
+                return "xhdpi (2x)";
+            case DisplayMetrics.DENSITY_280:
+                return "xhdpi (System scaled down to suit)";
+            case DisplayMetrics.DENSITY_360:
+                return "xxhdpi (System scaled down to suit)";
+            case DisplayMetrics.DENSITY_400:
+            case DisplayMetrics.DENSITY_420:
+                return "xxhdpi (System scaled down to suit)";
+            case DisplayMetrics.DENSITY_XXHIGH:
+                return "xxhdpi (3x)";
+            case DisplayMetrics.DENSITY_560:
+                return "xxxhdpi (System scaled down to suit)";
+            case DisplayMetrics.DENSITY_XXXHIGH:
+                return "xxxhdpi (4x)";
+        }
+        return "Unknown DPI: " + metrics.densityDpi;
     }
 
     public ArrayList<StatItem> getFeatureList() {
