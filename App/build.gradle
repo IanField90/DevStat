@@ -69,19 +69,6 @@ configurations {
     apt
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7'
-    }
-}
-
-repositories {
-    mavenCentral()
-}
-
 android {
     compileSdkVersion 23
     buildToolsVersion '23.0.2'
