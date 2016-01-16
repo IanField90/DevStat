@@ -101,6 +101,22 @@ android {
         defaultFlavor {
             proguardFile 'proguard-rules.txt'
         }
+        productFlavors
+        dev {
+            minSdkVersion 23
+        }
+        prod {
+            // The actual minSdkVersion for the application.
+            minSdkVersion 8
+        }
+    }
+
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+            outputs.upToDateWhen { false }
+            showStandardStreams = true
+        }
     }
 
 }
