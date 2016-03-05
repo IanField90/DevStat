@@ -7,7 +7,7 @@ Android application to quickly query device data. This can also be used to help 
 
 ![App image](https://raw.githubusercontent.com/IanField90/DevStat/master/Nexus6_framed.png)
 
-[![GooglePlay](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=uk.co.ianfield.devstat)
+[![GooglePlay](http://ianfield.com/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=uk.co.ianfield.devstat)
 
 ##Information
 
