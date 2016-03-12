@@ -32,11 +32,11 @@ def getCredentials = {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:23.1.1'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:cardview-v7:23.1.1'
-    compile 'com.android.support:recyclerview-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:support-v4:24.0.0-alpha1'
+    compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
+    compile 'com.android.support:cardview-v7:24.0.0-alpha1'
+    compile 'com.android.support:recyclerview-v7:24.0.0-alpha1'
+    compile 'com.android.support:design:24.0.0-alpha1'
 
     // Android Annotations
     apt "org.androidannotations:androidannotations:3.3.2"
@@ -51,7 +51,7 @@ dependencies {
 
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.1'
-    androidTestCompile 'com.android.support:support-annotations:23.1.1'
+    androidTestCompile 'com.android.support:support-annotations:24.0.0-alpha1'
     androidTestCompile 'com.android.support.test:runner:0.4.1'
     androidTestCompile 'com.android.support.test:rules:0.4.1'
     // Set this dependency if you want to use Hamcrest matching
@@ -70,12 +70,12 @@ configurations {
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.2'
+    compileSdkVersion 'android-N'
+    buildToolsVersion '24.0.0 rc1'
 
     defaultConfig {
         minSdkVersion 8
-        targetSdkVersion 23
+        targetSdkVersion 'android-N'
         applicationId 'uk.co.ianfield.devstat'
         versionCode 12
         versionName '2.1.2'
@@ -103,7 +103,7 @@ android {
         }
         productFlavors
         dev {
-            minSdkVersion 23
+            minSdkVersion 'android-N'
         }
         prod {
             // The actual minSdkVersion for the application.
