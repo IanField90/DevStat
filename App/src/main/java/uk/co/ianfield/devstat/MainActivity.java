@@ -9,42 +9,33 @@ import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.OptionsItem;
-import org.androidannotations.annotations.OptionsMenu;
-import org.androidannotations.annotations.ViewById;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import uk.co.ianfield.devstat.model.StatItem;
 import uk.co.ianfield.devstat.widget.InformationPagerAdapter;
 
-@EActivity(R.layout.activity_main)
-@OptionsMenu(R.menu.main)
 public class MainActivity extends AppCompatActivity {
-
-    @ViewById(R.id.tabs)
-    TabLayout tabLayout;
-
-    @ViewById(R.id.viewpager)
-    ViewPager viewPager;
+    @Bind(R.id.tabs) TabLayout tabLayout;
+    @Bind(R.id.viewpager) ViewPager viewPager;
 
     ArrayList<StatItem> hardwareStats;
     ArrayList<StatItem> screenStats;
     ArrayList<StatItem> softwareStats;
     ArrayList<StatItem> featureStats;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-    @AfterViews
-    void initContent() {
         StatHelper helper = new StatHelper(this);
         hardwareStats = new ArrayList<>();
         screenStats = new ArrayList<>();
@@ -95,20 +86,29 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    @OptionsItem(R.id.action_about)
-    void actionAboutClick() {
-        Intent intent = new Intent(this, AboutActivity_.class);
-        startActivity(intent);
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
     }
 
-    @OptionsItem(R.id.action_developer)
-    void actionDeveloperClick() {
-        startActivity(new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS));
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_about:
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_developer:
+                startActivity(new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @SuppressLint("StringFormatInvalid")
-    @Click(R.id.btnSendEmail)
-    void emailClick() {
+    @OnClick(R.id.btnSendEmail) protected void emailClick() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", "", null));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));

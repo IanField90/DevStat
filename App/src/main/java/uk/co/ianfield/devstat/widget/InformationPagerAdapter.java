@@ -26,7 +26,7 @@ public class InformationPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        InformationPageFragment fragment = InformationPageFragment_.builder().build();
+        InformationPageFragment fragment = new InformationPageFragment();
         fragment.setItems(statSets.get(i));
         return fragment;
     }

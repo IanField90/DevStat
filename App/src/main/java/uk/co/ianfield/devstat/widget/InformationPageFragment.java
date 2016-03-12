@@ -4,44 +4,40 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import uk.co.ianfield.devstat.R;
 import uk.co.ianfield.devstat.StatItemAdapter;
 import uk.co.ianfield.devstat.model.StatItem;
 
-/**
- * Created by Ian Field on 14/08/15.
- */
-@EFragment(R.layout.fragment_information_page)
 public class InformationPageFragment extends Fragment {
-    @ViewById(R.id.recycler_view)
-    RecyclerView mRecyclerView;
-
+    @Bind(R.id.recycler_view) RecyclerView recyclerView;
     ArrayList<StatItem> items;
 
-    @AfterViews
-    void init() {
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_information_page, container, false);
+        ButterKnife.bind(this, view);
         setRetainInstance(true);
-        mRecyclerView.setHasFixedSize(true);
-
+        recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);
 
         RecyclerView.Adapter adapter = new StatItemAdapter(items, new StatItemAdapter.OnItemLongClickListener() {
             @Override
             public void onItemClick(int position) {
 
-                if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+                if (Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
                     android.text.ClipboardManager clipboard = (android.text.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                     clipboard.setText(items.get(position).toString());
                 } else {
@@ -52,10 +48,16 @@ public class InformationPageFragment extends Fragment {
                 Toast.makeText(getActivity(), R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
             }
         });
-        mRecyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
+        return view;
     }
 
     public void setItems(ArrayList<StatItem> items) {
         this.items = items;
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

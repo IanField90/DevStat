@@ -14,22 +14,22 @@ import uk.co.ianfield.devstat.model.StatItem;
  * Created by Ian on 18/08/2015.
  */
 public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewHolder> {
-    private ArrayList<StatItem> mDataset;
+    private ArrayList<StatItem> dataSet;
 
     private final OnItemLongClickListener listener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTitle;
-        public TextView mInfo;
+        public TextView title;
+        public TextView info;
         public ViewHolder(View container) {
             super(container);
-            mTitle = (TextView) container.findViewById(R.id.txtTitle);
-            mInfo = (TextView) container.findViewById(R.id.txtInfo);
+            title = (TextView) container.findViewById(R.id.txtTitle);
+            info = (TextView) container.findViewById(R.id.txtInfo);
         }
     }
 
     public StatItemAdapter(ArrayList<StatItem> statItems, OnItemLongClickListener listener) {
-        mDataset = statItems;
+        dataSet = statItems;
         this.listener = listener;
     }
 
@@ -42,8 +42,8 @@ public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewH
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.mTitle.setText(mDataset.get(position).getTitle());
-        holder.mInfo.setText(mDataset.get(position).getInfo());
+        holder.title.setText(dataSet.get(position).getTitle());
+        holder.info.setText(dataSet.get(position).getInfo());
 
         if (listener != null) {
             View.OnLongClickListener viewListener = new View.OnLongClickListener() {
@@ -53,14 +53,14 @@ public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewH
                     return true;
                 }
             };
-            holder.mTitle.setOnLongClickListener(viewListener);
-            holder.mInfo.setOnLongClickListener(viewListener);
+            holder.title.setOnLongClickListener(viewListener);
+            holder.info.setOnLongClickListener(viewListener);
         }
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        return dataSet.size();
     }
 
     public interface OnItemLongClickListener {

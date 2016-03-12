@@ -1,23 +1,21 @@
 package uk.co.ianfield.devstat;
 
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
-/**
- * Created by ianfield on 21/02/2014.
- */
-@EActivity(R.layout.activity_about)
 public class AboutActivity extends AppCompatActivity {
 
-    @ViewById(R.id.webView)
-    WebView webView;
+    @Bind(R.id.webView) WebView webView;
 
-    @AfterViews
-    void initAbout() {
+    @Override public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        setContentView(R.layout.activity_about);
+        ButterKnife.bind(this);
         webView.loadUrl("file:///android_asset/about.html");
     }
 }

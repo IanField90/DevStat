@@ -23,14 +23,14 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class MainActivityTest {
 
     @Rule
-    public ActivityTestRule<MainActivity_> mActivityRule = new ActivityTestRule(MainActivity_.class);
+    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule(MainActivity.class);
 
     @Test
     public void checkAboutIsLaunched() {
         Intents.init();
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
         onView(withText(R.string.action_about)).perform(click());
-        intended(hasComponent(AboutActivity_.class.getName()));
+        intended(hasComponent(AboutActivity.class.getName()));
         Intents.release();
     }
 
