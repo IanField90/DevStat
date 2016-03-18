@@ -1,36 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
-// Load profile information from the standard maven settings file
-def getMavenSettingsProfiles = {
-    String userHome = System.getProperty("user.home");
-    File mavenSettings = new File(userHome, ".m2/settings.xml")
-    def output
-    if (mavenSettings.canRead()) {
-        def xmlSlurper = new XmlSlurper()
-        output = xmlSlurper.parse(mavenSettings)
-    } else {
-        println "WARNING: Maven settings file cannot be found - builds cannot be signed"
-        output = []
-    }
-    return output."profiles"."profile"
-}
-
-def getCredentials = {
-    def profiles = getMavenSettingsProfiles()
-    def creds = [location: "/not/found", password: "", keypass: "", alias: ""]
-    for (profile in profiles) {
-        if (profile."id".text() == "devstat") {
-            def properties = profile."properties"
-            creds = [location: properties."keystore.location".text(),
-                     password: properties."keystore.password".text(),
-                     keypass: properties."keystore.keypass".text(),
-                     alias: properties."keystore.alias".text()]
-        }
-    }
-    return creds
-}
-
 dependencies {
     compile 'com.android.support:support-v4:24.0.0-alpha1'
     compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
@@ -72,11 +42,10 @@ android {
     }
     signingConfigs {
         release {
-            def credentials = getCredentials()
-            storeFile file(credentials["location"])
-            storePassword credentials["password"]
-            keyPassword credentials["keypass"]
-            keyAlias credentials["alias"]
+            storeFile file(this.properties["uk.co.ianfield.devstat.keystore.location"])
+            storePassword this.properties["uk.co.ianfield.devstat.keystore.storepass"]
+            keyPassword this.properties["uk.co.ianfield.devstat.keystore.keypass"]
+            keyAlias this.properties["uk.co.ianfield.devstat.keystore.alias"]
         }
     }
     buildTypes {
@@ -90,14 +59,6 @@ android {
         defaultFlavor {
             proguardFile 'proguard-rules.txt'
         }
-        productFlavors
-        dev {
-            minSdkVersion 'android-N'
-        }
-        prod {
-            // The actual minSdkVersion for the application.
-            minSdkVersion 8
-        }
     }
 
     testOptions.unitTests.all {
@@ -110,6 +71,7 @@ android {
 
     lintOptions {
         disable 'InvalidPackage'
+        checkReleaseBuilds false
     }
 
     packagingOptions {
