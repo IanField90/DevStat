@@ -298,4 +298,11 @@ public class StatHelper {
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return (tm != null && tm.getSimState() == TelephonyManager.SIM_STATE_READY);
     }
+
+//    @Provides @Singleton @ApplicationContext Context provideContext() {
+//        return context.getApplicationContext();
+//    }
+//
+//    @Qualifier @Documented @Retention(RetentionPolicy.RUNTIME) public @interface ApplicationContext {
+//    }
 }

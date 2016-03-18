@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -31,12 +33,15 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<StatItem> softwareStats;
     ArrayList<StatItem> featureStats;
 
+    @Inject
+    StatHelper helper;
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ((DevStatApplication) getApplication()).component().inject(this);
         ButterKnife.bind(this);
 
-        StatHelper helper = new StatHelper(this);
         hardwareStats = new ArrayList<>();
         screenStats = new ArrayList<>();
         softwareStats = new ArrayList<>();
