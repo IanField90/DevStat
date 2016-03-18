@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import uk.co.ianfield.devstat.common.base.AndroidModule;
 
 /**
  * Created by Ian Field on 18/03/2016.

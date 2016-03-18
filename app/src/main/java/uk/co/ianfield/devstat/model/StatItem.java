@@ -1,7 +1,7 @@
 package uk.co.ianfield.devstat.model;
 
 /**
- * Created by ianfield on 20/02/2014.
+ * Created by Ian Field on 20/02/2014.
  */
 public class StatItem {
     String title;

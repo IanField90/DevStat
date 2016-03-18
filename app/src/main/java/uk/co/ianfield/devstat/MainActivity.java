@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<StatItem> softwareStats;
     ArrayList<StatItem> featureStats;
 
-    @Inject
-    StatHelper helper;
+    @Inject StatHelper helper;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

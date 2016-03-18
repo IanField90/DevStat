@@ -299,10 +299,4 @@ public class StatHelper {
         return (tm != null && tm.getSimState() == TelephonyManager.SIM_STATE_READY);
     }
 
-//    @Provides @Singleton @ApplicationContext Context provideContext() {
-//        return context.getApplicationContext();
-//    }
-//
-//    @Qualifier @Documented @Retention(RetentionPolicy.RUNTIME) public @interface ApplicationContext {
-//    }
 }
