@@ -27,9 +27,9 @@ import uk.co.ianfield.devstat.StatHelper;
 
     /**
      * Allow the application context to be injected but require that it be annotated with
-     * {@link AppplicationContext @Annotation} to explicitly differentiate it from an activity context.
+     * {@link ApplicationContext @Annotation} to explicitly differentiate it from an activity context.
      */
-    @Provides @Singleton @AppplicationContext Context provideContext() {
+    @Provides @Singleton @ApplicationContext Context provideContext() {
         return application;
     }
 
@@ -37,6 +37,6 @@ import uk.co.ianfield.devstat.StatHelper;
         return new StatHelper(application);
     }
 
-    @Qualifier @Documented @Retention(RetentionPolicy.RUNTIME) public @interface AppplicationContext {
+    @Qualifier @Documented @Retention(RetentionPolicy.RUNTIME) public @interface ApplicationContext {
     }
 }
