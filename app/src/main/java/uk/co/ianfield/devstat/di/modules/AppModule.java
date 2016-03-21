@@ -1,4 +1,4 @@
-package uk.co.ianfield.devstat.common.base;
+package uk.co.ianfield.devstat.di.modules;
 
 import android.content.Context;
 
@@ -18,10 +18,10 @@ import uk.co.ianfield.devstat.StatHelper;
  * A module for Android-specific dependencies which require a {@link Context} or
  * {@link android.app.Application} to create.
  */
-@Module public class AndroidModule {
+@Module public class AppModule {
     private final DevStatApplication application;
 
-    public AndroidModule(DevStatApplication application) {
+    public AppModule(DevStatApplication application) {
         this.application = application;
     }
 

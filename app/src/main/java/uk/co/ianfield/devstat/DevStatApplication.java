@@ -2,35 +2,25 @@ package uk.co.ianfield.devstat;
 
 import android.app.Application;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import dagger.Component;
-import uk.co.ianfield.devstat.common.base.AndroidModule;
+import uk.co.ianfield.devstat.common.base.DaggerAppComponent;
+import uk.co.ianfield.devstat.di.components.AppComponent;
+import uk.co.ianfield.devstat.di.modules.AppModule;
 
 /**
  * Created by Ian Field on 18/03/2016.
  */
 public class DevStatApplication extends Application {
 
-    @Singleton
-    @Component(modules = AndroidModule.class)
-    public interface ApplicationComponent {
-        void inject(MainActivity mainActivity);
-    }
-
-    @Inject StatHelper statHelper;
-
-    private ApplicationComponent component;
+    private AppComponent component;
 
     @Override public void onCreate() {
         super.onCreate();
-        component = DaggerDevStatApplication_ApplicationComponent.builder()
-                .androidModule(new AndroidModule(this))
+        component = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
                 .build();
     }
 
-    public ApplicationComponent component() {
+    public AppComponent component() {
         return component;
     }
 }
