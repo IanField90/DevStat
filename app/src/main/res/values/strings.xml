@@ -71,5 +71,7 @@
 
     <string name="sd_presence_emulated">Present: %1$s, Emulated: %2$s</string>
     <string name="sd_presence">Present: %1$s</string>
+    <string name="architecture">ABIs</string>
+    <string name="processors">Online Processors</string>
 
 </resources>

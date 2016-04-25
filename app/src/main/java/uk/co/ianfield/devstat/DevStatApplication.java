@@ -2,8 +2,8 @@ package uk.co.ianfield.devstat;
 
 import android.app.Application;
 
-import uk.co.ianfield.devstat.common.base.DaggerAppComponent;
 import uk.co.ianfield.devstat.di.components.AppComponent;
+import uk.co.ianfield.devstat.di.components.DaggerAppComponent;
 import uk.co.ianfield.devstat.di.modules.AppModule;
 
 /**

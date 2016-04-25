@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.FREE_SPACE));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.TELEPHONY));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.SD_CARD));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.ARCHITECTURE));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.PROCESSORS));
 
         // Features (some will dupe for now)
         featureStats = helper.getFeatureList();

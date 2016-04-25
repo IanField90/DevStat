@@ -11,11 +11,13 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import uk.co.ianfield.devstat.model.StatItem;
 
@@ -42,7 +44,9 @@ public class StatHelper {
         BOARD,
         HOST,
         PRODUCT,
-        SD_CARD
+        SD_CARD,
+        ARCHITECTURE,
+        PROCESSORS
     }
 
     public enum Screen {
@@ -188,7 +192,18 @@ public class StatHelper {
                     stat.setInfo(context.getString(R.string.sd_presence_emulated, String.valueOf(sdPresence), String.valueOf(emulated)));
                 }
                 break;
-
+            case ARCHITECTURE:
+                stat.setTitle(context.getString(R.string.architecture));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    stat.setInfo(TextUtils.join(", ", Build.SUPPORTED_ABIS));
+                } else {
+                    stat.setInfo(TextUtils.join(", ", Arrays.asList(Build.CPU_ABI, Build.CPU_ABI2)));
+                }
+                break;
+            case PROCESSORS:
+                stat.setTitle(context.getString(R.string.processors));
+                stat.setInfo("" + Runtime.getRuntime().availableProcessors());
+                break;
         }
         return stat;
     }
