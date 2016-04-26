@@ -18,15 +18,15 @@ import java.util.Arrays;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import uk.co.ianfield.devstat.model.StatItem;
 import uk.co.ianfield.devstat.widget.InformationPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
-    @Bind(R.id.tabs) TabLayout tabLayout;
-    @Bind(R.id.viewpager) ViewPager viewPager;
+    @BindView(R.id.tabs) TabLayout tabLayout;
+    @BindView(R.id.viewpager) ViewPager viewPager;
 
     ArrayList<StatItem> hardwareStats;
     ArrayList<StatItem> screenStats;

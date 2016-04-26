@@ -15,19 +15,22 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import uk.co.ianfield.devstat.R;
 import uk.co.ianfield.devstat.StatItemAdapter;
 import uk.co.ianfield.devstat.model.StatItem;
 
 public class InformationPageFragment extends Fragment {
-    @Bind(R.id.recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.recycler_view) RecyclerView recyclerView;
     ArrayList<StatItem> items;
+
+    Unbinder unbinder;
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_information_page, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         setRetainInstance(true);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -58,6 +61,6 @@ public class InformationPageFragment extends Fragment {
 
     @Override public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
     }
 }
