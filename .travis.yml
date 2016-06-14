@@ -12,13 +12,12 @@ env:
 android:
   components:
     - tools
-    - build-tools-${BUILD_TOOLS}  # specify build tools version as they might not be pre-installed
-    - android-${TARGET_API}  # The SDK version used to compile your project
-
-    # Additional components
+    - build-tools-${BUILD_TOOLS}
+    - android-${TARGET_API}
+    - extra-google-m2repository
     - extra-android-m2repository
     - extra-android-support
-    # - addon-google_apis-google-${TARGET_API}
+    - addon-google_apis-google-${TARGET_API}
     - sys-img-x86-android-23
 
 before_install:
