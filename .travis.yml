@@ -11,6 +11,7 @@ env:
 
 android:
   components:
+    - tools
     - build-tools-${BUILD_TOOLS}  # specify build tools version as they might not be pre-installed
     - android-${TARGET_API}  # The SDK version used to compile your project
 
