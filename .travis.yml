@@ -27,3 +27,6 @@ before_install:
 
   # for gradle output style
   - export TERM=dumb
+
+script:
+  - "./gradlew assembleDebug"
