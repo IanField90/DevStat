@@ -1,5 +1,6 @@
 package uk.co.ianfield.devstat;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import uk.co.ianfield.devstat.model.StatItem;
  * Created by Ian on 18/08/2015.
  */
 public class StatItemAdapter extends RecyclerView.Adapter<StatItemAdapter.ViewHolder> {
+    private final LayoutInflater inflater;
     private ArrayList<StatItem> dataSet;
 
     private final OnItemLongClickListener listener;
@@ -29,16 +31,16 @@ public class StatItemAdapter extends RecyclerView.Adapter<StatItemAdapter.ViewHo
         }
     }
 
-    public StatItemAdapter(ArrayList<StatItem> statItems, OnItemLongClickListener listener) {
+    public StatItemAdapter(Context context, ArrayList<StatItem> statItems, OnItemLongClickListener listener) {
         dataSet = statItems;
         this.listener = listener;
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.stat_item, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        View v = inflater.inflate(R.layout.stat_item, parent, false);
+        return new ViewHolder(v);
     }
 
     @Override
@@ -47,12 +49,9 @@ public class StatItemAdapter extends RecyclerView.Adapter<StatItemAdapter.ViewHo
         holder.info.setText(dataSet.get(position).getInfo());
 
         if (listener != null) {
-            View.OnLongClickListener viewListener = new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    listener.onItemClick(holder.getAdapterPosition());
-                    return true;
-                }
+            View.OnLongClickListener viewListener = v -> {
+                listener.onItemClick(holder.getAdapterPosition());
+                return true;
             };
             holder.title.setOnLongClickListener(viewListener);
             holder.info.setOnLongClickListener(viewListener);

@@ -1,6 +1,5 @@
 package uk.co.ianfield.devstat;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -30,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.viewpager)
     ViewPager viewPager;
 
-    ArrayList<StatItem> hardwareStats;
-    ArrayList<StatItem> screenStats;
-    ArrayList<StatItem> softwareStats;
-    ArrayList<StatItem> featureStats;
+    private ArrayList<StatItem> hardwareStats;
+    private ArrayList<StatItem> screenStats;
+    private ArrayList<StatItem> softwareStats;
+    private ArrayList<StatItem> featureStats;
 
     @Inject
     StatHelper helper;
@@ -117,8 +116,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("StringFormatInvalid")
-    @OnClick(R.id.btnSendEmail)
+    @OnClick(R.id.send_email)
     protected void emailClick() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", "", null));

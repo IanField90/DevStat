@@ -3,6 +3,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="uk.co.ianfield.devstat">
 
+    <!--<uses-permission android:name="android.permission.INTERNET"/>-->
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -12,7 +14,9 @@
         >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,6 +24,7 @@
         </activity>
 
         <activity android:name=".AboutActivity"
+                  android:screenOrientation="portrait"
                   android:label="@string/app_name"
                   android:parentActivityName=".MainActivity"
                   tools:ignore="UnusedAttribute">

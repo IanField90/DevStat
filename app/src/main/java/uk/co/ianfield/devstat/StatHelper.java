@@ -16,6 +16,7 @@ import android.util.Log;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import uk.co.ianfield.devstat.model.StatItem;
 
@@ -139,13 +140,13 @@ public class StatHelper {
             case MEMORY_CLASS:
                 stat.setTitle(context.getString(R.string.memory_class));
                 int memoryClass = am.getMemoryClass();
-                stat.setInfo(String.format("%d MB", memoryClass));
+                stat.setInfo(String.format(Locale.getDefault(), "%d MB", memoryClass));
                 break;
             case LARGE_MEMORY_CLASS:
                 if (Build.VERSION.SDK_INT >= 11) {
                     stat.setTitle(context.getString(R.string.large_memory_class));
                     int largeMemoryClass = am.getLargeMemoryClass();
-                    stat.setInfo(String.format("%d MB", largeMemoryClass));
+                    stat.setInfo(String.format(Locale.getDefault(), "%d MB", largeMemoryClass));
                 } else {
                     stat = null;
                 }
@@ -200,15 +201,15 @@ public class StatHelper {
         switch (screen) {
             case WIDTH:
                 stat.setTitle(context.getString(R.string.screen_width));
-                stat.setInfo(String.format("%d px", metrics.widthPixels));
+                stat.setInfo(String.format(Locale.getDefault(), "%d px", metrics.widthPixels));
                 break;
             case HEIGHT:
                 stat.setTitle(context.getString(R.string.screen_height));
-                stat.setInfo(String.format("%d px", metrics.heightPixels));
+                stat.setInfo(String.format(Locale.getDefault(), "%d px", metrics.heightPixels));
                 break;
             case DISPLAY_DENSITY:
                 stat.setTitle(context.getString(R.string.display_density));
-                stat.setInfo(String.format("%d dpi", metrics.densityDpi));
+                stat.setInfo(String.format(Locale.getDefault(), "%d dpi", metrics.densityDpi));
                 break;
             case DRAWABLE_DENSITY:
                 stat.setTitle(context.getString(R.string.drawable_density));
