@@ -9,6 +9,8 @@ import uk.co.ianfield.devstat.di.modules.AppModule;
 /**
  * Created by Ian Field on 21/03/2016.
  */
-@Singleton @Component(modules = AppModule.class) public interface AppComponent {
+@Singleton
+@Component(modules = AppModule.class)
+public interface AppComponent {
     void inject(MainActivity activity);
 }

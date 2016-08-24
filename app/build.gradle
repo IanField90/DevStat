@@ -2,11 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 dependencies {
-    compile 'com.android.support:support-v4:24.0.0-alpha1'
-    compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
-    compile 'com.android.support:recyclerview-v7:24.0.0-alpha1'
-    compile 'com.android.support:design:24.0.0-alpha1'
-    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.android.support:support-v4:24.2.0'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:recyclerview-v7:24.2.0'
+    compile 'com.android.support:design:24.2.0'
+
+    compile 'com.jakewharton:butterknife:8.2.1'
+    apt 'com.jakewharton:butterknife-compiler:8.2.1'
 
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'com.google.dagger:dagger:2.0.2'
@@ -21,7 +23,7 @@ dependencies {
 
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.1'
-    androidTestCompile 'com.android.support:support-annotations:24.0.0-alpha1'
+    androidTestCompile 'com.android.support:support-annotations:24.2.0'
     androidTestCompile 'com.android.support.test:runner:0.4.1'
     androidTestCompile 'com.android.support.test:rules:0.4.1'
     // Set this dependency if you want to use Hamcrest matching
@@ -29,12 +31,12 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 'android-N'
-    buildToolsVersion '24.0.0 rc1'
+    compileSdkVersion 24
+    buildToolsVersion '24.0.2'
 
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 'android-N'
+        minSdkVersion 9
+        targetSdkVersion 24
         applicationId 'uk.co.ianfield.devstat'
         versionCode 12
         versionName '2.1.2'
@@ -58,14 +60,6 @@ android {
     productFlavors {
         defaultFlavor {
             proguardFile 'proguard-rules.txt'
-        }
-    }
-
-    testOptions.unitTests.all {
-        testLogging {
-            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
-            outputs.upToDateWhen { false }
-            showStandardStreams = true
         }
     }
 

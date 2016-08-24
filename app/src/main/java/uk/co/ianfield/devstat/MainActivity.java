@@ -18,24 +18,28 @@ import java.util.Arrays;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import uk.co.ianfield.devstat.model.StatItem;
 import uk.co.ianfield.devstat.widget.InformationPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
-    @Bind(R.id.tabs) TabLayout tabLayout;
-    @Bind(R.id.viewpager) ViewPager viewPager;
+    @BindView(R.id.tabs)
+    TabLayout tabLayout;
+    @BindView(R.id.viewpager)
+    ViewPager viewPager;
 
     ArrayList<StatItem> hardwareStats;
     ArrayList<StatItem> screenStats;
     ArrayList<StatItem> softwareStats;
     ArrayList<StatItem> featureStats;
 
-    @Inject StatHelper helper;
+    @Inject
+    StatHelper helper;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ((DevStatApplication) getApplication()).component().inject(this);
@@ -84,19 +88,21 @@ public class MainActivity extends AppCompatActivity {
         statGroups.addAll(Arrays.asList(screenStats, softwareStats, hardwareStats, featureStats));
 
         viewPager.setAdapter(new InformationPagerAdapter(getSupportFragmentManager(), this,
-            new int[] { R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware, R.string.title_features },
-            statGroups));
+                new int[]{R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware, R.string.title_features},
+                statGroups));
 
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
         return true;
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_about:
@@ -112,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("StringFormatInvalid")
-    @OnClick(R.id.btnSendEmail) protected void emailClick() {
+    @OnClick(R.id.btnSendEmail)
+    protected void emailClick() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", "", null));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject));

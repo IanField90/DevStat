@@ -275,7 +275,7 @@ public class StatHelper {
             StatItem stat = new StatItem();
             if (featureInfo.name != null) {
                 String[] featureParts = featureInfo.name.toLowerCase().split("[.]");
-                String featureName = featureParts[featureParts.length -1].replaceAll("_", " ");
+                String featureName = featureParts[featureParts.length - 1].replaceAll("_", " ");
                 stat.setTitle(featureName.substring(0, 1).toUpperCase() + featureName.substring(1));
                 stat.setInfo(featureInfo.name);
             } else {
@@ -288,7 +288,9 @@ public class StatHelper {
     }
 
     private static String readableFileSize(long size) {
-        if (size <= 0) return "0";
+        if (size <= 0) {
+            return "0";
+        }
         final String[] units = new String[]{"B", "kB", "MB", "GB", "TB"};
         int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
         return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];

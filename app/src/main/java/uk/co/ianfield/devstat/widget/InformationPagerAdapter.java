@@ -24,17 +24,20 @@ public class InformationPagerAdapter extends FragmentPagerAdapter {
         this.statSets = statSets;
     }
 
-    @Override public Fragment getItem(int i) {
+    @Override
+    public Fragment getItem(int i) {
         InformationPageFragment fragment = new InformationPageFragment();
         fragment.setItems(statSets.get(i));
         return fragment;
     }
 
-    @Override public int getCount() {
+    @Override
+    public int getCount() {
         return tabTitles.length;
     }
 
-    @Override public CharSequence getPageTitle(int position) {
+    @Override
+    public CharSequence getPageTitle(int position) {
         // Generate title based on item position
         return context.getText(tabTitles[position]);
     }

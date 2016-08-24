@@ -13,7 +13,7 @@ import uk.co.ianfield.devstat.model.StatItem;
 /**
  * Created by Ian on 18/08/2015.
  */
-public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewHolder> {
+public class StatItemAdapter extends RecyclerView.Adapter<StatItemAdapter.ViewHolder> {
     private ArrayList<StatItem> dataSet;
 
     private final OnItemLongClickListener listener;
@@ -21,6 +21,7 @@ public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewH
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView info;
+
         public ViewHolder(View container) {
             super(container);
             title = (TextView) container.findViewById(R.id.txtTitle);
@@ -33,13 +34,15 @@ public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewH
         this.listener = listener;
     }
 
-    @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.stat_item, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
-    @Override public void onBindViewHolder(ViewHolder holder, final int position) {
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.title.setText(dataSet.get(position).getTitle());
         holder.info.setText(dataSet.get(position).getInfo());
 
@@ -47,7 +50,7 @@ public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewH
             View.OnLongClickListener viewListener = new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    listener.onItemClick(position);
+                    listener.onItemClick(holder.getAdapterPosition());
                     return true;
                 }
             };
@@ -56,7 +59,8 @@ public class StatItemAdapter extends  RecyclerView.Adapter<StatItemAdapter.ViewH
         }
     }
 
-    @Override public int getItemCount() {
+    @Override
+    public int getItemCount() {
         return dataSet.size();
     }
 
