@@ -15,8 +15,8 @@ android {
         minSdkVersion 9
         targetSdkVersion 24
         applicationId 'uk.co.ianfield.devstat'
-        versionCode 12
-        versionName '2.1.2'
+        versionCode 14
+        versionName '2.2.1'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -34,17 +34,6 @@ android {
             signingConfig signingConfigs.release
         }
     }
-//    productFlavors {
-//        defaultFlavor {
-//            proguardFile 'proguard-rules.txt'
-//        }
-//    }
-
-//    lintOptions {
-//        disable 'InvalidPackage'
-//        // Temporary fix for https://code.google.com/p/android/issues/detail?id=203407
-//        checkReleaseBuilds false
-//    }
 
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
