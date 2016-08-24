@@ -13,9 +13,9 @@ import uk.co.ianfield.devstat.model.StatItem;
  * Created by Ian Field on 14/08/15.
  */
 public class InformationPagerAdapter extends FragmentPagerAdapter {
-    private Context context;
-    private int[] tabTitles;
-    private ArrayList<ArrayList<StatItem>> statSets;
+    private final Context context;
+    private final int[] tabTitles;
+    private final ArrayList<ArrayList<StatItem>> statSets;
 
     public InformationPagerAdapter(FragmentManager fm, Context context, int[] tabTitles, ArrayList<ArrayList<StatItem>> statSets) {
         super(fm);

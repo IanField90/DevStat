@@ -16,13 +16,13 @@ import uk.co.ianfield.devstat.model.StatItem;
  */
 public class StatItemAdapter extends RecyclerView.Adapter<StatItemAdapter.ViewHolder> {
     private final LayoutInflater inflater;
-    private ArrayList<StatItem> dataSet;
+    private final ArrayList<StatItem> dataSet;
 
     private final OnItemLongClickListener listener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
-        public TextView info;
+        public final TextView title;
+        public final TextView info;
 
         public ViewHolder(View container) {
             super(container);

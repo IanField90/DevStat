@@ -24,7 +24,7 @@ import uk.co.ianfield.devstat.model.StatItem;
  * Created by IanField90 on 17/06/2014.
  */
 public class StatHelper {
-    private Context context;
+    private final Context context;
 
     public StatHelper(Context context) {
         this.context = context;
@@ -71,7 +71,7 @@ public class StatHelper {
                 break;
             case SDK_INT:
                 stat.setTitle(context.getString(R.string.sdk_int));
-                stat.setInfo(String.format("%d", Build.VERSION.SDK_INT));
+                stat.setInfo(String.format(Locale.getDefault(), "%d", Build.VERSION.SDK_INT));
                 break;
             case OPEN_GL_ES:
                 stat.setTitle(context.getString(R.string.opengl_version));

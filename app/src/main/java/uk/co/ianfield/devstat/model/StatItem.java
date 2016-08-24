@@ -4,8 +4,8 @@ package uk.co.ianfield.devstat.model;
  * Created by Ian Field on 20/02/2014.
  */
 public class StatItem {
-    String title;
-    String info;
+    private String title;
+    private String info;
 
     public String getTitle() {
         return title;
