@@ -11,11 +11,13 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 
 import uk.co.ianfield.devstat.model.StatItem;
@@ -30,37 +32,14 @@ public class StatHelper {
         this.context = context;
     }
 
-    public enum Hardware {
-        MANUFACTURER,
-        MODEL,
-        MEMORY_CLASS,
-        LARGE_MEMORY_CLASS,
-        MAX_MEMORY,
-        FREE_SPACE,
-        TELEPHONY,
-        DEVICE,
-        BRAND,
-        BOARD,
-        HOST,
-        PRODUCT,
-        SD_CARD
+    private static String readableFileSize(long size) {
+        if (size <= 0) {
+            return "0";
+        }
+        final String[] units = new String[]{"B", "kB", "MB", "GB", "TB"};
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
-
-    public enum Screen {
-        WIDTH,
-        HEIGHT,
-        DISPLAY_DENSITY,
-        DRAWABLE_DENSITY,
-        SCREEN_SIZE,
-    }
-
-    public enum Software {
-        ANDROID_VERSION,
-        SDK_INT,
-        OPEN_GL_ES,
-        GOOGLE_PLAY_SERVICES_VERSION
-    }
-
 
     public StatItem getStatItem(Software software) {
         StatItem stat = new StatItem();
@@ -189,7 +168,18 @@ public class StatHelper {
                     stat.setInfo(context.getString(R.string.sd_presence_emulated, String.valueOf(sdPresence), String.valueOf(emulated)));
                 }
                 break;
-
+            case ARCHITECTURE:
+                stat.setTitle(context.getString(R.string.architecture));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    stat.setInfo(TextUtils.join(", ", Build.SUPPORTED_ABIS));
+                } else {
+                    stat.setInfo(TextUtils.join(", ", Arrays.asList(Build.CPU_ABI, Build.CPU_ABI2)));
+                }
+                break;
+            case PROCESSORS:
+                stat.setTitle(context.getString(R.string.processors));
+                stat.setInfo("" + Runtime.getRuntime().availableProcessors());
+                break;
         }
         return stat;
     }
@@ -288,18 +278,42 @@ public class StatHelper {
         return featureList;
     }
 
-    private static String readableFileSize(long size) {
-        if (size <= 0) {
-            return "0";
-        }
-        final String[] units = new String[]{"B", "kB", "MB", "GB", "TB"};
-        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
-        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
-    }
-
     private boolean isTelephonyEnabled() {
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return (tm != null && tm.getSimState() == TelephonyManager.SIM_STATE_READY);
+    }
+
+    public enum Hardware {
+        MANUFACTURER,
+        MODEL,
+        MEMORY_CLASS,
+        LARGE_MEMORY_CLASS,
+        MAX_MEMORY,
+        FREE_SPACE,
+        TELEPHONY,
+        DEVICE,
+        BRAND,
+        BOARD,
+        HOST,
+        PRODUCT,
+        SD_CARD,
+        ARCHITECTURE,
+        PROCESSORS
+    }
+
+    public enum Screen {
+        WIDTH,
+        HEIGHT,
+        DISPLAY_DENSITY,
+        DRAWABLE_DENSITY,
+        SCREEN_SIZE,
+    }
+
+    public enum Software {
+        ANDROID_VERSION,
+        SDK_INT,
+        OPEN_GL_ES,
+        GOOGLE_PLAY_SERVICES_VERSION
     }
 
 }

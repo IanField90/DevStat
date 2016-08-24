@@ -1,0 +1,31 @@
+language: android
+
+jdk:
+  oraclejdk7
+
+env:
+  global:
+    - ANDROID_SDK_VERSION="r25.1.7"
+    - BUILD_TOOLS="23.0.3"
+    - TARGET_API="23"
+
+android:
+  components:
+    - tools
+    - build-tools-${BUILD_TOOLS}
+    - android-${TARGET_API}
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - extra-android-support
+    # - addon-google_apis-google-${TARGET_API}
+    # - sys-img-x86-android-23
+
+before_install:
+  # environment info
+  - uname -a
+
+  # for gradle output style
+  - export TERM=dumb
+
+script:
+  - "./gradlew assembleDebug"

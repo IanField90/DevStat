@@ -20,17 +20,6 @@ public class StatItemAdapter extends RecyclerView.Adapter<StatItemAdapter.ViewHo
 
     private final OnItemLongClickListener listener;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView title;
-        public final TextView info;
-
-        public ViewHolder(View container) {
-            super(container);
-            title = (TextView) container.findViewById(R.id.txtTitle);
-            info = (TextView) container.findViewById(R.id.txtInfo);
-        }
-    }
-
     public StatItemAdapter(Context context, ArrayList<StatItem> statItems, OnItemLongClickListener listener) {
         dataSet = statItems;
         this.listener = listener;
@@ -65,5 +54,16 @@ public class StatItemAdapter extends RecyclerView.Adapter<StatItemAdapter.ViewHo
 
     public interface OnItemLongClickListener {
         void onItemClick(int position);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public final TextView title;
+        public final TextView info;
+
+        public ViewHolder(View container) {
+            super(container);
+            title = (TextView) container.findViewById(R.id.txtTitle);
+            info = (TextView) container.findViewById(R.id.txtInfo);
+        }
     }
 }

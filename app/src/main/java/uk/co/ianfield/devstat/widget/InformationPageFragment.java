@@ -23,9 +23,9 @@ import uk.co.ianfield.devstat.StatItemAdapter;
 import uk.co.ianfield.devstat.model.StatItem;
 
 public class InformationPageFragment extends Fragment {
+
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-
     private ArrayList<StatItem> items;
 
     private Unbinder unbinder;

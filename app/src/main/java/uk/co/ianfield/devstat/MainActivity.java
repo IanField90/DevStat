@@ -28,14 +28,12 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
-
+    @Inject
+    StatHelper helper;
     private ArrayList<StatItem> hardwareStats;
     private ArrayList<StatItem> screenStats;
     private ArrayList<StatItem> softwareStats;
     private ArrayList<StatItem> featureStats;
-
-    @Inject
-    StatHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.FREE_SPACE));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.TELEPHONY));
         hardwareStats.add(helper.getStatItem(StatHelper.Hardware.SD_CARD));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.ARCHITECTURE));
+        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.PROCESSORS));
 
         // Features (some will dupe for now)
         featureStats = helper.getFeatureList();
