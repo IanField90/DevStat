@@ -18,7 +18,7 @@ android:
     - extra-android-m2repository
     - extra-android-support
     # - addon-google_apis-google-${TARGET_API}
-    # - sys-img-x86-android-23
+    # - sys-img-x86-android-24
 
 before_install:
   # environment info
