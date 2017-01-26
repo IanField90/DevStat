@@ -62,5 +62,6 @@
     <string name="processors">Online Processors</string>
 
     <string name="copied_to_clipboard">Copied to clipboard!</string>
+    <string name="title_crypto">Crypto</string>
 
 </resources>

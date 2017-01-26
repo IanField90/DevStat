@@ -15,10 +15,13 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import java.security.Provider;
+import java.security.Security;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Set;
 
 import uk.co.ianfield.devstat.model.StatItem;
 
@@ -281,6 +284,26 @@ public class StatHelper {
     private boolean isTelephonyEnabled() {
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return (tm != null && tm.getSimState() == TelephonyManager.SIM_STATE_READY);
+    }
+
+    ArrayList<StatItem> getCryptoList() {
+        ArrayList<StatItem> cryptoList = new ArrayList<>();
+
+        for (Provider provider : Security.getProviders()) {
+            StatItem item = new StatItem();
+            item.setTitle(provider.getName());
+            String info = "";
+
+            Set<Provider.Service> services = provider.getServices();
+            for (Provider.Service service : services) {
+                info += service.getAlgorithm() + "\n";
+            }
+            info = info.substring(0, info.length() - 2);
+            item.setInfo(info);
+            cryptoList.add(item);
+        }
+
+        return cryptoList;
     }
 
     public enum Hardware {

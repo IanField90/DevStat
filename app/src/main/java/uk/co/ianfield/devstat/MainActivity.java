@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<StatItem> screenStats;
     private ArrayList<StatItem> softwareStats;
     private ArrayList<StatItem> featureStats;
+    private ArrayList<StatItem> cryptoStats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +83,18 @@ public class MainActivity extends AppCompatActivity {
         // Features (some will dupe for now)
         featureStats = helper.getFeatureList();
 
+        cryptoStats = helper.getCryptoList();
+
         // This could probably be done better
         ArrayList<ArrayList<StatItem>> statGroups = new ArrayList<>();
-        statGroups.addAll(Arrays.asList(screenStats, softwareStats, hardwareStats, featureStats));
+        statGroups.addAll(
+                Arrays.asList(screenStats, softwareStats, hardwareStats, featureStats, cryptoStats)
+        );
 
         viewPager.setAdapter(new InformationPagerAdapter(getSupportFragmentManager(), this,
-                new int[]{R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware, R.string.title_features},
+                new int[]{R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware,
+                        R.string.title_features, R.string.title_crypto
+                },
                 statGroups));
 
         tabLayout.setupWithViewPager(viewPager);
