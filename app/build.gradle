@@ -15,8 +15,8 @@ android {
         minSdkVersion 9
         targetSdkVersion 25
         applicationId 'uk.co.ianfield.devstat'
-        versionCode 15
-        versionName '2.3.0'
+        versionCode 16
+        versionName '2.3.1'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {

@@ -157,6 +157,15 @@ public class MainActivity extends AppCompatActivity {
             stringBuilder.append("\n");
         }
 
+        stringBuilder.append(String.format("\n%s\n", getString(R.string.title_crypto)));
+        for (StatItem item : cryptoStats) {
+            stringBuilder.append(item.getTitle());
+            stringBuilder.append(":\n");
+            stringBuilder.append(item.getInfo());
+            stringBuilder.append("\n");
+        }
+
+
         emailIntent.putExtra(Intent.EXTRA_TEXT, stringBuilder.toString());
         startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email)));
     }
