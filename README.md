@@ -48,3 +48,6 @@ Android application to quickly query device data. This can also be used to help 
 ###Features
 
     All features available to the device
+    
+### Crypto
+    Providers and their set of supported algorithms
