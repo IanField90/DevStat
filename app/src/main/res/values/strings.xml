@@ -6,6 +6,8 @@
     <string name="title_screen_metrics">Screen Metrics</string>
     <string name="title_software">Software</string>
     <string name="title_hardware">Hardware</string>
+    <string name="title_features">Features</string>
+    <string name="title_crypto">Crypto</string>
 
     <string name="action_about">About</string>
     <string name="action_developer">Open developer options</string>
@@ -49,7 +51,6 @@
 
     <string name="manufacturer">Manufacturer</string>
     <string name="device_model">Device model</string>
-    <string name="title_features">Features</string>
     <string name="product">Product</string>
     <string name="host">Host</string>
     <string name="board">Board</string>
@@ -62,6 +63,10 @@
     <string name="processors">Online Processors</string>
 
     <string name="copied_to_clipboard">Copied to clipboard!</string>
-    <string name="title_crypto">Crypto</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_copy_short">Copy stats</string>
+    <string name="shortcut_copy_long">Copy stats to Clipboard</string>
+    <string name="shortcut_copy_disabled">Copy disabled</string>
 
 </resources>

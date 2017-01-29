@@ -44,6 +44,15 @@ public class StatHelper {
         return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
 
+    public ArrayList<StatItem> getSoftwareList() {
+        ArrayList<StatItem> softwareStats = new ArrayList<>();
+        softwareStats.add(getStatItem(StatHelper.Software.ANDROID_VERSION));
+        softwareStats.add(getStatItem(StatHelper.Software.SDK_INT));
+        softwareStats.add(getStatItem(StatHelper.Software.OPEN_GL_ES));
+        softwareStats.add(getStatItem(StatHelper.Software.GOOGLE_PLAY_SERVICES_VERSION));
+        return softwareStats;
+    }
+
     public StatItem getStatItem(Software software) {
         StatItem stat = new StatItem();
         switch (software) {
@@ -78,6 +87,29 @@ public class StatHelper {
 
         }
         return stat;
+    }
+
+    public ArrayList<StatItem> getHardwareList() {
+        ArrayList<StatItem> hardwareStats = new ArrayList<>();
+        // Hardware
+        hardwareStats.add(getStatItem(StatHelper.Hardware.MANUFACTURER));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.MODEL));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.DEVICE));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.BRAND));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.BOARD));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.HOST));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.PRODUCT));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.MEMORY_CLASS));
+        if (Build.VERSION.SDK_INT >= 11) { // This is also checked for within
+            hardwareStats.add(getStatItem(StatHelper.Hardware.LARGE_MEMORY_CLASS));
+        }
+        hardwareStats.add(getStatItem(StatHelper.Hardware.MAX_MEMORY));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.FREE_SPACE));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.TELEPHONY));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.SD_CARD));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.ARCHITECTURE));
+        hardwareStats.add(getStatItem(StatHelper.Hardware.PROCESSORS));
+        return hardwareStats;
     }
 
     public StatItem getStatItem(Hardware hardware) {
@@ -185,6 +217,16 @@ public class StatHelper {
                 break;
         }
         return stat;
+    }
+
+    public ArrayList<StatItem> getScreenList() {
+        ArrayList<StatItem> screenStats = new ArrayList<>();
+        screenStats.add(getStatItem(StatHelper.Screen.WIDTH));
+        screenStats.add(getStatItem(StatHelper.Screen.HEIGHT));
+        screenStats.add(getStatItem(StatHelper.Screen.DISPLAY_DENSITY));
+        screenStats.add(getStatItem(StatHelper.Screen.DRAWABLE_DENSITY));
+        screenStats.add(getStatItem(StatHelper.Screen.SCREEN_SIZE));
+        return screenStats;
     }
 
     public StatItem getStatItem(Screen screen) {

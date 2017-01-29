@@ -2,7 +2,6 @@ package uk.co.ianfield.devstat;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.TabLayout;
@@ -43,46 +42,10 @@ public class MainActivity extends AppCompatActivity {
         ((DevStatApplication) getApplication()).component().inject(this);
         ButterKnife.bind(this);
 
-        hardwareStats = new ArrayList<>();
-        screenStats = new ArrayList<>();
-        softwareStats = new ArrayList<>();
-        featureStats = new ArrayList<>();
-
-        // Screen
-        screenStats.add(helper.getStatItem(StatHelper.Screen.WIDTH));
-        screenStats.add(helper.getStatItem(StatHelper.Screen.HEIGHT));
-        screenStats.add(helper.getStatItem(StatHelper.Screen.DISPLAY_DENSITY));
-        screenStats.add(helper.getStatItem(StatHelper.Screen.DRAWABLE_DENSITY));
-        screenStats.add(helper.getStatItem(StatHelper.Screen.SCREEN_SIZE));
-
-        // Software
-        softwareStats.add(helper.getStatItem(StatHelper.Software.ANDROID_VERSION));
-        softwareStats.add(helper.getStatItem(StatHelper.Software.SDK_INT));
-        softwareStats.add(helper.getStatItem(StatHelper.Software.OPEN_GL_ES));
-        softwareStats.add(helper.getStatItem(StatHelper.Software.GOOGLE_PLAY_SERVICES_VERSION));
-
-        // Hardware
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MANUFACTURER));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MODEL));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.DEVICE));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.BRAND));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.BOARD));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.HOST));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.PRODUCT));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MEMORY_CLASS));
-        if (Build.VERSION.SDK_INT >= 11) { // This is also checked for within
-            hardwareStats.add(helper.getStatItem(StatHelper.Hardware.LARGE_MEMORY_CLASS));
-        }
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.MAX_MEMORY));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.FREE_SPACE));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.TELEPHONY));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.SD_CARD));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.ARCHITECTURE));
-        hardwareStats.add(helper.getStatItem(StatHelper.Hardware.PROCESSORS));
-
-        // Features (some will dupe for now)
+        hardwareStats = helper.getHardwareList();
+        screenStats = helper.getScreenList();
+        softwareStats = helper.getSoftwareList();
         featureStats = helper.getFeatureList();
-
         cryptoStats = helper.getCryptoList();
 
         // This could probably be done better
@@ -164,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
             stringBuilder.append(item.getInfo());
             stringBuilder.append("\n");
         }
-
 
         emailIntent.putExtra(Intent.EXTRA_TEXT, stringBuilder.toString());
         startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email)));

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:tools="http://schemas.android.com/tools"
+           xmlns:android="http://schemas.android.com/apk/res/android"
+           tools:targetApi="n_mr1"
+    >
+    <shortcut
+        android:shortcutId="copy"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_copy"
+        android:shortcutShortLabel="@string/shortcut_copy_short"
+        android:shortcutLongLabel="@string/shortcut_copy_long"
+        android:shortcutDisabledMessage="@string/shortcut_copy_disabled"
+        >
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="uk.co.ianfield.devstat"
+            android:targetClass="uk.co.ianfield.devstat.ClipboardActivity"
+            >
+            <extra android:name="type" android:value="all" />
+        </intent>
+        <categories android:name="android.shortcut.details" />
+    </shortcut>
+
+</shortcuts>
