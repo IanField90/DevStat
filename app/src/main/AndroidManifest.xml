@@ -24,7 +24,9 @@
                        android:resource="@xml/shortcuts" />
         </activity>
 
-        <activity android:name=".ClipboardActivity" />
+        <activity android:name=".ClipboardActivity"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                  />
 
         <activity android:name=".AboutActivity"
                   android:screenOrientation="portrait"
