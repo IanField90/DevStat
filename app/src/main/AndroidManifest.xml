@@ -37,6 +37,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+
+            <meta-data android:name="android.max_aspect"
+                android:value="2.1" />
+
         </activity>
     </application>
 
