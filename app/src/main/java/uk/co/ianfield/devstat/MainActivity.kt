@@ -9,14 +9,19 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import butterknife.BindView
+import butterknife.ButterKnife
+import butterknife.OnClick
 import uk.co.ianfield.devstat.model.StatItem
 import uk.co.ianfield.devstat.widget.InformationPagerAdapter
 import java.util.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    internal var tabLayout: TabLayout? = null
-    internal var viewPager: ViewPager? = null
+    @BindView(R.id.tabs)
+    lateinit var tabLayout: TabLayout
+    @BindView(R.id.viewpager)
+    lateinit var viewPager: ViewPager
 
     @Inject lateinit var helper: StatHelper
     private var hardwareStats: ArrayList<StatItem>? = null
@@ -29,10 +34,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         (application as DevStatApplication).component()!!.inject(this)
-        viewPager = findViewById(R.id.viewpager) as ViewPager?
-        tabLayout = findViewById(R.id.tabs) as TabLayout?
+        ButterKnife.bind(this)
 
-        findViewById(R.id.send_email).setOnClickListener({ emailClick() })
+//        findViewById(R.id.send_email).setOnClickListener({ emailClick() })
 
         hardwareStats = helper.hardwareList
         screenStats = helper.screenList
@@ -46,11 +50,11 @@ class MainActivity : AppCompatActivity() {
                 Arrays.asList<ArrayList<StatItem>>(screenStats, softwareStats, hardwareStats, featureStats, cryptoStats)
         )
 
-        viewPager!!.adapter = InformationPagerAdapter(supportFragmentManager, this,
+        viewPager.adapter = InformationPagerAdapter(supportFragmentManager, this,
                 intArrayOf(R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware, R.string.title_features, R.string.title_crypto),
                 statGroups)
 
-        tabLayout!!.setupWithViewPager(viewPager)
+        tabLayout.setupWithViewPager(viewPager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -75,7 +79,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun emailClick() {
+    @OnClick(R.id.send_email)
+    fun emailClick() {
         val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", "", null))
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject))

@@ -9,7 +9,11 @@ import butterknife.ButterKnife
 
 class AboutActivity : AppCompatActivity() {
     @BindView(R.id.webView)
-    internal var webView: WebView? = null
+    lateinit var webView: WebView
+
+//    init {
+//        ButterKnife.bind(this)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

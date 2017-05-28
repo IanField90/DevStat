@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import butterknife.BindView
+import butterknife.ButterKnife
 import butterknife.Unbinder
 import uk.co.ianfield.devstat.R
 import uk.co.ianfield.devstat.StatItemAdapter
@@ -20,18 +22,19 @@ import java.util.*
 
 class InformationPageFragment : Fragment() {
 
-    internal var recyclerView: RecyclerView? = null
+    @BindView(R.id.recycler_view)
+    lateinit var recyclerView: RecyclerView
     private var items: ArrayList<StatItem>? = null
 
     lateinit private var unbinder: Unbinder
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_information_page, container, false)
-        recyclerView = view.findViewById(R.id.recycler_view) as RecyclerView
+        unbinder = ButterKnife.bind(this, view)
         retainInstance = true
-        recyclerView!!.setHasFixedSize(true)
+        recyclerView.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(activity)
-        recyclerView!!.layoutManager = layoutManager
+        recyclerView.layoutManager = layoutManager
 
         val adapter = StatItemAdapter(activity, items) { position: Int ->
 
@@ -45,11 +48,16 @@ class InformationPageFragment : Fragment() {
             }
             Snackbar.make(view, R.string.copied_to_clipboard, Snackbar.LENGTH_SHORT).show()
         }
-        recyclerView!!.adapter = adapter
+        recyclerView.adapter = adapter
         return view
     }
 
     fun setItems(items: ArrayList<StatItem>) {
         this.items = items
+    }
+
+    override fun onDestroyView() {
+        unbinder.unbind()
+        super.onDestroyView()
     }
 }
