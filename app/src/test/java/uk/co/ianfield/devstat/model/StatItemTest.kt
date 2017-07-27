@@ -6,7 +6,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.Mock
-import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations.initMocks
 import org.mockito.Mockito.`when` as whenMock
 
@@ -25,7 +24,6 @@ class StatItemTest {
     @Test
     @Throws(Exception::class)
     fun testToString() {
-//        var item = mock<StatItem>(StatItem::class.java)
         whenMock(statItem.title).thenReturn("a")
         whenMock(statItem.info).thenReturn("b")
         assertThat(statItem.title).isEqualTo("a")
