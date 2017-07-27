@@ -47,8 +47,8 @@ class StatItemAdapter(context: Context, private val dataSet: ArrayList<StatItem>
         val info: TextView
 
         init {
-            title = container.findViewById(R.id.txtTitle) as TextView
-            info = container.findViewById(R.id.txtInfo) as TextView
+            title = container.findViewById<TextView>(R.id.txtTitle)
+            info = container.findViewById<TextView>(R.id.txtInfo)
         }
     }
 }

@@ -3,7 +3,7 @@ package uk.co.ianfield.devstat.model
 /**
  * Created by Ian Field on 20/02/2014.
  */
-class StatItem {
+open class StatItem {
     var title: String? = null
     var info: String? = null
 
