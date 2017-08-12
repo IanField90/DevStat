@@ -18,7 +18,7 @@ import java.util.*
 
 class InformationPageFragment : Fragment() {
 
-    private var items: ArrayList<StatItem>? = null
+    private lateinit var items: ArrayList<StatItem>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_information_page, container, false)
@@ -34,7 +34,7 @@ class InformationPageFragment : Fragment() {
 
         val adapter = StatItemAdapter(activity, items) { position: Int ->
             val clipboard = activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip = ClipData.newPlainText("text label", items!![position].toString())
+            val clip = ClipData.newPlainText("text label", items[position].toString())
             clipboard.primaryClip = clip
             Snackbar.make(recyclerView, R.string.copied_to_clipboard, Snackbar.LENGTH_SHORT).show()
         }

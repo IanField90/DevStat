@@ -16,11 +16,11 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject lateinit var helper: StatHelper
-    private var hardwareStats: ArrayList<StatItem>? = null
-    private var screenStats: ArrayList<StatItem>? = null
-    private var softwareStats: ArrayList<StatItem>? = null
-    private var featureStats: ArrayList<StatItem>? = null
-    private var cryptoStats: ArrayList<StatItem>? = null
+    private lateinit var hardwareStats: ArrayList<StatItem>
+    private lateinit var screenStats: ArrayList<StatItem>
+    private lateinit var softwareStats: ArrayList<StatItem>
+    private lateinit var featureStats: ArrayList<StatItem>
+    private lateinit var cryptoStats: ArrayList<StatItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,25 +77,25 @@ class MainActivity : AppCompatActivity() {
         val stringBuilder = StringBuilder()
 
         stringBuilder.append(String.format("%s\n", getString(R.string.title_screen_metrics)))
-        for (item in screenStats!!) {
+        for (item in screenStats) {
             stringBuilder.append(item.toString())
             stringBuilder.append("\n")
         }
 
         stringBuilder.append(String.format("\n%s\n", getString(R.string.title_software)))
-        for (item in softwareStats!!) {
+        for (item in softwareStats) {
             stringBuilder.append(item.toString())
             stringBuilder.append("\n")
         }
 
         stringBuilder.append(String.format("\n%s\n", getString(R.string.title_hardware)))
-        for (item in hardwareStats!!) {
+        for (item in hardwareStats) {
             stringBuilder.append(item.toString())
             stringBuilder.append("\n")
         }
 
         stringBuilder.append(String.format("\n%s\n", getString(R.string.title_features)))
-        for (item in featureStats!!) {
+        for (item in featureStats) {
             stringBuilder.append(item.title)
             stringBuilder.append(":\n")
             stringBuilder.append(item.info)
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         stringBuilder.append(String.format("\n%s\n", getString(R.string.title_crypto)))
-        for (item in cryptoStats!!) {
+        for (item in cryptoStats) {
             stringBuilder.append(item.title)
             stringBuilder.append(":\n")
             stringBuilder.append(item.info)

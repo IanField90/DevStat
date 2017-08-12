@@ -4,15 +4,16 @@ import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-
-import java.util.ArrayList
-
 import uk.co.ianfield.devstat.model.StatItem
+import java.util.*
 
 /**
  * Created by Ian Field on 14/08/15.
  */
-class InformationPagerAdapter(fm: FragmentManager, private val context: Context, private val tabTitles: IntArray, private val statSets: ArrayList<ArrayList<StatItem>>) : FragmentPagerAdapter(fm) {
+class InformationPagerAdapter(fm: FragmentManager, private val context: Context,
+                              private val tabTitles: IntArray,
+                              private val statSets: ArrayList<ArrayList<StatItem>>)
+    : FragmentPagerAdapter(fm) {
 
     override fun getItem(i: Int): Fragment {
         val fragment = InformationPageFragment()
