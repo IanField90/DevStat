@@ -16,8 +16,8 @@ android {
         minSdkVersion 14
         targetSdkVersion 26
         applicationId 'uk.co.ianfield.devstat'
-        versionCode 17
-        versionName '2.3.2'
+        versionCode 18
+        versionName '2.4.0'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -30,8 +30,9 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFile getDefaultProguardFile('proguard-android.txt')
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
             signingConfig signingConfigs.release
         }
     }
