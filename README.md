@@ -10,9 +10,9 @@ Android application to quickly query device data. This can also be used to help 
 
 [![GooglePlay](http://ianfield.com/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=uk.co.ianfield.devstat)
 
-##Information
+## Information
 
-###Screen Metrics
+### Screen Metrics
 
     Width
     Height
@@ -20,13 +20,13 @@ Android application to quickly query device data. This can also be used to help 
     Drawable density
     Screen size
 
-###Software
+### Software
 
     Android version
     SDK Int
     OpenGL ES version
 
-###Hardware
+### Hardware
 
     Manufacturer
     Device
@@ -45,7 +45,7 @@ Android application to quickly query device data. This can also be used to help 
     ABIs
     Online Processors
 
-###Features
+### Features
 
     All features available to the device
     
