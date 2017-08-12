@@ -91,9 +91,7 @@ class StatHelper(private val context: Context) {
             hardwareStats.add(getStatItem(StatHelper.Hardware.HOST)!!)
             hardwareStats.add(getStatItem(StatHelper.Hardware.PRODUCT)!!)
             hardwareStats.add(getStatItem(StatHelper.Hardware.MEMORY_CLASS)!!)
-            if (Build.VERSION.SDK_INT >= 11) {
-                hardwareStats.add(getStatItem(StatHelper.Hardware.LARGE_MEMORY_CLASS)!!)
-            }
+            hardwareStats.add(getStatItem(StatHelper.Hardware.LARGE_MEMORY_CLASS)!!)
             hardwareStats.add(getStatItem(StatHelper.Hardware.MAX_MEMORY)!!)
             hardwareStats.add(getStatItem(StatHelper.Hardware.FREE_SPACE)!!)
             hardwareStats.add(getStatItem(StatHelper.Hardware.TELEPHONY)!!)
@@ -185,12 +183,8 @@ class StatHelper(private val context: Context) {
             StatHelper.Hardware.SD_CARD -> {
                 stat!!.title = context.getString(R.string.sd_card)
                 val sdPresence = android.os.Environment.getExternalStorageState() == android.os.Environment.MEDIA_MOUNTED
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-                    stat.info = context.getString(R.string.sd_presence, sdPresence.toString())
-                } else {
-                    val emulated = android.os.Environment.isExternalStorageEmulated()
-                    stat.info = context.getString(R.string.sd_presence_emulated, sdPresence.toString(), emulated.toString())
-                }
+                val emulated = android.os.Environment.isExternalStorageEmulated()
+                stat.info = context.getString(R.string.sd_presence_emulated, sdPresence.toString(), emulated.toString())
             }
             StatHelper.Hardware.ARCHITECTURE -> {
                 stat!!.title = context.getString(R.string.architecture)

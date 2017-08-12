@@ -4,24 +4,16 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
+import kotlinx.android.synthetic.main.activity_main.*
 import uk.co.ianfield.devstat.model.StatItem
 import uk.co.ianfield.devstat.widget.InformationPagerAdapter
 import java.util.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    @BindView(R.id.tabs)
-    lateinit var tabLayout: TabLayout
-    @BindView(R.id.viewpager)
-    lateinit var viewPager: ViewPager
 
     @Inject lateinit var helper: StatHelper
     private var hardwareStats: ArrayList<StatItem>? = null
@@ -34,9 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         (application as DevStatApplication).component()!!.inject(this)
-        ButterKnife.bind(this)
-
-//        findViewById(R.id.send_email).setOnClickListener({ emailClick() })
+        sendEmail.setOnClickListener({ emailClick() })
 
         hardwareStats = helper.hardwareList
         screenStats = helper.screenList
@@ -79,7 +69,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @OnClick(R.id.send_email)
     fun emailClick() {
         val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", "", null))
