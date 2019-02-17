@@ -17,8 +17,8 @@ android {
         minSdkVersion 14
         targetSdkVersion 28
         applicationId 'uk.co.ianfield.devstat'
-        versionCode 19
-        versionName '2.4.2'
+        versionCode 20
+        versionName '2.4.3'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -66,7 +66,7 @@ dependencies {
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.1'
-    androidTestImplementation 'androidx.annotation:annotation:1.0.1'
+    androidTestImplementation 'androidx.annotation:annotation:1.0.0'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test:rules:1.1.1'
     // Set this dependency if you want to use Hamcrest matching
