@@ -5,9 +5,9 @@ jdk:
 
 env:
   global:
-    - ANDROID_SDK_VERSION="r26.0.2"
-    - BUILD_TOOLS="26.0.2"
-    - TARGET_API="26"
+    - ANDROID_SDK_VERSION="r28.0.3"
+    - BUILD_TOOLS="28.0.3"
+    - TARGET_API="28"
 
 android:
   components:
