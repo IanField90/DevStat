@@ -1,7 +1,7 @@
 package uk.co.ianfield.devstat
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import java.util.*
  */
 class StatItemAdapter(context: Context, private val dataSet: ArrayList<StatItem>?,
                       private val listener: (Int) -> Unit) :
-        RecyclerView.Adapter<StatItemAdapter.ViewHolder>() {
+        androidx.recyclerview.widget.RecyclerView.Adapter<StatItemAdapter.ViewHolder>() {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,7 +42,7 @@ class StatItemAdapter(context: Context, private val dataSet: ArrayList<StatItem>
         fun onItemClick(position: Int)
     }
 
-    class ViewHolder(container: View) : RecyclerView.ViewHolder(container) {
+    class ViewHolder(container: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(container) {
         val title: TextView
         val info: TextView
 

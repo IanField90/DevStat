@@ -1,21 +1,21 @@
 package uk.co.ianfield.devstat.widget
 
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import uk.co.ianfield.devstat.model.StatItem
 import java.util.*
 
 /**
  * Created by Ian Field on 14/08/15.
  */
-class InformationPagerAdapter(fm: FragmentManager, private val context: Context,
+class InformationPagerAdapter(fm: androidx.fragment.app.FragmentManager, private val context: Context,
                               private val tabTitles: IntArray,
                               private val statSets: ArrayList<ArrayList<StatItem>>)
-    : FragmentPagerAdapter(fm) {
+    : androidx.fragment.app.FragmentPagerAdapter(fm) {
 
-    override fun getItem(i: Int): Fragment {
+    override fun getItem(i: Int): androidx.fragment.app.Fragment {
         val fragment = InformationPageFragment()
         fragment.setItems(statSets[i])
         return fragment
