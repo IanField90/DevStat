@@ -35,7 +35,7 @@ class InformationPageFragment : Fragment() {
         val adapter = StatItemAdapter(context!!, items) { position: Int ->
             val clipboard = context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("text label", items[position].toString())
-            clipboard.primaryClip = clip
+            clipboard.setPrimaryClip(clip)
             Snackbar.make(recyclerView, R.string.copied_to_clipboard, Snackbar.LENGTH_SHORT).show()
         }
         recyclerView.adapter = adapter

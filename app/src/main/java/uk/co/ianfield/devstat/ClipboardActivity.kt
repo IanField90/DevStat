@@ -65,7 +65,7 @@ class ClipboardActivity : AppCompatActivity() {
 
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("text label", clipboardContents)
-        clipboard.primaryClip = clip
+        clipboard.setPrimaryClip(clip)
 
         Toast.makeText(this, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show()
         finish()
