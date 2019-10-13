@@ -22,7 +22,6 @@ class ClipboardActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         val statHelper = StatHelper(this)
         var clipboardContents = ""
         var list: ArrayList<StatItem>
