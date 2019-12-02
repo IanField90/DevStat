@@ -8,6 +8,6 @@ open class StatItem {
     lateinit var info: String
 
     override fun toString(): String {
-        return String.format("%s: %s", title, info)
+        return "$title: $info"
     }
 }

@@ -15,13 +15,12 @@ import uk.co.ianfield.devstat.di.modules.AppModule
  * Created by Ian Field on 18/03/2016.
  */
 class DevStatApplication : Application() {
-    var TAG = "DevStatApplication"
 
     companion object {
+        const val TAG = "DevStatApplication"
         //platformStatic allow access it from java code
         @JvmStatic lateinit var graph: AppComponent
     }
-
 
     override fun onCreate() {
         super.onCreate()
@@ -65,7 +64,7 @@ class DevStatApplication : Application() {
         }
         val json = JSONObject()
         val keys = bundle.keySet()
-        for (key in keys) {
+        keys.forEach { key ->
             try {
                 // json.put(key, bundle.get(key)); see edit below
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

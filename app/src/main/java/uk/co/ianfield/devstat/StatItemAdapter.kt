@@ -12,9 +12,9 @@ import java.util.*
 /**
  * Created by Ian on 18/08/2015.
  */
-class StatItemAdapter(context: Context, private val dataSet: ArrayList<StatItem>?,
+class StatItemAdapter(context: Context, private val dataSet: ArrayList<StatItem>,
                       private val listener: (Int) -> Unit) :
-        androidx.recyclerview.widget.RecyclerView.Adapter<StatItemAdapter.ViewHolder>() {
+        RecyclerView.Adapter<StatItemAdapter.ViewHolder>() {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,7 +23,7 @@ class StatItemAdapter(context: Context, private val dataSet: ArrayList<StatItem>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.title.text = dataSet!![position].title
+        holder.title.text = dataSet[position].title
         holder.info.text = dataSet[position].info
 
         val viewListener: View.OnLongClickListener = View.OnLongClickListener {
@@ -35,20 +35,15 @@ class StatItemAdapter(context: Context, private val dataSet: ArrayList<StatItem>
     }
 
     override fun getItemCount(): Int {
-        return dataSet!!.size
+        return dataSet.size
     }
 
     interface OnItemLongClickListener {
         fun onItemClick(position: Int)
     }
 
-    class ViewHolder(container: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(container) {
-        val title: TextView
-        val info: TextView
-
-        init {
-            title = container.findViewById<TextView>(R.id.txtTitle)
-            info = container.findViewById<TextView>(R.id.txtInfo)
-        }
+    class ViewHolder(container: View) : RecyclerView.ViewHolder(container) {
+        val title: TextView = container.findViewById(R.id.txtTitle)
+        val info: TextView = container.findViewById(R.id.txtInfo)
     }
 }

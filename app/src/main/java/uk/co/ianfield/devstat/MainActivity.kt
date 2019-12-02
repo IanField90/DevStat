@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         (application as DevStatApplication).component()!!.inject(this)
-        sendEmail.setOnClickListener({ emailClick() })
+        sendEmail.setOnClickListener { emailClick() }
 
         hardwareStats = helper.hardwareList
         screenStats = helper.screenList
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         // This could probably be done better
         val statGroups = ArrayList<ArrayList<StatItem>>()
         statGroups.addAll(
-                Arrays.asList<ArrayList<StatItem>>(screenStats, softwareStats, hardwareStats, featureStats, cryptoStats)
+                listOf(screenStats, softwareStats, hardwareStats, featureStats, cryptoStats)
         )
 
         viewPager.adapter = InformationPagerAdapter(supportFragmentManager, this,
@@ -55,17 +55,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.action_about -> {
                 val intent = Intent(this, AboutActivity::class.java)
                 startActivity(intent)
-                return true
+                true
             }
             R.id.action_developer -> {
                 startActivity(Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS))
-                return true
+                true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -96,18 +96,23 @@ class MainActivity : AppCompatActivity() {
 
         stringBuilder.append(String.format("\n%s\n", getString(R.string.title_features)))
         for (item in featureStats) {
-            stringBuilder.append(item.title)
-            stringBuilder.append(":\n")
-            stringBuilder.append(item.info)
-            stringBuilder.append("\n")
+            stringBuilder.apply {
+                append(item.title)
+                append(":\n")
+                append(item.info)
+                append("\n")
+            }
+
         }
 
         stringBuilder.append(String.format("\n%s\n", getString(R.string.title_crypto)))
         for (item in cryptoStats) {
-            stringBuilder.append(item.title)
-            stringBuilder.append(":\n")
-            stringBuilder.append(item.info)
-            stringBuilder.append("\n")
+            stringBuilder.apply {
+                append(item.title)
+                append(":\n")
+                append(item.info)
+                append("\n")
+            }
         }
 
         emailIntent.putExtra(Intent.EXTRA_TEXT, stringBuilder.toString())

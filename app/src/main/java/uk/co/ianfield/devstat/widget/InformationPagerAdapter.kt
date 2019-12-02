@@ -10,12 +10,12 @@ import java.util.*
 /**
  * Created by Ian Field on 14/08/15.
  */
-class InformationPagerAdapter(fm: androidx.fragment.app.FragmentManager, private val context: Context,
+class InformationPagerAdapter(fm: FragmentManager, private val context: Context,
                               private val tabTitles: IntArray,
                               private val statSets: ArrayList<ArrayList<StatItem>>)
-    : androidx.fragment.app.FragmentPagerAdapter(fm) {
+    : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    override fun getItem(i: Int): androidx.fragment.app.Fragment {
+    override fun getItem(i: Int): Fragment {
         val fragment = InformationPageFragment()
         fragment.setItems(statSets[i])
         return fragment

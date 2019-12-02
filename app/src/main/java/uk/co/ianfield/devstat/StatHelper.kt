@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Environment
-import android.os.StatFs
 import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.util.DisplayMetrics
@@ -17,6 +16,8 @@ import uk.co.ianfield.devstat.model.StatItem
 import java.security.Security
 import java.text.DecimalFormat
 import java.util.*
+import kotlin.math.log10
+import kotlin.math.pow
 
 /**
  * Created by IanField90 on 17/06/2014.
@@ -28,32 +29,32 @@ class StatHelper(private val context: Context) {
             return "0"
         }
         val units = arrayOf("B", "kB", "MB", "GB", "TB")
-        val digitGroups = (Math.log10(size.toDouble()) / Math.log10(1024.0)).toInt()
-        return DecimalFormat("#,##0.#").format(size / Math.pow(1024.0, digitGroups.toDouble())) + " " + units[digitGroups]
+        val digitGroups = (log10(size.toDouble()) / log10(1024.0)).toInt()
+        return DecimalFormat("#,##0.#").format(size / 1024.0.pow(digitGroups.toDouble())) + " " + units[digitGroups]
     }
 
     val softwareList: ArrayList<StatItem>
         get() {
             val softwareStats = ArrayList<StatItem>()
-            softwareStats.add(getStatItem(StatHelper.Software.ANDROID_VERSION))
-            softwareStats.add(getStatItem(StatHelper.Software.SDK_INT))
-            softwareStats.add(getStatItem(StatHelper.Software.OPEN_GL_ES))
-            softwareStats.add(getStatItem(StatHelper.Software.GOOGLE_PLAY_SERVICES_VERSION))
+            softwareStats.add(getStatItem(Software.ANDROID_VERSION))
+            softwareStats.add(getStatItem(Software.SDK_INT))
+            softwareStats.add(getStatItem(Software.OPEN_GL_ES))
+            softwareStats.add(getStatItem(Software.GOOGLE_PLAY_SERVICES_VERSION))
             return softwareStats
         }
 
     fun getStatItem(software: Software): StatItem {
         val stat = StatItem()
         when (software) {
-            StatHelper.Software.ANDROID_VERSION -> {
+            Software.ANDROID_VERSION -> {
                 stat.title = context.getString(R.string.android_version)
                 stat.info = Build.VERSION.RELEASE
             }
-            StatHelper.Software.SDK_INT -> {
+            Software.SDK_INT -> {
                 stat.title = context.getString(R.string.sdk_int)
                 stat.info = String.format(Locale.getDefault(), "%d", Build.VERSION.SDK_INT)
             }
-            StatHelper.Software.OPEN_GL_ES -> {
+            Software.OPEN_GL_ES -> {
                 stat.title = context.getString(R.string.opengl_version)
                 val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
                 val configurationInfo = activityManager.deviceConfigurationInfo
@@ -63,7 +64,7 @@ class StatHelper(private val context: Context) {
                     stat.info = context.getString(R.string.unknown)
                 }
             }
-            StatHelper.Software.GOOGLE_PLAY_SERVICES_VERSION -> {
+            Software.GOOGLE_PLAY_SERVICES_VERSION -> {
                 stat.title = context.getString(R.string.google_play_services_version)
                 try {
                     val info = context.packageManager.getPackageInfo("com.google.android.gms", 0)
@@ -83,119 +84,110 @@ class StatHelper(private val context: Context) {
     val hardwareList: ArrayList<StatItem>
         get() {
             val hardwareStats = ArrayList<StatItem>()
-            hardwareStats.add(getStatItem(StatHelper.Hardware.MANUFACTURER)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.MODEL)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.DEVICE)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.BRAND)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.BOARD)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.HOST)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.PRODUCT)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.MEMORY_CLASS)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.LARGE_MEMORY_CLASS)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.MAX_MEMORY)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.FREE_SPACE)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.TELEPHONY)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.SD_CARD)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.ARCHITECTURE)!!)
-            hardwareStats.add(getStatItem(StatHelper.Hardware.PROCESSORS)!!)
+            hardwareStats.add(getStatItem(Hardware.MANUFACTURER))
+            hardwareStats.add(getStatItem(Hardware.MODEL))
+            hardwareStats.add(getStatItem(Hardware.DEVICE))
+            hardwareStats.add(getStatItem(Hardware.BRAND))
+            hardwareStats.add(getStatItem(Hardware.BOARD))
+            hardwareStats.add(getStatItem(Hardware.HOST))
+            hardwareStats.add(getStatItem(Hardware.PRODUCT))
+            hardwareStats.add(getStatItem(Hardware.MEMORY_CLASS))
+            hardwareStats.add(getStatItem(Hardware.LARGE_MEMORY_CLASS))
+            hardwareStats.add(getStatItem(Hardware.MAX_MEMORY))
+            hardwareStats.add(getStatItem(Hardware.FREE_SPACE))
+            hardwareStats.add(getStatItem(Hardware.TELEPHONY))
+            hardwareStats.add(getStatItem(Hardware.SD_CARD))
+            hardwareStats.add(getStatItem(Hardware.ARCHITECTURE))
+            hardwareStats.add(getStatItem(Hardware.PROCESSORS))
             return hardwareStats
         }
 
-    fun getStatItem(hardware: Hardware): StatItem? {
-        var stat: StatItem? = StatItem()
+    fun getStatItem(hardware: Hardware): StatItem {
+        var stat = StatItem()
         val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         when (hardware) {
-            StatHelper.Hardware.MODEL -> {
-                stat!!.title = context.getString(R.string.device_model)
+            Hardware.MODEL -> {
+                stat.title = context.getString(R.string.device_model)
                 stat.info = Build.MODEL
             }
 
-            StatHelper.Hardware.DEVICE -> {
-                stat!!.title = context.getString(R.string.device)
+            Hardware.DEVICE -> {
+                stat.title = context.getString(R.string.device)
                 stat.info = Build.DEVICE
             }
 
-            StatHelper.Hardware.BRAND -> {
-                stat!!.title = context.getString(R.string.brand)
+            Hardware.BRAND -> {
+                stat.title = context.getString(R.string.brand)
                 stat.info = Build.BRAND
             }
 
-            StatHelper.Hardware.BOARD -> {
-                stat!!.title = context.getString(R.string.board)
+            Hardware.BOARD -> {
+                stat.title = context.getString(R.string.board)
                 stat.info = Build.BOARD
             }
 
-            StatHelper.Hardware.HOST -> {
-                stat!!.title = context.getString(R.string.host)
+            Hardware.HOST -> {
+                stat.title = context.getString(R.string.host)
                 stat.info = Build.HOST
             }
 
-            StatHelper.Hardware.MANUFACTURER -> {
-                stat!!.title = context.getString(R.string.manufacturer)
+            Hardware.MANUFACTURER -> {
+                stat.title = context.getString(R.string.manufacturer)
                 stat.info = Build.MANUFACTURER
             }
 
-            StatHelper.Hardware.PRODUCT -> {
-                stat!!.title = context.getString(R.string.product)
+            Hardware.PRODUCT -> {
+                stat.title = context.getString(R.string.product)
                 stat.info = Build.PRODUCT
             }
 
-            StatHelper.Hardware.MEMORY_CLASS -> {
-                stat!!.title = context.getString(R.string.memory_class)
+            Hardware.MEMORY_CLASS -> {
+                stat.title = context.getString(R.string.memory_class)
                 val memoryClass = am.memoryClass
                 stat.info = String.format(Locale.getDefault(), "%d MB", memoryClass)
             }
-            StatHelper.Hardware.LARGE_MEMORY_CLASS -> if (Build.VERSION.SDK_INT >= 11) {
-                stat!!.title = context.getString(R.string.large_memory_class)
+            Hardware.LARGE_MEMORY_CLASS -> {
+                stat.title = context.getString(R.string.large_memory_class)
                 val largeMemoryClass = am.largeMemoryClass
                 stat.info = String.format(Locale.getDefault(), "%d MB", largeMemoryClass)
-            } else {
-                stat = null
             }
-            StatHelper.Hardware.MAX_MEMORY -> {
+            Hardware.MAX_MEMORY -> {
                 stat = StatItem()
                 stat.title = context.getString(R.string.max_memory)
                 val rt = Runtime.getRuntime()
                 val maxMemory = rt.maxMemory()
                 stat.info = readableFileSize(maxMemory)
             }
-            StatHelper.Hardware.FREE_SPACE -> {
-                stat!!.title = context.getString(R.string.free_space)
-                val available: Long
-                if (Build.VERSION.SDK_INT >= 9) {
-                    available = Environment.getExternalStorageDirectory().freeSpace
-                } else {
-                    val filesystemstats = StatFs(Environment.getExternalStorageDirectory().absolutePath)
-                    filesystemstats.restat(Environment.getExternalStorageDirectory().absolutePath)
-                    available = filesystemstats.availableBlocks.toLong() * filesystemstats.blockSize.toLong()
-                }
+            Hardware.FREE_SPACE -> {
+                stat.title = context.getString(R.string.free_space)
+                val available = Environment.getExternalStorageDirectory().freeSpace
                 stat.info = readableFileSize(available)
             }
-            StatHelper.Hardware.TELEPHONY -> {
-                stat!!.title = context.getString(R.string.telephony)
-                if (isTelephonyEnabled) {
-                    stat.info = context.getString(R.string.enabled)
+            Hardware.TELEPHONY -> {
+                stat.title = context.getString(R.string.telephony)
+                stat.info = if (isTelephonyEnabled) {
+                    context.getString(R.string.enabled)
                 } else {
-                    stat.info = context.getString(R.string.disabled)
+                    context.getString(R.string.disabled)
                 }
             }
 
-            StatHelper.Hardware.SD_CARD -> {
-                stat!!.title = context.getString(R.string.sd_card)
-                val sdPresence = android.os.Environment.getExternalStorageState() == android.os.Environment.MEDIA_MOUNTED
-                val emulated = android.os.Environment.isExternalStorageEmulated()
+            Hardware.SD_CARD -> {
+                stat.title = context.getString(R.string.sd_card)
+                val sdPresence = Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
+                val emulated = Environment.isExternalStorageEmulated()
                 stat.info = context.getString(R.string.sd_presence_emulated, sdPresence.toString(), emulated.toString())
             }
-            StatHelper.Hardware.ARCHITECTURE -> {
-                stat!!.title = context.getString(R.string.architecture)
+            Hardware.ARCHITECTURE -> {
+                stat.title = context.getString(R.string.architecture)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     stat.info = TextUtils.join(", ", Build.SUPPORTED_ABIS)
                 } else {
                     stat.info = TextUtils.join(", ", Arrays.asList(Build.CPU_ABI, Build.CPU_ABI2))
                 }
             }
-            StatHelper.Hardware.PROCESSORS -> {
-                stat!!.title = context.getString(R.string.processors)
+            Hardware.PROCESSORS -> {
+                stat.title = context.getString(R.string.processors)
                 stat.info = "" + Runtime.getRuntime().availableProcessors()
             }
         }
@@ -205,11 +197,11 @@ class StatHelper(private val context: Context) {
     val screenList: ArrayList<StatItem>
         get() {
             val screenStats = ArrayList<StatItem>()
-            screenStats.add(getStatItem(StatHelper.Screen.WIDTH))
-            screenStats.add(getStatItem(StatHelper.Screen.HEIGHT))
-            screenStats.add(getStatItem(StatHelper.Screen.DISPLAY_DENSITY))
-            screenStats.add(getStatItem(StatHelper.Screen.DRAWABLE_DENSITY))
-            screenStats.add(getStatItem(StatHelper.Screen.SCREEN_SIZE))
+            screenStats.add(getStatItem(Screen.WIDTH))
+            screenStats.add(getStatItem(Screen.HEIGHT))
+            screenStats.add(getStatItem(Screen.DISPLAY_DENSITY))
+            screenStats.add(getStatItem(Screen.DRAWABLE_DENSITY))
+            screenStats.add(getStatItem(Screen.SCREEN_SIZE))
             return screenStats
         }
 
@@ -218,23 +210,23 @@ class StatHelper(private val context: Context) {
 
         val stat = StatItem()
         when (screen) {
-            StatHelper.Screen.WIDTH -> {
+            Screen.WIDTH -> {
                 stat.title = context.getString(R.string.screen_width)
                 stat.info = String.format(Locale.getDefault(), "%d px", metrics.widthPixels)
             }
-            StatHelper.Screen.HEIGHT -> {
+            Screen.HEIGHT -> {
                 stat.title = context.getString(R.string.screen_height)
                 stat.info = String.format(Locale.getDefault(), "%d px", metrics.heightPixels)
             }
-            StatHelper.Screen.DISPLAY_DENSITY -> {
+            Screen.DISPLAY_DENSITY -> {
                 stat.title = context.getString(R.string.display_density)
                 stat.info = String.format(Locale.getDefault(), "%d dpi", metrics.densityDpi)
             }
-            StatHelper.Screen.DRAWABLE_DENSITY -> {
+            Screen.DRAWABLE_DENSITY -> {
                 stat.title = context.getString(R.string.drawable_density)
                 stat.info = getDensityInfo(metrics)
             }
-            StatHelper.Screen.SCREEN_SIZE -> {
+            Screen.SCREEN_SIZE -> {
                 stat.title = context.getString(R.string.screen_size)
                 val screenSize = context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
 
@@ -274,9 +266,9 @@ class StatHelper(private val context: Context) {
             for (featureInfo in context.packageManager.systemAvailableFeatures) {
                 val stat = StatItem()
                 if (featureInfo.name != null) {
-                    val featureParts = featureInfo.name.toLowerCase().split("[.]".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
+                    val featureParts = featureInfo.name.toLowerCase(Locale.UK).split("[.]".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                     val featureName = featureParts[featureParts.size - 1].replace("_".toRegex(), " ")
-                    stat.title = featureName.substring(0, 1).toUpperCase() + featureName.substring(1)
+                    stat.title = featureName.substring(0, 1).toUpperCase(Locale.UK) + featureName.substring(1)
                     stat.info = featureInfo.name
                 } else {
                     stat.title = context.getString(R.string.opengl_version)

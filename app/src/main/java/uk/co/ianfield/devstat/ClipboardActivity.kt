@@ -27,25 +27,28 @@ class ClipboardActivity : AppCompatActivity() {
         var list: ArrayList<StatItem>
 
         list = statHelper.hardwareList
-        clipboardContents += String.format("%s\n", getString(R.string.title_hardware))
+        clipboardContents += "${getString(R.string.title_hardware)}\n"
         for (item in list) {
             clipboardContents += item.toString()
             clipboardContents += "\n"
         }
+
         list = statHelper.screenList
-        clipboardContents += String.format("\n%s\n", getString(R.string.title_screen_metrics))
+        clipboardContents += "\n${getString(R.string.title_screen_metrics)}\n"
         for (item in list) {
             clipboardContents += item.toString()
             clipboardContents += "\n"
         }
+
         list = statHelper.softwareList
-        clipboardContents += String.format("\n%s\n", getString(R.string.title_software))
+        clipboardContents += "\n${getString(R.string.title_software)}\n"
         for (item in list) {
             clipboardContents += item.toString()
             clipboardContents += "\n"
         }
+
         list = statHelper.featureList
-        clipboardContents += String.format("\n%s\n", getString(R.string.title_crypto))
+        clipboardContents += "\n${getString(R.string.title_crypto)}\n"
         for (item in list) {
             clipboardContents += item.title
             clipboardContents += ":\n"
