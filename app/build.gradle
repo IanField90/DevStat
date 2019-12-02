@@ -17,8 +17,8 @@ android {
         minSdkVersion 14
         targetSdkVersion 29
         applicationId 'uk.co.ianfield.devstat'
-        versionCode 22
-        versionName '2.4.5'
+        versionCode 23
+        versionName '2.4.6'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
 
