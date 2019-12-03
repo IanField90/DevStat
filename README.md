@@ -2,7 +2,7 @@
 
 DevStat
 =======
-[![Build Status](https://travis-ci.org/IanField90/DevStat.png)](https://travis-ci.org/IanField90/DevStat)
+[![Build Status](https://github.com/IanField90/DevStat/workflows/Android%20CI/badge.svg)
 
 Android application to quickly query device data. This can also be used to help debug the cause of an app not showing in the Google Play store due to your AndroidManifest.xml settings e.g. Camera auto-focus.
 
