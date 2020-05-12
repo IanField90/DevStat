@@ -40,6 +40,7 @@ class StatHelper(private val context: Context) {
             softwareStats.add(getStatItem(Software.SDK_INT))
             softwareStats.add(getStatItem(Software.OPEN_GL_ES))
             softwareStats.add(getStatItem(Software.GOOGLE_PLAY_SERVICES_VERSION))
+            softwareStats.add(getStatItem(Software.BUILD_NUMBER))
             return softwareStats
         }
 
@@ -73,7 +74,10 @@ class StatHelper(private val context: Context) {
                     Log.e(StatHelper::class.java.simpleName, "Unable to find google play services", e)
                     stat.info = context.getString(R.string.unavailable)
                 }
-
+            }
+            Software.BUILD_NUMBER -> {
+                stat.title = context.getString(R.string.build_number)
+                stat.info = Build.DISPLAY
             }
         }
         return stat
@@ -336,7 +340,8 @@ class StatHelper(private val context: Context) {
         ANDROID_VERSION,
         SDK_INT,
         OPEN_GL_ES,
-        GOOGLE_PLAY_SERVICES_VERSION
+        GOOGLE_PLAY_SERVICES_VERSION,
+        BUILD_NUMBER
     }
 
 }

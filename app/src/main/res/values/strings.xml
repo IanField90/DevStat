@@ -68,5 +68,6 @@
     <string name="shortcut_copy_short">Copy stats</string>
     <string name="shortcut_copy_long">Copy stats to Clipboard</string>
     <string name="shortcut_copy_disabled">Copy disabled</string>
+    <string name="build_number">Build Number</string>
 
 </resources>
