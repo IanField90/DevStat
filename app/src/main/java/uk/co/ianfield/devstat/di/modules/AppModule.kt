@@ -3,37 +3,22 @@ package uk.co.ianfield.devstat.di.modules
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import uk.co.ianfield.devstat.DevStatApplication
 import uk.co.ianfield.devstat.StatHelper
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-/**
- * A module for Android-specific dependencies which require a [Context] or
- * [android.app.Application] to create.
- */
+@InstallIn(SingletonComponent::class)
 @Module
-class AppModule(private val application: DevStatApplication) {
-
-    /**
-     * Allow the application context to be injected but require that it be annotated with
-     * [@Annotation][ApplicationContext] to explicitly differentiate it from an activity context.
-     */
-    @Provides
-    @Singleton
-    @ApplicationContext
-    fun provideContext(): Context {
-        return application
-    }
+class AppModule {
 
     @Provides
     @Singleton
-    fun provideStatHelper(): StatHelper {
-        return StatHelper(application)
+    fun provideStatHelper(@ApplicationContext context: Context): StatHelper {
+        return StatHelper(context)
     }
 
-    @Qualifier
-    @MustBeDocumented
-    @Retention(AnnotationRetention.RUNTIME)
-    annotation class ApplicationContext
 }

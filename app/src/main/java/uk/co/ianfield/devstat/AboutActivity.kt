@@ -2,13 +2,15 @@ package uk.co.ianfield.devstat
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_about.*
+import uk.co.ianfield.devstat.databinding.ActivityAboutBinding
 
 class AboutActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
-        webView.loadUrl("file:///android_asset/about.html")
+        binding = ActivityAboutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.webView.loadUrl("file:///android_asset/about.html")
     }
 }

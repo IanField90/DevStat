@@ -27,7 +27,7 @@ class StatItemAdapter(context: Context, private val dataSet: ArrayList<StatItem>
         holder.info.text = dataSet[position].info
 
         val viewListener: View.OnLongClickListener = View.OnLongClickListener {
-            listener.invoke(holder.adapterPosition)
+            listener.invoke(holder.bindingAdapterPosition)
             true
         }
         holder.title.setOnLongClickListener(viewListener)
@@ -36,10 +36,6 @@ class StatItemAdapter(context: Context, private val dataSet: ArrayList<StatItem>
 
     override fun getItemCount(): Int {
         return dataSet.size
-    }
-
-    interface OnItemLongClickListener {
-        fun onItemClick(position: Int)
     }
 
     class ViewHolder(container: View) : RecyclerView.ViewHolder(container) {

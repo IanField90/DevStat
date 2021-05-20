@@ -7,13 +7,16 @@ import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_main.*
+import dagger.hilt.android.AndroidEntryPoint
+import uk.co.ianfield.devstat.databinding.ActivityMainBinding
 import uk.co.ianfield.devstat.model.StatItem
 import uk.co.ianfield.devstat.widget.InformationPagerAdapter
 import java.util.*
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     @Inject lateinit var helper: StatHelper
     private lateinit var hardwareStats: ArrayList<StatItem>
@@ -24,9 +27,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        (application as DevStatApplication).component()!!.inject(this)
-        sendEmail.setOnClickListener { emailClick() }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+//        (application as DevStatApplication).component()!!.inject(this)
+        binding.sendEmail.setOnClickListener { emailClick() }
 
         hardwareStats = helper.hardwareList
         screenStats = helper.screenList
@@ -40,11 +44,11 @@ class MainActivity : AppCompatActivity() {
                 listOf(screenStats, softwareStats, hardwareStats, featureStats, cryptoStats)
         )
 
-        viewPager.adapter = InformationPagerAdapter(supportFragmentManager, this,
+        binding.viewPager.adapter = InformationPagerAdapter(supportFragmentManager, this,
                 intArrayOf(R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware, R.string.title_features, R.string.title_crypto),
                 statGroups)
 
-        tabLayout.setupWithViewPager(viewPager)
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -24,9 +24,8 @@ class ClipboardActivity : AppCompatActivity() {
 
         val statHelper = StatHelper(this)
         var clipboardContents = ""
-        var list: ArrayList<StatItem>
 
-        list = statHelper.hardwareList
+        var list: ArrayList<StatItem> = statHelper.hardwareList
         clipboardContents += "${getString(R.string.title_hardware)}\n"
         for (item in list) {
             clipboardContents += item.toString()
