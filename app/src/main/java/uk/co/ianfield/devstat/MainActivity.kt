@@ -7,6 +7,7 @@ import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import uk.co.ianfield.devstat.databinding.ActivityMainBinding
 import uk.co.ianfield.devstat.model.StatItem
@@ -44,11 +45,15 @@ class MainActivity : AppCompatActivity() {
                 listOf(screenStats, softwareStats, hardwareStats, featureStats, cryptoStats)
         )
 
-        binding.viewPager.adapter = InformationPagerAdapter(supportFragmentManager, this,
-                intArrayOf(R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware, R.string.title_features, R.string.title_crypto),
+        val tabTitles = intArrayOf(R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware, R.string.title_features, R.string.title_crypto)
+        binding.viewPager.adapter = InformationPagerAdapter(this,
+                tabTitles,
                 statGroups)
 
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = getString(tabTitles[position])
+        }.attach()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
