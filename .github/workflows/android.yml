@@ -19,5 +19,16 @@ jobs:
       with:
         java-version: '11'
         distribution: 'zulu'
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches/modules-*
+          ~/.gradle/caches/jars-*
+          ~/.gradle/caches/build-cache-*
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', 'gradle/libs.versions.toml') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+    - name: Copy CI gradle.properties
+      run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
     - name: Clean
       run: ./gradlew clean assembleDebug test
