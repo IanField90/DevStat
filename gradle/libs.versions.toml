@@ -1,0 +1,10 @@
+[versions]
+kotlin = "1.5.31"
+androidBuildTools = "7.0.2"
+hilt = "2.37"
+
+[libraries]
+kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+android-pluginGradle = { module = "com.android.tools.build:gradle", version.ref = "androidBuildTools" }
+
+hilt-pluginGradle = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
