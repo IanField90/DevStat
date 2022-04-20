@@ -7,8 +7,8 @@ plugins {
 
 
 android {
-    compileSdk = 30
-    buildToolsVersion = "30.0.3"
+    compileSdk = 32
+    buildToolsVersion = "32.0.0"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -17,10 +17,10 @@ android {
 
     defaultConfig {
         minSdk = 14
-        targetSdk = 30
+        targetSdk = 32
         applicationId = "uk.co.ianfield.devstat"
-        versionCode = 24
-        versionName = "2.4.7"
+        versionCode = 26
+        versionName = "2.4.8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments.putAll(
             mapOf(
@@ -69,17 +69,17 @@ android {
     }
 }
 
-val hilt_version = "2.37"
+val hilt_version = "2.40.5"
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31")
 
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("com.google.android.material:material:1.4.0")
+    implementation("com.google.android.material:material:1.5.0")
 
-    implementation("androidx.core:core-ktx:1.6.0")
+    implementation("androidx.core:core-ktx:1.7.0")
 
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
@@ -98,14 +98,14 @@ dependencies {
 
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation("androidx.test.espresso:espresso-intents:3.4.0")
-    androidTestImplementation("androidx.annotation:annotation:1.2.0")
+    androidTestImplementation("androidx.annotation:annotation:1.3.0")
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:rules:1.4.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     // Set this dependency if you want to use Hamcrest matching
     androidTestImplementation("org.hamcrest:hamcrest-library:2.2")
 
-    androidTestUtil("androidx.test:orchestrator:1.4.0")
+    androidTestUtil("androidx.test:orchestrator:1.4.1")
 
 }
 
