@@ -1,14 +1,19 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+//    id("org.jetbrains.kotlin.android") version "2.1.10" apply false
 }
 
 
 android {
-    compileSdk = 32
-    buildToolsVersion = "32.0.0"
+    compileSdk = 35
+    buildToolsVersion = "35.0.0"
+
+    namespace = "uk.co.ianfield.devstat"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -16,8 +21,8 @@ android {
     }
 
     defaultConfig {
-        minSdk = 14
-        targetSdk = 32
+        minSdk = 21
+        targetSdk = 35
         applicationId = "uk.co.ianfield.devstat"
         versionCode = 26
         versionName = "2.4.8"
@@ -39,6 +44,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
     buildTypes {
         release {
@@ -49,9 +55,9 @@ android {
         }
     }
 
-    packagingOptions {
-        excludes.addAll(mutableSetOf("META-INF/services/javax.annotation.processing.Processor"))
-    }
+//    packagingOptions {
+//        excludes.addAll(mutableSetOf("META-INF/services/javax.annotation.processing.Processor"))
+//    }
 
     kotlinOptions {
         jvmTarget = "1.8"
@@ -64,48 +70,47 @@ android {
         }
     }
 
-    sourceSets {
-        getByName("androidTest").resources.srcDirs("src/androidTest/res", "src/test/resources")
-    }
+//    sourceSets {
+//        getByName("androidTest").resources.srcDirs("src/androidTest/res", "src/test/resources")
+//    }
+
 }
 
-val hilt_version = "2.40.5"
-
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31")
+    implementation(libs.kotlin.stdlib.jdk8)
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("com.google.android.material:material:1.5.0")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.material)
 
-    implementation("androidx.core:core-ktx:1.7.0")
+    implementation(libs.androidx.core.ktx)
 
-    implementation("com.google.dagger:hilt-android:$hilt_version")
-    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:$hilt_version")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hilt_version")
-    testImplementation("com.google.dagger:hilt-android-testing:$hilt_version")
-    kaptTest("com.google.dagger:hilt-android-compiler:$hilt_version")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
+    testImplementation(libs.hilt.android.testing)
+    kaptTest(libs.hilt.android.compiler)
 
-    testImplementation("junit:junit:4.12")
-    testImplementation("org.mockito:mockito-core:3.10.0")
-    testImplementation("org.hamcrest:hamcrest-library:2.2")
-    testImplementation("com.google.truth:truth:1.1.2")
-    testImplementation("androidx.test.ext:junit:1.1.3")
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.hamcrest.library)
+    testImplementation(libs.truth)
+    testImplementation(libs.androidx.junit)
 
-    androidTestImplementation("junit:junit:4.12")
+    androidTestImplementation(libs.junit)
 
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation("androidx.test.espresso:espresso-intents:3.4.0")
-    androidTestImplementation("androidx.annotation:annotation:1.3.0")
-    androidTestImplementation("androidx.test:runner:1.4.0")
-    androidTestImplementation("androidx.test:rules:1.4.0")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.espresso.intents)
+    androidTestImplementation(libs.androidx.annotation)
+    androidTestImplementation(libs.androidx.runner)
+    androidTestImplementation(libs.androidx.rules)
+    androidTestImplementation(libs.androidx.junit)
     // Set this dependency if you want to use Hamcrest matching
-    androidTestImplementation("org.hamcrest:hamcrest-library:2.2")
+    androidTestImplementation(libs.hamcrest.library)
 
-    androidTestUtil("androidx.test:orchestrator:1.4.1")
+    androidTestUtil(libs.androidx.orchestrator)
 
 }
 
