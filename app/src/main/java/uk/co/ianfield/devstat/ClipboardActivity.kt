@@ -64,7 +64,7 @@ class ClipboardActivity : AppCompatActivity() {
             clipboardContents += "\n"
         }
 
-        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("text label", clipboardContents)
         clipboard.setPrimaryClip(clip)
 

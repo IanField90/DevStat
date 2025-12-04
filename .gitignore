@@ -29,7 +29,6 @@ proguard/
 .idea/
 
 # Android Studio (SDK)
-local.properties
 /*/local.properties
 /*/out
 /*/*/build

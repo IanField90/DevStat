@@ -1,4 +1,6 @@
-@file:Suppress("UnstableApiUsage")
+//@file:Suppress("UnstableApiUsage")
+
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.application")
@@ -59,8 +61,10 @@ android {
 //        excludes.addAll(mutableSetOf("META-INF/services/javax.annotation.processing.Processor"))
 //    }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_1_8
+        }
     }
 
     testOptions {

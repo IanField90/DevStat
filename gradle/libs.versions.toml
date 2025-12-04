@@ -9,7 +9,7 @@ junit = "4.13.2"
 kotlin = "2.2.21"
 androidBuildTools = "8.13.1"
 hilt = "2.57.2"
-kotlinStdlibJdk8 = "2.2.0"
+kotlinStdlibJdk8 = "2.2.21"
 material = "1.13.0"
 mockitoCore = "5.20.0"
 orchestrator = "1.6.1"
@@ -38,7 +38,7 @@ kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ve
 android-pluginGradle = { module = "com.android.tools.build:gradle", version.ref = "androidBuildTools" }
 
 hilt-pluginGradle = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
-kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version = "2.2.21" }
+kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinStdlibJdk8" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }

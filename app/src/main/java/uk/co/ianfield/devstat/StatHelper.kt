@@ -2,6 +2,7 @@
 
 package uk.co.ianfield.devstat
 
+import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Context
 import android.content.pm.PackageManager
@@ -184,11 +185,7 @@ class StatHelper(private val context: Context) {
             }
             Hardware.ARCHITECTURE -> {
                 stat.title = context.getString(R.string.architecture)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    stat.info = TextUtils.join(", ", Build.SUPPORTED_ABIS)
-                } else {
-                    stat.info = TextUtils.join(", ", Arrays.asList(Build.CPU_ABI, Build.CPU_ABI2))
-                }
+                stat.info = TextUtils.join(", ", listOf(Build.CPU_ABI, Build.CPU_ABI2))
             }
             Hardware.PROCESSORS -> {
                 stat.title = context.getString(R.string.processors)
@@ -246,6 +243,7 @@ class StatHelper(private val context: Context) {
         return stat
     }
 
+    @SuppressLint("SwitchIntDef")
     private fun getDensityInfo(metrics: DisplayMetrics): String {
         when (metrics.densityDpi) {
             DisplayMetrics.DENSITY_LOW -> return "ldpi (.75x)"

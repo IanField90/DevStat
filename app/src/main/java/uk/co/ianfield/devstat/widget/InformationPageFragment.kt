@@ -22,7 +22,7 @@ class InformationPageFragment : Fragment() {
 
     private lateinit var items: ArrayList<StatItem>
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentInformationPageBinding.inflate(inflater, container, false)
         return binding.root
     }

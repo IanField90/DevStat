@@ -20,6 +20,7 @@ class DevStatApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        @Suppress("KotlinConstantConditions")
         if (BuildConfig.DEBUG) {
             registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
                 override fun onActivityCreated(activity: Activity, bundle: Bundle?) {

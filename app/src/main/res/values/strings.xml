@@ -58,7 +58,6 @@
     <string name="device">Device</string>
 
     <string name="sd_presence_emulated">Present: %1$s, Emulated: %2$s</string>
-    <string name="sd_presence">Present: %1$s</string>
     <string name="architecture">ABIs</string>
     <string name="processors">Online Processors</string>
 
@@ -69,5 +68,6 @@
     <string name="shortcut_copy_long">Copy stats to Clipboard</string>
     <string name="shortcut_copy_disabled">Copy disabled</string>
     <string name="build_number">Build Number</string>
+    <string name="share_icon">Share icon</string>
 
 </resources>

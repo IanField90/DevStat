@@ -1,6 +1,5 @@
 package uk.co.ianfield.devstat.widget
 
-import android.content.Context
 import androidx.fragment.app.*
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import uk.co.ianfield.devstat.model.StatItem
