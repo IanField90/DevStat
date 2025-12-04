@@ -10,8 +10,8 @@ plugins {
 
 
 android {
-    compileSdk = 35
-    buildToolsVersion = "35.0.0"
+    compileSdk = 36
+    buildToolsVersion = "36.1.0"
 
     namespace = "uk.co.ianfield.devstat"
 
@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 35
+        targetSdk = 36
         applicationId = "uk.co.ianfield.devstat"
         versionCode = 26
         versionName = "2.4.8"

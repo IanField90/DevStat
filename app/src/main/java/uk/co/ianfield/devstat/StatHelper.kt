@@ -270,9 +270,9 @@ class StatHelper(private val context: Context) {
             for (featureInfo in context.packageManager.systemAvailableFeatures) {
                 val stat = StatItem()
                 if (featureInfo.name != null) {
-                    val featureParts = featureInfo.name.toLowerCase(Locale.UK).split("[.]".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                    val featureParts = featureInfo.name.lowercase().split("[.]".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                     val featureName = featureParts[featureParts.size - 1].replace("_".toRegex(), " ")
-                    stat.title = featureName.substring(0, 1).toUpperCase(Locale.UK) + featureName.substring(1)
+                    stat.title = featureName.take(1).uppercase() + featureName.substring(1)
                     stat.info = featureInfo.name
                 } else {
                     stat.title = context.getString(R.string.opengl_version)
@@ -302,7 +302,7 @@ class StatHelper(private val context: Context) {
                 for (service in services) {
                     info += service.algorithm + "\n"
                 }
-                info = info.substring(0, info.length - 2)
+                info = info.dropLast(2)
                 item.info = info
                 cryptoList.add(item)
             }
