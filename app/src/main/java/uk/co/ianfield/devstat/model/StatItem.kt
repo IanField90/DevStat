@@ -1,4 +1,4 @@
-package com.ianfield.devstat.model
+package uk.co.ianfield.devstat.model
 
 /**
  * Created by Ian Field on 20/02/2014.

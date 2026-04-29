@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.ianfield.devstat"
+    namespace = "uk.co.ianfield.devstat"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.ianfield.devstat"
+        applicationId = "uk.co.ianfield.devstat"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

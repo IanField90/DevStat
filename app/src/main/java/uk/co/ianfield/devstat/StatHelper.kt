@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.ianfield.devstat
+package uk.co.ianfield.devstat
 
 import android.annotation.SuppressLint
 import android.app.ActivityManager
@@ -13,7 +13,7 @@ import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.util.Log
-import com.ianfield.devstat.model.StatItem
+import uk.co.ianfield.devstat.model.StatItem
 import java.security.Security
 import java.text.DecimalFormat
 import java.util.*

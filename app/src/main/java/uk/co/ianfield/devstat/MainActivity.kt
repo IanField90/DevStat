@@ -1,5 +1,6 @@
-package com.ianfield.devstat
+package uk.co.ianfield.devstat
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,8 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.ianfield.devstat.ui.components.InformationPage
-import com.ianfield.devstat.ui.theme.DevStat2Theme
+import uk.co.ianfield.devstat.ui.components.InformationPage
+import uk.co.ianfield.devstat.ui.theme.DevStatTheme
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            DevStat2Theme {
+            DevStatTheme {
                 MainScreen()
             }
         }
@@ -43,13 +44,17 @@ fun MainScreen() {
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
-    val tabs = listOf(
-        R.string.title_screen_metrics to helper.screenList,
-        R.string.title_software to helper.softwareList,
-        R.string.title_hardware to helper.hardwareList,
-        R.string.title_features to helper.featureList,
-        R.string.title_crypto to helper.cryptoList
-    )
+    // Optimization: remember the tabs list to avoid expensive computation on every recomposition.
+    // This prevents the "hang" or lag during UI interactions like swiping or clicking.
+    val tabs = remember(helper) {
+        listOf(
+            R.string.title_screen_metrics to helper.screenList,
+            R.string.title_software to helper.softwareList,
+            R.string.title_hardware to helper.hardwareList,
+            R.string.title_features to helper.featureList,
+            R.string.title_crypto to helper.cryptoList
+        )
+    }
 
     val pagerState = rememberPagerState(pageCount = { tabs.size })
 
@@ -61,7 +66,19 @@ fun MainScreen() {
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { /* Handle share */ }) {
+            FloatingActionButton(onClick = {
+                // Implement share functionality
+                val shareText = tabs.joinToString("\n\n") { (titleRes, items) ->
+                    "${context.getString(titleRes)}:\n" + items.joinToString("\n") { it.toString() }
+                }
+                val sendIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, shareText)
+                    type = "text/plain"
+                }
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                context.startActivity(shareIntent)
+            }) {
                 Icon(Icons.Default.Share, contentDescription = stringResource(R.string.share_icon))
             }
         },

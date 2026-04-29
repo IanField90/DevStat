@@ -1,4 +1,4 @@
-package com.ianfield.devstat
+package uk.co.ianfield.devstat
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.ianfield.devstat.model.StatItem
+import uk.co.ianfield.devstat.model.StatItem
 import java.util.*
 
 /**

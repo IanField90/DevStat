@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "DevStat2"
+rootProject.name = "DevStat"
 include(":app")
  

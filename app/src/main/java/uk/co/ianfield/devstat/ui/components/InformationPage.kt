@@ -1,4 +1,4 @@
-package com.ianfield.devstat.ui.components
+package uk.co.ianfield.devstat.ui.components
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -17,8 +17,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.ianfield.devstat.R
-import com.ianfield.devstat.model.StatItem
+import uk.co.ianfield.devstat.R
+import uk.co.ianfield.devstat.model.StatItem
 import kotlinx.coroutines.launch
 
 @Composable
