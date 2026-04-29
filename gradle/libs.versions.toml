@@ -1,44 +1,37 @@
 [versions]
-androidxJunit = "1.3.0"
-annotation = "1.9.1"
-appcompat = "1.7.1"
-coreKtx = "1.17.0"
-espressoCore = "3.7.0"
-hamcrestLibrary = "3.0"
+agp = "8.7.3"
+coreKtx = "1.15.0"
 junit = "4.13.2"
-kotlin = "2.2.21"
-androidBuildTools = "8.13.1"
-hilt = "2.57.2"
-kotlinStdlibJdk8 = "2.2.21"
-material = "1.13.0"
-mockitoCore = "5.20.0"
-orchestrator = "1.6.1"
-recyclerview = "1.4.0"
-rules = "1.7.0"
-runner = "1.7.0"
-truth = "1.4.5"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+lifecycleRuntimeKtx = "2.8.7"
+activityCompose = "1.9.3"
+kotlin = "2.0.21"
+composeBom = "2024.10.01"
+recyclerview = "1.3.2"
+material = "1.12.0"
+fragment = "1.8.5"
 
 [libraries]
-androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
-androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
-androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
-androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
-androidx-espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espressoCore" }
-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidxJunit" }
-androidx-orchestrator = { module = "androidx.test:orchestrator", version.ref = "orchestrator" }
+androidx-corektx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
-androidx-rules = { module = "androidx.test:rules", version.ref = "rules" }
-androidx-runner = { module = "androidx.test:runner", version.ref = "runner" }
-hamcrest-library = { module = "org.hamcrest:hamcrest-library", version.ref = "hamcrestLibrary" }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
-junit = { module = "junit:junit", version.ref = "junit" }
-kotlin-pluginGradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-android-pluginGradle = { module = "com.android.tools.build:gradle", version.ref = "androidBuildTools" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 
-hilt-pluginGradle = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
-kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlinStdlibJdk8" }
-material = { module = "com.google.android.material:material", version.ref = "material" }
-mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
-truth = { module = "com.google.truth:truth", version.ref = "truth" }
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

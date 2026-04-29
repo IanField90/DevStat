@@ -36,3 +36,7 @@ proguard/
 .gradle
 *.swp
 /build
+
+.DS_Store
+
+./kotlin*
