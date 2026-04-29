@@ -13,8 +13,8 @@
         >
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="uk.co.ianfield.devstat"
-            android:targetClass="uk.co.ianfield.devstat.ClipboardActivity"
+            android:targetPackage="com.ianfield.devstat"
+            android:targetClass="com.ianfield.devstat.ClipboardActivity"
             >
             <extra android:name="type" android:value="all" />
         </intent>

@@ -1,131 +1,129 @@
 package uk.co.ianfield.devstat
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import com.google.android.material.tabs.TabLayoutMediator
-import dagger.hilt.android.AndroidEntryPoint
-import uk.co.ianfield.devstat.databinding.ActivityMainBinding
-import uk.co.ianfield.devstat.model.StatItem
-import uk.co.ianfield.devstat.widget.InformationPagerAdapter
-import java.util.*
-import javax.inject.Inject
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import uk.co.ianfield.devstat.ui.components.InformationPage
+import uk.co.ianfield.devstat.ui.theme.DevStatTheme
+import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-
-    @Inject lateinit var helper: StatHelper
-    private lateinit var hardwareStats: ArrayList<StatItem>
-    private lateinit var screenStats: ArrayList<StatItem>
-    private lateinit var softwareStats: ArrayList<StatItem>
-    private lateinit var featureStats: ArrayList<StatItem>
-    private lateinit var cryptoStats: ArrayList<StatItem>
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-//        (application as DevStatApplication).component()!!.inject(this)
-        binding.sendEmail.setOnClickListener { emailClick() }
+        enableEdgeToEdge()
+        setContent {
+            DevStatTheme {
+                MainScreen()
+            }
+        }
+    }
+}
 
-        hardwareStats = helper.hardwareList
-        screenStats = helper.screenList
-        softwareStats = helper.softwareList
-        featureStats = helper.featureList
-        cryptoStats = helper.cryptoList
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MainScreen() {
+    val context = LocalContext.current
+    val helper = remember { StatHelper(context) }
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+    var showMenu by remember { mutableStateOf(false) }
 
-        // This could probably be done better
-        val statGroups = ArrayList<ArrayList<StatItem>>()
-        statGroups.addAll(
-                listOf(screenStats, softwareStats, hardwareStats, featureStats, cryptoStats)
+    // Optimization: remember the tabs list to avoid expensive computation on every recomposition.
+    val tabs = remember(helper) {
+        listOf(
+            R.string.title_screen_metrics to helper.screenList,
+            R.string.title_software to helper.softwareList,
+            R.string.title_hardware to helper.hardwareList,
+            R.string.title_features to helper.featureList,
+            R.string.title_crypto to helper.cryptoList
         )
-
-        val tabTitles = intArrayOf(R.string.title_screen_metrics, R.string.title_software, R.string.title_hardware, R.string.title_features, R.string.title_crypto)
-        binding.viewPager.adapter = InformationPagerAdapter(this,
-                tabTitles,
-                statGroups)
-
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            tab.text = getString(tabTitles[position])
-        }.attach()
-
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.main, menu)
-        return true
+    val pagerState = rememberPagerState(pageCount = { tabs.size })
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                title = { Text(stringResource(R.string.app_name)) },
+                actions = {
+                    IconButton(onClick = { showMenu = !showMenu }) {
+                        Icon(Icons.Default.MoreVert, contentDescription = null)
+                    }
+                    DropdownMenu(
+                        expanded = showMenu,
+                        onDismissRequest = { showMenu = false }
+                    ) {
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.action_about)) },
+                            onClick = {
+                                showMenu = false
+                                context.startActivity(Intent(context, AboutActivity::class.java))
+                            }
+                        )
+                    }
+                }
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                val shareText = tabs.joinToString("\n\n") { (titleRes, items) ->
+                    "${context.getString(titleRes)}:\n" + items.joinToString("\n") { it.toString() }
+                }
+                val sendIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, shareText)
+                    type = "text/plain"
+                }
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                context.startActivity(shareIntent)
+            }) {
+                Icon(Icons.Default.Share, contentDescription = stringResource(R.string.share_icon))
+            }
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { innerPadding ->
+        Column(modifier = Modifier.padding(innerPadding)) {
+            ScrollableTabRow(
+                selectedTabIndex = pagerState.currentPage,
+                edgePadding = 16.dp
+            ) {
+                tabs.forEachIndexed { index, tab ->
+                    Tab(
+                        selected = pagerState.currentPage == index,
+                        onClick = {
+                            scope.launch { pagerState.animateScrollToPage(index) }
+                        },
+                        text = { Text(stringResource(tab.first)) }
+                    )
+                }
+            }
+
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.fillMaxSize()
+            ) { pageIndex ->
+                InformationPage(
+                    items = tabs[pageIndex].second,
+                    snackbarHostState = snackbarHostState
+                )
+            }
+        }
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle item selection
-        return when (item.itemId) {
-            R.id.action_about -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            R.id.action_developer -> {
-                startActivity(Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS))
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    fun emailClick() {
-        val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                "mailto", "", null))
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_subject))
-
-        val stringBuilder = StringBuilder()
-
-        stringBuilder.append(String.format("%s\n", getString(R.string.title_screen_metrics)))
-        for (item in screenStats) {
-            stringBuilder.append(item.toString())
-            stringBuilder.append("\n")
-        }
-
-        stringBuilder.append(String.format("\n%s\n", getString(R.string.title_software)))
-        for (item in softwareStats) {
-            stringBuilder.append(item.toString())
-            stringBuilder.append("\n")
-        }
-
-        stringBuilder.append(String.format("\n%s\n", getString(R.string.title_hardware)))
-        for (item in hardwareStats) {
-            stringBuilder.append(item.toString())
-            stringBuilder.append("\n")
-        }
-
-        stringBuilder.append(String.format("\n%s\n", getString(R.string.title_features)))
-        for (item in featureStats) {
-            stringBuilder.apply {
-                append(item.title)
-                append(":\n")
-                append(item.info)
-                append("\n")
-            }
-
-        }
-
-        stringBuilder.append(String.format("\n%s\n", getString(R.string.title_crypto)))
-        for (item in cryptoStats) {
-            stringBuilder.apply {
-                append(item.title)
-                append(":\n")
-                append(item.info)
-                append("\n")
-            }
-        }
-
-        emailIntent.putExtra(Intent.EXTRA_TEXT, stringBuilder.toString())
-        startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email)))
-    }
-
 }
