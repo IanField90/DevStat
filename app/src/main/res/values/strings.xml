@@ -69,5 +69,6 @@
     <string name="shortcut_copy_disabled">Copy disabled</string>
     <string name="build_number">Build Number</string>
     <string name="share_icon">Share icon</string>
+    <string name="back">Back</string>
 
 </resources>

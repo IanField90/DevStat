@@ -11,11 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -43,9 +42,9 @@ fun MainScreen() {
     val helper = remember { StatHelper(context) }
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
+    var showMenu by remember { mutableStateOf(false) }
 
     // Optimization: remember the tabs list to avoid expensive computation on every recomposition.
-    // This prevents the "hang" or lag during UI interactions like swiping or clicking.
     val tabs = remember(helper) {
         listOf(
             R.string.title_screen_metrics to helper.screenList,
@@ -62,12 +61,28 @@ fun MainScreen() {
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.app_name)) }
+                title = { Text(stringResource(R.string.app_name)) },
+                actions = {
+                    IconButton(onClick = { showMenu = !showMenu }) {
+                        Icon(Icons.Default.MoreVert, contentDescription = null)
+                    }
+                    DropdownMenu(
+                        expanded = showMenu,
+                        onDismissRequest = { showMenu = false }
+                    ) {
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.action_about)) },
+                            onClick = {
+                                showMenu = false
+                                context.startActivity(Intent(context, AboutActivity::class.java))
+                            }
+                        )
+                    }
+                }
             )
         },
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                // Implement share functionality
                 val shareText = tabs.joinToString("\n\n") { (titleRes, items) ->
                     "${context.getString(titleRes)}:\n" + items.joinToString("\n") { it.toString() }
                 }

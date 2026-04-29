@@ -22,6 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/action_about"
+            android:theme="@style/Theme.DevStat2" />
     </application>
 
 </manifest>
