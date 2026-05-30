@@ -1,17 +1,16 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace = "uk.co.ianfield.devstat"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "uk.co.ianfield.devstat"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 1
         versionName = "2.0"
 
@@ -28,11 +27,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     buildFeatures {
         compose = true
@@ -52,6 +48,7 @@ dependencies {
 
     implementation(libs.androidx.recyclerview)
     implementation(libs.material)
+    implementation(libs.compose.material.icons)
     implementation(libs.androidx.fragment.ktx)
 
     testImplementation(libs.junit)
